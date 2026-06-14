@@ -10,16 +10,16 @@ Keep the adapter aligned with Antigravity CLI native behavior.
 
 # Allowed Tools
 
-Read Gemini config files, inspect validators, and run bounded Gemini-specific checks.
+Read Antigravity config files, inspect validators, and run bounded Antigravity-specific checks.
 
 # MCP Server Access Policy
 
-Use OpenAI Docs only for OpenAI facts; use official Gemini docs or repository
-sources for Gemini facts.
+Use OpenAI Docs only for OpenAI facts; use official Antigravity docs or repository
+sources for Antigravity facts.
 
 # Browser Provider Routing
 
-No browser provider use unless the task asks for Gemini browser workflow evidence.
+No browser provider use unless the task asks for Antigravity browser workflow evidence.
 
 # Report Contract
 
