@@ -1,5 +1,5 @@
 name = "ry:start"
-description = "RU: полный жизненный цикл задачи в Gemini CLI. EN: full rldyour task lifecycle in Gemini CLI."
+description = "RU: полный жизненный цикл задачи в Antigravity CLI. EN: full rldyour task lifecycle in Antigravity CLI."
 prompt = """
 Start a bounded rldyour task in this Gemini adapter.
 

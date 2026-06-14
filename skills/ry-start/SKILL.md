@@ -15,7 +15,7 @@ Gemini subagents are local delegation helpers, not cmux orchestration.
 
 # When To Use
 
-Use when the owner asks Gemini CLI to implement or repair a scoped task.
+Use when the owner asks Antigravity CLI to implement or repair a scoped task.
 
 # Inputs
 

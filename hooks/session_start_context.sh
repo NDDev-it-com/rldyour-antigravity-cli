@@ -3,7 +3,7 @@ set -euo pipefail
 
 input="$(cat || true)"
 export RLDYOUR_GEMINI_HOOK_INPUT="$input"
-printf '%s\n' "rldyour-gemini SessionStart hook received input" >&2
+printf '%s\n' "rldyour-antigravity-cli SessionStart hook received input" >&2
 
 python3 - <<'PY'
 import json
@@ -11,7 +11,7 @@ import os
 
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
 message = (
-    "rldyour-gemini adapter=1.3.7 runtime=@google/gemini-cli@0.46.0; "
+    "rldyour-antigravity-cli adapter=1.4.0 runtime=antigravity-cli@1.0.8; "
     "standard mode is owner-led; cmux orchestration is visible-terminal-only; "
     "browser routing is Webwright, Playwright CLI, and Chrome DevTools MCP; "
     "only approved inventory providers are active; supported auth is enterprise, "

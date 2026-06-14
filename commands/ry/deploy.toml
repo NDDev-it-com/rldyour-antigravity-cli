@@ -1,5 +1,5 @@
 name = "ry:deploy"
-description = "RU: подготовь deploy/release handoff из Gemini CLI. EN: prepare deployment or release handoff in Gemini CLI."
+description = "RU: подготовь deploy/release handoff из Antigravity CLI. EN: prepare deployment or release handoff in Antigravity CLI."
 prompt = """
 Prepare a bounded rldyour deploy or release handoff for this Gemini adapter.
 

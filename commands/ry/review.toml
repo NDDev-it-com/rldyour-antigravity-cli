@@ -1,5 +1,5 @@
 name = "ry:review"
-description = "RU: проведи read-only review в Gemini CLI. EN: run a read-only rldyour review in Gemini CLI."
+description = "RU: проведи read-only review в Antigravity CLI. EN: run a read-only rldyour review in Antigravity CLI."
 prompt = """
 Run a read-only rldyour review for the requested scope.
 

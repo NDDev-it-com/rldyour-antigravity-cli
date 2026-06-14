@@ -1,33 +1,35 @@
-# rldyour-gemini
+# rldyour-antigravity-cli
 
-`rldyour-gemini` is the Gemini CLI-native configuration adapter for the rldyour AI CLI control plane. It provides a public, source-validated Gemini CLI configuration using native Gemini surfaces: `GEMINI.md`, `.gemini/settings.json`, `gemini-extension.json`, TOML commands, skills, subagents, hooks, policies, MCP servers, browser-provider routing, Serena memory, and release validation.
+`rldyour-antigravity-cli` is the Antigravity CLI-native configuration adapter for the rldyour AI CLI control plane. It provides a public, source-validated Antigravity CLI configuration using native surfaces: `GEMINI.md`, `.gemini/antigravity-cli/settings.json`, `.gemini/antigravity-cli/mcp_config.json`, `gemini-extension.json`, TOML commands, skills, subagents, hooks, policies, MCP servers, browser-provider routing, Serena memory, and release validation.
 
 ## Current Baseline
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.3.7` |
-| Runtime baseline | `@google/gemini-cli` `0.46.0` |
-| Runtime channel | `stable/npm-latest` |
-| GitHub release tag | `1.3.7` |
+| Adapter version | `1.4.0` |
+| Runtime baseline | Antigravity CLI `1.0.8` |
+| Runtime channel | `stable/curl-latest` |
+| GitHub release tag | `1.4.0` |
 | Pinned commit | `001fe7784a1d6cf27eb4cb94f02b84d95316b19b` |
 
-Gemini CLI freshness uses `npm view @google/gemini-cli version` as the primary
-source of truth, with the matching GitHub release tag as release provenance.
-Only the scoped package `@google/gemini-cli` is valid for this adapter.
+Antigravity CLI freshness uses `antigravity-cli --version` as the primary
+source of truth, with the GitHub release tag as release provenance.
+The legacy Antigravity CLI `@google/gemini-cli` `0.46.0` remains compatible for
+enterprise Standard/Enterprise license holders.
 The pinned commit and product version are governed by the root control plane
 `config/repositories.json`.
 
 ## What This Repository Provides
 
-This repository is a configuration package for Gemini CLI, not a fork or copy
-of the upstream `@google/gemini-cli` runtime. It wires together the native
-Gemini configuration surfaces - context files, project settings, extension
-manifest, TOML commands, Agent Skills, subagents, hooks, policies, and MCP
-servers - into a coherent, version-controlled, owner-validated setup. The
-upstream Gemini CLI binary is installed separately via npm and is not modified
-here. All changes in this repository are configuration and adapter logic; runtime
-behavior is governed by the installed `@google/gemini-cli` binary version.
+This repository is a configuration package for Antigravity CLI (successor to
+Antigravity CLI), not a fork or copy of the upstream runtime. It wires together
+the native Antigravity CLI configuration surfaces - context files, project
+settings, MCP config, extension manifest, TOML commands, Agent Skills,
+subagents, hooks, policies, and MCP servers - into a coherent,
+version-controlled, owner-validated setup. The upstream Antigravity CLI binary
+is installed separately via the official installer and is not modified here.
+All changes in this repository are configuration and adapter logic; runtime
+behavior is governed by the installed `antigravity-cli` binary version.
 
 ## Native Boundaries
 
@@ -45,7 +47,7 @@ Active native surfaces:
   flow, release, ry, security, and serena groups).
 - `.gemini/skills/*/SKILL.md` - Agent Skills (14 skills).
 - `.gemini/agents/*.md` - Gemini subagents (7 agents: browser-reviewer,
-  codebase-investigator, design-reviewer, gemini-cli-specialist,
+  codebase-investigator, design-reviewer, antigravity-cli-specialist,
   release-reviewer, security-reviewer, serena-curator).
 - `.gemini/hooks/` - native hook scripts for SessionStart, BeforeTool,
   AfterAgent, and SessionEnd events.
@@ -53,12 +55,12 @@ Active native surfaces:
 
 Hooks use Gemini's native event-keyed schema: read JSON from stdin, write
 exactly one JSON object to stdout, and send diagnostics to stderr. Gemini
-subagents are internal Gemini CLI delegation and are not cmux worker terminals.
+subagents are internal Antigravity CLI delegation and are not cmux worker terminals.
 Headless `gemini -p` is allowed for smoke, doctor, and CI checks only.
 
 ## Install / Update / ry-repair
 
-Install the upstream Gemini CLI runtime:
+Install the upstream Antigravity CLI runtime:
 
 ```bash
 npm install -g @google/gemini-cli
@@ -69,14 +71,14 @@ Clone or update this adapter:
 
 ```bash
 # First time
-git clone https://github.com/NDDev-it-com/rldyour-gemini.git
-cd rldyour-gemini
+git clone https://github.com/NDDev-it-com/rldyour-antigravity-cli.git
+cd rldyour-antigravity-cli
 
 # Update to latest
 git pull origin main
 ```
 
-Run `/ry-repair` convergence from within a Gemini CLI session to normalize
+Run `/ry-repair` convergence from within a Antigravity CLI session to normalize
 adapter configuration, validate surface adoption, and sync Serena memories.
 For offline or check-only mode, run the static validation lane (see
 `## Validation`). Runtime doctor:
@@ -173,7 +175,7 @@ Rules, Last Verified). Chat logs, speculation, secrets, tokens, cookies, and
 credentials must not be stored.
 
 Freshness contract: re-verify memories after each adapter release and after any
-upstream Gemini CLI version change. The `fullrepo` sync script publishes the
+upstream Antigravity CLI version change. The `fullrepo` sync script publishes the
 overlay with safe force-with-lease.
 
 ## Security Boundary
@@ -181,7 +183,7 @@ overlay with safe force-with-lease.
 ### Approval Mode and YOLO
 
 Committed `.gemini/settings.json` sets `general.defaultApprovalMode =
-"auto_edit"` - the maximal owner-autonomy posture that Gemini CLI accepts in
+"auto_edit"` - the maximal owner-autonomy posture that Antigravity CLI accepts in
 committed configuration. `auto_edit` auto-approves file edits without prompting.
 `security.disableYoloMode = false` and `security.toolSandboxing = false` are set
 explicitly to preserve full-auto launcher capability.
@@ -193,7 +195,7 @@ launcher-only:
 GEMINI_SANDBOX=false gemini --approval-mode=yolo
 ```
 
-Gemini CLI silently downgrades a committed `yolo` value to the default approval
+Antigravity CLI silently downgrades a committed `yolo` value to the default approval
 mode. Writing `yolo` into committed settings has no effect and must not be done.
 
 Permissions are not a sandbox. This adapter is designed for an owner workstation
@@ -217,10 +219,10 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Gemini CLI adapter `1.3.7` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.3.7` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
-Google announced a transition of unpaid and Google One Gemini CLI users to
+Google announced a transition of unpaid and Google One Antigravity CLI users to
 Antigravity CLI. Antigravity CLI is out of scope for this adapter release. See
 `references/gemini-antigravity-transition.md`.
 
@@ -278,8 +280,8 @@ License: `AGPL-3.0-or-later`.
 
 Author: Danil Silantyev (github:rldyourmnd), CEO NDDev.
 
-Repository: <https://github.com/NDDev-it-com/rldyour-gemini>
+Repository: <https://github.com/NDDev-it-com/rldyour-antigravity-cli>
 
 Report security issues privately through GitHub Security Advisories for
-`NDDev-it-com/rldyour-gemini`. Do not open public issues for security
+`NDDev-it-com/rldyour-antigravity-cli`. Do not open public issues for security
 vulnerabilities.

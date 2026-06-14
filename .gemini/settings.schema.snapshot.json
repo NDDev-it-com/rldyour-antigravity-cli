@@ -1,7 +1,7 @@
 {
   "schema": "https://geminicli.com/schemas/settings.schema.json",
   "snapshot_verified_on": "2026-06-12",
-  "purpose": "Repository policy snapshot for documented Gemini CLI 0.46.0 settings categories; the 0.46.0 npm package includes bundle/docs/reference/configuration.md but does not ship a standalone schemas/settings.schema.json file.",
+  "purpose": "Repository policy snapshot for documented Antigravity CLI 0.46.0 settings categories; the 0.46.0 npm package includes bundle/docs/reference/configuration.md but does not ship a standalone schemas/settings.schema.json file.",
   "official_reference": "https://geminicli.com/docs/reference/configuration/",
   "runtime_package": "@google/gemini-cli",
   "runtime_version": "0.46.0",

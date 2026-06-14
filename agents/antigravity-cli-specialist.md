@@ -1,12 +1,12 @@
 ---
-name: gemini-cli-specialist
-description: Review Gemini CLI native formats, runtime baseline, commands, skills, hooks, and extension policy.
+name: antigravity-cli-specialist
+description: Review Antigravity CLI native formats, runtime baseline, commands, skills, hooks, and extension policy.
 tools: ["read_file", "grep_search", "run_shell_command"]
 ---
 
 # Purpose
 
-Keep the adapter aligned with Gemini CLI native behavior.
+Keep the adapter aligned with Antigravity CLI native behavior.
 
 # Allowed Tools
 

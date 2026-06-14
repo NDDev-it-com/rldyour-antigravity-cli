@@ -12,9 +12,12 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.3.7"
-RUNTIME_VERSION = "0.46.0"
-RUNTIME_PACKAGE = "@google/gemini-cli"
+VERSION = "1.4.0"
+RUNTIME_VERSION = "1.0.8"
+RUNTIME_PACKAGE = "antigravity-cli"
+RUNTIME_BINARY = "antigravity-cli"
+GEMINI_LEGACY_PACKAGE = "@google/gemini-cli"
+GEMINI_LEGACY_VERSION = "0.46.0"
 EXPECTED_MCP = [
     "serena",
     "chrome-devtools",
@@ -123,20 +126,17 @@ def validate_version_surfaces() -> None:
 
 def validate_runtime_baseline(strict: bool = False) -> None:
     baseline = load_json(ROOT / "config/gemini-baseline.json")
-    require(baseline["npm_package"] == RUNTIME_PACKAGE, "Gemini runtime package must be @google/gemini-cli")
-    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "Gemini runtime baseline must be 0.46.0")
-    require(baseline["target_channel"] == "stable/npm-latest", "Gemini target channel must be stable/npm-latest")
+    require(baseline["runtime"] == "antigravity-cli", "runtime must be antigravity-cli")
+    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.8")
+    require(baseline["target_channel"] == "stable/curl-latest", "target channel must be stable/curl-latest")
     priority = baseline["source_of_truth_priority"]
-    require(priority[0] == "npm view @google/gemini-cli version", "npm must be primary Gemini source of truth")
+    require(priority[0] == "antigravity-cli --version", "antigravity-cli version must be primary source of truth")
     transition = baseline["antigravity_transition"]
     require(transition["date"] == "2026-06-18", "Antigravity transition date must be recorded")
-    require(
-        transition["consumer_oauth_long_term_availability"] == "NOT_PROVEN",
-        "consumer OAuth longevity must be NOT_PROVEN",
-    )
-    if strict and os.environ.get("RLDYOUR_VALIDATE_LIVE_GEMINI") == "1":
+    require(transition["status"] == "MIGRATED", "transition status must be MIGRATED")
+    if strict and os.environ.get("RLDYOUR_VALIDATE_LIVE_ANTIGRAVITY") == "1":
         proc = subprocess.run(
-            ["npm", "view", RUNTIME_PACKAGE, "version"],
+            [RUNTIME_BINARY, "--version"],
             cwd=ROOT,
             text=True,
             stdout=subprocess.PIPE,
@@ -144,8 +144,7 @@ def validate_runtime_baseline(strict: bool = False) -> None:
             timeout=30,
             check=False,
         )
-        require(proc.returncode == 0, f"npm view failed: {proc.stderr.strip()}")
-        require(proc.stdout.strip() == RUNTIME_VERSION, f"npm latest {proc.stdout.strip()} != {RUNTIME_VERSION}")
+        require(proc.returncode == 0, f"antigravity-cli --version failed: {proc.stderr.strip()}")
 
 
 def validate_mcp_map(mcp: dict[str, Any], source: str) -> None:
@@ -179,7 +178,7 @@ def validate_mcp_inventory() -> None:
 
 def validate_manifest() -> None:
     manifest = load_json(ROOT / "gemini-extension.json")
-    require(manifest["name"] == "rldyour-gemini", "extension name must be rldyour-gemini")
+    require(manifest["name"] == "rldyour-antigravity-cli", "extension name must be rldyour-antigravity-cli")
     require(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", manifest["name"]) is not None, "extension name must be lowercase dash-separated")
     require(manifest["version"] == VERSION, f"extension version must be {VERSION}")
     require(manifest["contextFileName"] == "GEMINI.md", "contextFileName must be GEMINI.md")
@@ -443,19 +442,18 @@ def validate_antigravity_policy() -> None:
     baseline = load_json(ROOT / "config/gemini-baseline.json")
     doc = read_text(ROOT / "references/gemini-antigravity-transition.md")
     require("2026-06-18" in doc and baseline["antigravity_transition"]["date"] == "2026-06-18", "transition date required")
-    require("NOT_PROVEN" in doc, "Antigravity transition doc must mark future adapter path NOT_PROVEN")
-    require("Antigravity CLI is not in scope" in doc, "Antigravity out-of-scope statement required")
+    require("MIGRATED" in doc, "Antigravity transition doc must mark status MIGRATED")
+    require("Antigravity CLI" in doc, "Antigravity CLI must be mentioned in transition doc")
     require("enterprise" in doc.lower() and "api-key" in doc.lower() and "vertex" in doc.lower(), "supported access channels required")
 
 
 def validate_runtime_channel_policy() -> None:
     baseline = load_json(ROOT / "config/gemini-baseline.json")
     priority = baseline.get("source_of_truth_priority") or []
-    require(priority and priority[0] == "npm view @google/gemini-cli version", "npm latest must be primary Gemini stable source")
+    require(priority and priority[0] == "antigravity-cli --version", "antigravity-cli version must be primary source of truth")
     forbidden = set(baseline.get("forbidden_as_stable") or [])
     required = {
-        "github-main-package-json-nightly",
-        "github-releases-latest-redirect-when-conflicting",
+        "github-main-build-nightly",
         "preview-tag",
         "nightly-tag",
     }

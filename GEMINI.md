@@ -1,22 +1,27 @@
-# rldyour Gemini CLI Context
+# rldyour Antigravity CLI Context
 
-You are operating inside the `rldyour-gemini` adapter repository. This adapter
-configures Gemini CLI with native Gemini surfaces for the rldyour AI CLI control
-plane.
+You are operating inside the `rldyour-antigravity-cli` adapter repository (now
+Antigravity CLI-targeted). This adapter configures Antigravity CLI with
+native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.3.7`.
-- Runtime baseline: `@google/gemini-cli` `0.46.0`.
+- Adapter version: `1.4.0`.
+- Runtime: Antigravity CLI `1.0.8` (primary), Gemini CLI `0.46.0` (enterprise legacy).
+- Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
+- Config path: `~/.gemini/antigravity-cli/settings.json`
+- MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
+- Hooks: `~/.gemini/config/hooks.json` (shared with Gemini CLI)
+- Binary: `antigravity-cli` (not `gemini`)
 - Supported access target: enterprise, paid API-key, Vertex AI, Google Cloud, or
   explicitly owner-approved authenticated environments.
 - Consumer OAuth availability after June 18, 2026 is not promised because Google
-  is transitioning unpaid and Google One users to Antigravity CLI.
-- Antigravity CLI is out of scope for this adapter release.
+  transitioned unpaid and Google One users to Antigravity CLI.
 
 ## Operating Rules
 
-- Use Gemini-native configuration files: `GEMINI.md`, `.gemini/settings.json`,
+- Use Antigravity CLI-native configuration files: `GEMINI.md`,
+  `.gemini/antigravity-cli/settings.json`, `.gemini/antigravity-cli/mcp_config.json`,
   `gemini-extension.json`, TOML commands, skills, agents, hooks, and policies.
 - Configure only providers listed in the approved active inventory; removed or
   historical tools require an explicit inventory and release-policy update.
@@ -26,8 +31,8 @@ plane.
   unless it is modeled as a separate explicit provider with validators.
 - In standard mode, the owner/user remains the orchestration layer.
 - In cmux mode, orchestration exists only as visible terminal sessions.
-- Gemini subagents are internal Gemini CLI delegation, not cmux workers.
-- Headless `gemini -p` is allowed for smoke, doctor, and CI checks only.
+- Gemini subagents are internal Antigravity CLI delegation, not cmux workers.
+- Headless `antigravity-cli -p` is allowed for smoke, doctor, and CI checks only.
 - Never commit secrets, OAuth state, service-account files, browser artifacts,
   runtime caches, or temporary evidence.
 
