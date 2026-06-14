@@ -219,7 +219,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.3.7` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.4.0` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 Google announced a transition of unpaid and Google One Antigravity CLI users to
