@@ -28,3 +28,8 @@ Record Gemini CLI runtime baseline and source-of-truth policy.
 
 2026-06-11
 
+
+## Last verified
+- date: 2026-06-15
+- commit: `1cc0b2a2ebdeb35c9dc418eec10e20f1442cf236`
+- checked by: flow-memory-sync post-task sync
