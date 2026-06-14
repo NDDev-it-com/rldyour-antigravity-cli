@@ -18,7 +18,7 @@ import os
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
 status = os.environ.get("RLDYOUR_GEMINI_STATUS_OUTPUT", "").strip()
 if status:
-    print("rldyour-gemini AfterAgent hook observed working-tree changes", file=os.sys.stderr)
+    print("rldyour-antigravity-cli AfterAgent hook observed working-tree changes", file=os.sys.stderr)
     message = "Working tree has changes; run scoped validation and Serena sync before final delivery."
 else:
     message = "Working tree clean or unavailable to hook; no post-task mutation was performed."

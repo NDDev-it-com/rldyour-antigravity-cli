@@ -1,7 +1,7 @@
 name = "ry:init"
 description = "RU: инициализируй Gemini adapter scope без изменений. EN: initialize Gemini adapter scope read-only."
 prompt = """
-Initialize the current repository scope for rldyour work in Gemini CLI.
+Initialize the current repository scope for rldyour work in Antigravity CLI.
 
 Required behavior:
 - Stay read-only unless the user explicitly asks for repair or implementation.

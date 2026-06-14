@@ -1,5 +1,5 @@
 name = "ry:newp"
-description = "RU: спроектируй новый rldyour scope в Gemini CLI. EN: design a new rldyour project scope in Gemini CLI."
+description = "RU: спроектируй новый rldyour scope в Antigravity CLI. EN: design a new rldyour project scope in Antigravity CLI."
 prompt = """
 Design a new rldyour project or feature scope using Gemini-native surfaces.
 

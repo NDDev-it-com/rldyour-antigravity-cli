@@ -26,11 +26,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist
-          git archive --format=zip --prefix=rldyour-gemini/ -o dist/rldyour-gemini-source.zip HEAD
+          git archive --format=zip --prefix=rldyour-antigravity-cli/ -o dist/rldyour-antigravity-cli-source.zip HEAD
           python3 - <<'PY'
           import sys, zipfile
           bad = ('.git/', '__MACOSX/', '.venv/', '.pytest_cache/', '.serena/cache/', '__pycache__/', 'node_modules/')
-          with zipfile.ZipFile('dist/rldyour-gemini-source.zip') as zf:
+          with zipfile.ZipFile('dist/rldyour-antigravity-cli-source.zip') as zf:
               names = zf.namelist()
           hits = [name for name in names if any(part in name for part in bad)]
           if hits:

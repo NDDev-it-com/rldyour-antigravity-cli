@@ -2,20 +2,21 @@
 
 ## Purpose
 
-This repository is the Gemini CLI-native rldyour adapter. Repository artifacts
-are English. Owner-facing conversation in connected agents remains Russian
-unless explicitly requested otherwise.
+This repository is the Antigravity CLI-native rldyour adapter (successor to
+Gemini CLI). Repository artifacts are English. Owner-facing conversation in
+connected agents remains Russian unless explicitly requested otherwise.
 
 ## Source Of Truth
 
 - `VERSION`: adapter product version.
-- `GEMINI.md`: Gemini CLI context file.
-- `.gemini/settings.json`: project Gemini settings and active MCP inventory.
+- `GEMINI.md`: Antigravity CLI context file.
+- `.gemini/antigravity-cli/settings.json`: Antigravity project settings.
+- `.gemini/antigravity-cli/mcp_config.json`: Antigravity MCP server config.
 - `gemini-extension.json`: extension manifest and extension MCP inventory.
-- `.gemini/commands/`: Gemini TOML custom commands.
-- `.gemini/skills/`: Gemini Agent Skills.
-- `.gemini/agents/`: Gemini subagent definitions.
-- `.gemini/hooks/`: synchronous bounded Gemini hooks.
+- `.gemini/commands/`: Antigravity TOML custom commands.
+- `.gemini/skills/`: Antigravity Agent Skills.
+- `.gemini/agents/`: Antigravity subagent definitions.
+- `.gemini/hooks/`: synchronous bounded Antigravity hooks.
 - `.gemini/policies/`: policy extension data.
 - `config/rldyour-contract.json`: adapter contract consumed by the root control plane.
 - `config/gemini-baseline.json`: runtime baseline and source-of-truth policy.
@@ -24,7 +25,7 @@ unless explicitly requested otherwise.
 
 ## Native Boundary
 
-Use Gemini CLI-native surfaces. Do not copy Claude slash commands, Codex plugin
+Use Antigravity CLI-native surfaces. Do not copy Claude slash commands, Codex plugin
 manifests, or OpenCode command JSON as runtime surfaces. Comparison notes are
 allowed only in documentation when they clarify boundaries.
 
@@ -45,9 +46,9 @@ Webwright as a non-MCP harness and keep Playwright CLI-only.
 
 ## cmux Boundary
 
-Gemini may run as a visible cmux worker terminal or, when explicitly selected by
-the owner, as a visible cmux orchestrator terminal. Gemini subagents and
-headless `gemini -p` smoke prompts are not cmux orchestration and must not become
+Antigravity may run as a visible cmux worker terminal or, when explicitly selected by
+the owner, as a visible cmux orchestrator terminal. Antigravity subagents and
+headless `antigravity-cli -p` smoke prompts are not cmux orchestration and must not become
 background, headless, daemon, or detached orchestrator processes.
 
 ## Validation

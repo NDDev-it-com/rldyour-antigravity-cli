@@ -17,7 +17,7 @@ import os
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
 markers = [line for line in os.environ.get("RLDYOUR_GEMINI_RUNTIME_MARKERS", "").splitlines() if line.strip()]
 if markers:
-    print("rldyour-gemini SessionEnd hook found runtime markers", file=os.sys.stderr)
+    print("rldyour-antigravity-cli SessionEnd hook found runtime markers", file=os.sys.stderr)
     message = "Runtime markers remain; cleanup requires explicit owner-approved command."
 else:
     message = "No rldyour runtime markers detected by SessionEnd hook."

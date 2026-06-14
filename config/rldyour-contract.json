@@ -2,16 +2,19 @@
   "schema_version": 1,
   "adapter": {
     "id": "gemini",
-    "name": "rldyour-gemini",
-    "version": "1.3.7",
-    "runtime": "gemini-cli",
+    "name": "rldyour-antigravity-cli",
+    "version": "1.4.0",
+    "runtime": "antigravity-cli",
+    "runtime_binary": "antigravity-cli",
     "runtime_package": "@google/gemini-cli",
     "runtime_version": "0.46.0",
+    "gemini_legacy_compatible": true,
     "license": "AGPL-3.0-or-later"
   },
   "native_surfaces": [
-    "gemini_context",
-    "gemini_settings_json",
+    "antigravity_context",
+    "antigravity_settings_json",
+    "antigravity_mcp_config",
     "gemini_extension_manifest",
     "gemini_commands_toml",
     "gemini_skills",
@@ -23,7 +26,8 @@
   ],
   "system_config_targets": [
     "${GEMINI_HOME:-$HOME/.gemini}",
-    "${GEMINI_HOME:-$HOME/.gemini}/extensions/rldyour-gemini"
+    "${GEMINI_HOME:-$HOME/.gemini}/antigravity-cli",
+    "${GEMINI_HOME:-$HOME/.gemini}/extensions/rldyour-antigravity-cli"
   ],
   "mcp_servers": [
     "serena",

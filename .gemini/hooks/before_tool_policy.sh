@@ -13,7 +13,7 @@ raw = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
 try:
     payload = json.loads(raw) if raw.strip() else {}
 except json.JSONDecodeError:
-    print("rldyour-gemini BeforeTool hook received invalid JSON", file=os.sys.stderr)
+    print("rldyour-antigravity-cli BeforeTool hook received invalid JSON", file=os.sys.stderr)
     print(json.dumps({
         "decision": "deny",
         "reason": "Invalid Gemini hook JSON input.",

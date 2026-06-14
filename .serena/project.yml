@@ -1,5 +1,5 @@
-name: rldyour-gemini
-project_name: rldyour-gemini
+name: rldyour-antigravity-cli
+project_name: rldyour-antigravity-cli
 language: python
 languages:
   - python

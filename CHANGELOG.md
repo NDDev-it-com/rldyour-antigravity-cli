@@ -7,6 +7,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.4.0] - 2026-06-15
+
+### Changed
+
+- Migrated primary runtime from Gemini CLI to Antigravity CLI 1.0.8.
+- Added `.gemini/antigravity-cli/settings.json` and `mcp_config.json`.
+- Updated install scripts for dual-runtime support (antigravity + gemini legacy).
+- Updated adapter contract with Antigravity native surfaces.
+- Updated transition doc status from NOT_PROVEN to MIGRATED.
+
+### Backward Compatibility
+
+- Gemini CLI 0.46.0 extension manifest remains compatible.
+- Enterprise users on Gemini CLI Standard/Enterprise are not impacted.
+- Extension name remains `rldyour-antigravity-cli` for marketplace continuity.
+
 ## [1.3.7] - 2026-06-14
 
 ### Fixed

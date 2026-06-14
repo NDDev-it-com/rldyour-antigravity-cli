@@ -1,6 +1,6 @@
 ---
 name: ry-repair
-description: "Запусти rldyour repair для Gemini CLI configuration. EN: repair Gemini CLI adapter."
+description: "Запусти rldyour repair для Antigravity CLI configuration. EN: repair Antigravity CLI adapter."
 ---
 
 # Purpose

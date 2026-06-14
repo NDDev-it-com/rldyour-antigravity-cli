@@ -3,6 +3,7 @@ set -euo pipefail
 
 apply=0
 gemini_home="${GEMINI_HOME:-$HOME/.gemini}"
+runtime="${RLDYOUR_ANTIGRAVITY:-antigravity}"
 
 while (($#)); do
   case "$1" in
@@ -11,8 +12,12 @@ while (($#)); do
       shift
       gemini_home="${1:?missing --gemini-home value}"
       ;;
+    --runtime)
+      shift
+      runtime="${1:?missing --runtime value}"
+      ;;
     -h|--help)
-      printf '%s\n' "usage: scripts/install_system_gemini.sh [--apply] [--gemini-home PATH]"
+      printf '%s\n' "usage: scripts/install_system_gemini.sh [--apply] [--gemini-home PATH] [--runtime antigravity|gemini]"
       exit 0
       ;;
     *)
@@ -24,11 +29,14 @@ while (($#)); do
 done
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-extension_dir="$gemini_home/extensions/rldyour-gemini"
+extension_dir="$gemini_home/extensions/rldyour-antigravity-cli"
 
 if [[ "$apply" -eq 0 ]]; then
-  printf 'dry-run: would install Gemini extension into %s\n' "$extension_dir"
+  printf 'dry-run: would install %s extension into %s\n' "$runtime" "$extension_dir"
   printf 'dry-run: would copy GEMINI.md, gemini-extension.json, commands, skills, agents, hooks, and policies\n'
+  if [[ "$runtime" == "antigravity" ]]; then
+    printf 'dry-run: would also install Antigravity CLI settings and MCP config\n'
+  fi
   exit 0
 fi
 
@@ -41,5 +49,12 @@ cp -R "$repo_root/.gemini/skills" "$extension_dir/skills"
 cp -R "$repo_root/.gemini/agents" "$extension_dir/agents"
 cp -R "$repo_root/.gemini/hooks" "$extension_dir/hooks"
 cp -R "$repo_root/.gemini/policies" "$extension_dir/policies"
-printf 'installed: %s\n' "$extension_dir"
 
+if [[ "$runtime" == "antigravity" ]]; then
+  mkdir -p "$gemini_home/antigravity-cli"
+  cp "$repo_root/.gemini/antigravity-cli/settings.json" "$gemini_home/antigravity-cli/settings.json"
+  cp "$repo_root/.gemini/antigravity-cli/mcp_config.json" "$gemini_home/antigravity-cli/mcp_config.json"
+  printf 'installed: %s (antigravity runtime)\n' "$extension_dir"
+else
+  printf 'installed: %s (gemini legacy runtime)\n' "$extension_dir"
+fi
