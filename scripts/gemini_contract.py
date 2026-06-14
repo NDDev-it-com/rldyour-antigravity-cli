@@ -420,8 +420,9 @@ def validate_browser_routing() -> None:
 def validate_native_boundaries() -> None:
     contract = load_json(ROOT / "config/rldyour-contract.json")
     required = {
-        "gemini_context",
-        "gemini_settings_json",
+        "antigravity_context",
+        "antigravity_settings_json",
+        "antigravity_mcp_config",
         "gemini_extension_manifest",
         "gemini_commands_toml",
         "gemini_skills",
@@ -431,7 +432,7 @@ def validate_native_boundaries() -> None:
         "gemini_mcp_servers",
         "gemini_headless_prompt",
     }
-    require(required.issubset(set(contract["native_surfaces"])), "contract missing native Gemini surfaces")
+    require(required.issubset(set(contract["native_surfaces"])), "contract missing native Antigravity surfaces")
     text = read_text(ROOT / "references/gemini-native-boundaries.md")
     require("Claude Code slash-command files" in text, "native boundary doc must reject Claude runtime surfaces")
     require("Codex plugin manifests" in text, "native boundary doc must reject Codex runtime surfaces")
