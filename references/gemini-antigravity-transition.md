@@ -2,7 +2,7 @@
 
 ## Current Fact
 
-Gemini adapter `1.5.0` has migrated primary runtime to Antigravity CLI `1.0.8`.
+Gemini adapter `1.5.1` has migrated primary runtime to Antigravity CLI `1.0.8`.
 The adapter now targets Antigravity CLI as the primary runtime while maintaining
 backward compatibility with Gemini CLI `0.46.0` for enterprise users.
 
