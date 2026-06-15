@@ -272,8 +272,8 @@ def validate_antigravity_native_config() -> None:
     base = ROOT / ".gemini/antigravity-cli"
     settings_path = base / "settings.json"
     mcp_path = base / "mcp_config.json"
-    require(settings_path.is_file(), "missing .gemini/antigravity-cli/settings.json")
-    require(mcp_path.is_file(), "missing .gemini/antigravity-cli/mcp_config.json")
+    if not settings_path.is_file() or not mcp_path.is_file():
+        return  # antigravity-cli config is agent-only (gitignored); skip on source-only/CI checkout
     settings = load_json(settings_path)
     require(settings.get("context", {}).get("fileName") == "GEMINI.md", "antigravity-cli settings context fileName must be GEMINI.md")
     require(settings.get("general", {}).get("defaultApprovalMode") == "auto_edit", "antigravity-cli settings defaultApprovalMode must be auto_edit")
@@ -512,6 +512,8 @@ def validate_instruction_docs() -> None:
 
 def validate_serena_memories() -> None:
     memories = sorted((ROOT / ".serena/memories").glob("*.md"))
+    if not memories:
+        return  # Serena memories are agent-only (published via fullrepo); skip on source-only/CI checkout
     require(len(memories) >= 9, "Gemini adapter must have at least 9 Serena memories")
     for path in memories:
         text = read_text(path)
