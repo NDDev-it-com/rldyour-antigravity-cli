@@ -38,6 +38,7 @@ NATIVE_MCP_KEYS = {
     "cwd",
     "url",
     "httpUrl",
+    "serverUrl",
     "headers",
     "timeout",
     "description",
@@ -164,7 +165,7 @@ def validate_mcp_map(mcp: dict[str, Any], source: str) -> None:
             require(isinstance(spec.get("args", []), list), f"{source}: args must be a list for {alias}")
             require(" " not in spec["command"], f"{source}: command must not shell-concatenate args for {alias}")
         else:
-            require("url" in spec or "httpUrl" in spec, f"{source}: MCP spec needs command, url, or httpUrl for {alias}")
+            require("url" in spec or "httpUrl" in spec or "serverUrl" in spec, f"{source}: MCP spec needs command, url, httpUrl, or serverUrl for {alias}")
 
 
 def validate_mcp_inventory() -> None:
@@ -265,6 +266,30 @@ def validate_hook_config(config: Any, source: str, *, project_settings: bool) ->
                     require(command.startswith("${extensionPath}/hooks/"), f"{source}: {event} extension hook command must use ${'{'}extensionPath{'}'}")
                 timeout = hook.get("timeout")
                 require(isinstance(timeout, int) and 0 < timeout <= 10000, f"{source}: {event} timeout must be bounded milliseconds")
+
+
+def validate_antigravity_native_config() -> None:
+    base = ROOT / ".gemini/antigravity-cli"
+    settings_path = base / "settings.json"
+    mcp_path = base / "mcp_config.json"
+    require(settings_path.is_file(), "missing .gemini/antigravity-cli/settings.json")
+    require(mcp_path.is_file(), "missing .gemini/antigravity-cli/mcp_config.json")
+    settings = load_json(settings_path)
+    require(settings.get("context", {}).get("fileName") == "GEMINI.md", "antigravity-cli settings context fileName must be GEMINI.md")
+    require(settings.get("general", {}).get("defaultApprovalMode") == "auto_edit", "antigravity-cli settings defaultApprovalMode must be auto_edit")
+    security = settings.get("security") or {}
+    require(security.get("disableYoloMode") is False, "antigravity-cli settings disableYoloMode must be false")
+    require(security.get("toolSandboxing") is False, "antigravity-cli settings toolSandboxing must be false")
+    require(settings.get("hooksConfig", {}).get("enabled") is True, "antigravity-cli settings hooks must be enabled")
+    validate_hook_config(settings.get("hooks"), ".gemini/antigravity-cli/settings.json hooks", project_settings=True)
+    mcp = load_json(mcp_path)
+    require("mcpServers" in mcp, "antigravity-cli mcp_config must define mcpServers")
+    validate_mcp_map(mcp["mcpServers"], ".gemini/antigravity-cli/mcp_config.json")
+    gemini_settings = load_json(ROOT / ".gemini/settings.json")
+    require(
+        settings["general"]["defaultApprovalMode"] == gemini_settings["general"]["defaultApprovalMode"],
+        "antigravity-cli native settings approval mode must match .gemini/settings.json",
+    )
 
 
 def command_files() -> list[Path]:
@@ -521,6 +546,7 @@ def validate_all(strict: bool = False) -> None:
     validate_manifest()
     validate_settings()
     validate_mcp_inventory()
+    validate_antigravity_native_config()
     validate_extension_secret_settings()
     validate_commands()
     validate_skills()
@@ -554,6 +580,7 @@ VALIDATORS: dict[str, Callable[[bool], None]] = {
     "instructions": lambda strict: validate_instruction_docs(),
     "memories": lambda strict: validate_serena_memories(),
     "native": lambda strict: validate_native_boundaries(),
+    "antigravity-native": lambda strict: validate_antigravity_native_config(),
     "antigravity": lambda strict: validate_antigravity_policy(),
 }
 
