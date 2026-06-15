@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1.4.0"
 RUNTIME_VERSION = "1.0.8"
 RUNTIME_PACKAGE = "antigravity-cli"
-RUNTIME_BINARY = "antigravity-cli"
+RUNTIME_BINARY = "agy"
 GEMINI_LEGACY_PACKAGE = "@google/gemini-cli"
 GEMINI_LEGACY_VERSION = "0.46.0"
 EXPECTED_MCP = [
@@ -130,7 +130,7 @@ def validate_runtime_baseline(strict: bool = False) -> None:
     require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.8")
     require(baseline["target_channel"] == "stable/curl-latest", "target channel must be stable/curl-latest")
     priority = baseline["source_of_truth_priority"]
-    require(priority[0] == "antigravity-cli --version", "antigravity-cli version must be primary source of truth")
+    require(priority[0] == "agy --version", "agy version must be primary source of truth")
     transition = baseline["antigravity_transition"]
     require(transition["date"] == "2026-06-18", "Antigravity transition date must be recorded")
     require(transition["status"] == "MIGRATED", "transition status must be MIGRATED")
@@ -144,7 +144,7 @@ def validate_runtime_baseline(strict: bool = False) -> None:
             timeout=30,
             check=False,
         )
-        require(proc.returncode == 0, f"antigravity-cli --version failed: {proc.stderr.strip()}")
+        require(proc.returncode == 0, f"agy --version failed: {proc.stderr.strip()}")
 
 
 def validate_mcp_map(mcp: dict[str, Any], source: str) -> None:
@@ -451,7 +451,7 @@ def validate_antigravity_policy() -> None:
 def validate_runtime_channel_policy() -> None:
     baseline = load_json(ROOT / "config/gemini-baseline.json")
     priority = baseline.get("source_of_truth_priority") or []
-    require(priority and priority[0] == "antigravity-cli --version", "antigravity-cli version must be primary source of truth")
+    require(priority and priority[0] == "agy --version", "agy version must be primary source of truth")
     forbidden = set(baseline.get("forbidden_as_stable") or [])
     required = {
         "github-main-build-nightly",

@@ -5,9 +5,13 @@
     "name": "rldyour-antigravity-cli",
     "version": "1.4.0",
     "runtime": "antigravity-cli",
-    "runtime_binary": "antigravity-cli",
-    "runtime_package": "@google/gemini-cli",
-    "runtime_version": "0.46.0",
+    "runtime_binary": "agy",
+    "runtime_package": "antigravity-cli",
+    "runtime_version": "1.0.8",
+    "gemini_legacy": {
+      "runtime_package": "@google/gemini-cli",
+      "runtime_version": "0.46.0"
+    },
     "gemini_legacy_compatible": true,
     "license": "AGPL-3.0-or-later"
   },
