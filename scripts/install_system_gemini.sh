@@ -8,6 +8,7 @@ runtime="${RLDYOUR_ANTIGRAVITY:-antigravity}"
 while (($#)); do
   case "$1" in
     --apply) apply=1 ;;
+    --dry-run) apply=0 ;;
     --gemini-home)
       shift
       gemini_home="${1:?missing --gemini-home value}"
@@ -17,7 +18,7 @@ while (($#)); do
       runtime="${1:?missing --runtime value}"
       ;;
     -h|--help)
-      printf '%s\n' "usage: scripts/install_system_gemini.sh [--apply] [--gemini-home PATH] [--runtime antigravity|gemini]"
+      printf '%s\n' "usage: scripts/install_system_gemini.sh [--dry-run|--apply] [--gemini-home PATH] [--runtime antigravity|gemini]"
       exit 0
       ;;
     *)
@@ -27,6 +28,24 @@ while (($#)); do
   esac
   shift
 done
+
+# Verify required CLI binary is on PATH before any non-dry-run work
+if [[ "$apply" -eq 1 ]]; then
+  if [[ "$runtime" == "antigravity" ]] && ! command -v agy >/dev/null 2>&1; then
+    printf 'error: --runtime antigravity requires the 'agy' CLI on PATH. Install with:\n' >&2
+    printf '  curl -fsSL https://antigravity.google/cli/install.sh | bash\n' >&2
+    exit 1
+  fi
+  if [[ "$runtime" == "gemini" ]] && ! command -v gemini >/dev/null 2>&1; then
+    printf 'error: --runtime gemini requires the 'gemini' CLI on PATH.\n' >&2
+    exit 1
+  fi
+  # Clean up legacy rldyour-gemini extension (renamed in 1.4.0 to rldyour-antigravity-cli)
+  if [[ -d "$gemini_home/extensions/rldyour-gemini" ]]; then
+    printf 'cleanup: removing legacy rldyour-gemini extension directory\n'
+    rm -rf "$gemini_home/extensions/rldyour-gemini"
+  fi
+fi
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 extension_dir="$gemini_home/extensions/rldyour-antigravity-cli"
