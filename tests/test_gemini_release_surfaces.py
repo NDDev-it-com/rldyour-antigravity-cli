@@ -16,3 +16,7 @@ def test_serena_memories_validate():
 
 def test_all_validates():
     gemini_contract.validate_all(strict=False)
+
+
+def test_binary_naming_validates():
+    gemini_contract.validate_binary_naming()

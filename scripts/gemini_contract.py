@@ -106,7 +106,7 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def require(condition: bool, message: str) -> None:
+def require(condition: object, message: str) -> None:
     if not condition:
         raise ValidationError(message)
 
@@ -203,9 +203,10 @@ def collect_secret_env_refs(value: Any) -> set[str]:
 
 
 def validate_extension_secret_settings(manifest: dict[str, Any] | None = None) -> None:
-    manifest = manifest or load_json(ROOT / "gemini-extension.json")
-    settings = manifest.get("settings")
-    require(isinstance(settings, list), "extension manifest must declare settings for secret env vars")
+    data: dict[str, Any] = manifest or load_json(ROOT / "gemini-extension.json")
+    settings = data.get("settings")
+    if not isinstance(settings, list):
+        raise ValidationError("extension manifest must declare settings for secret env vars")
     declared: dict[str, dict[str, Any]] = {}
     for item in settings:
         require(isinstance(item, dict), "extension settings entries must be objects")
@@ -215,7 +216,7 @@ def validate_extension_secret_settings(manifest: dict[str, Any] | None = None) -
         if re.search(r"TOKEN|KEY|SECRET|PASSWORD", env_var):
             require(item.get("sensitive") is True, f"extension setting {env_var} must be sensitive")
 
-    refs = collect_secret_env_refs(manifest.get("mcpServers", {}))
+    refs = collect_secret_env_refs(data.get("mcpServers", {}))
     missing = sorted(refs - set(declared))
     require(not missing, f"extension secret env refs must be declared in settings: {missing}")
 
@@ -335,7 +336,8 @@ def validate_skills() -> None:
         require(text.startswith("---\n"), f"{path}: skill frontmatter required")
         require("name:" in text and "description:" in text, f"{path}: name and description required")
         match = re.search(r"^name:\s*([A-Za-z0-9_-]+)\s*$", text, re.MULTILINE)
-        require(match is not None, f"{path}: skill name must be parseable")
+        if match is None:
+            raise ValidationError(f"{path}: skill name must be parseable")
         skill_names.add(match.group(1))
         for heading in required:
             require(heading in text, f"{path}: missing heading {heading}")
@@ -362,7 +364,8 @@ def validate_subagents() -> None:
         require('"read"' not in frontmatter and '"grep"' not in frontmatter and '"shell"' not in frontmatter, f"{path}: cross-tool shorthand is forbidden")
         require("mcp:" not in frontmatter, f"{path}: MCP shorthand with colon is forbidden")
         tools_match = re.search(r"tools:\s*\[(.*?)\]", frontmatter, re.DOTALL)
-        require(tools_match is not None, f"{path}: tools array required")
+        if tools_match is None:
+            raise ValidationError(f"{path}: tools array required")
         tools = [item.strip().strip("'\"") for item in tools_match.group(1).split(",") if item.strip()]
         for tool in tools:
             require(
@@ -542,6 +545,34 @@ def validate_retired_residue() -> None:
                 raise ValidationError(f"{rel}: retired-tool current-doc residue: {pattern.pattern}")
 
 
+def validate_binary_naming() -> None:
+    # Product, runtime, and package name is "antigravity-cli"; the invoked binary
+    # is `agy` (config/gemini-baseline.json runtime_binary). The legacy Gemini CLI
+    # version 0.46.0 belongs to @google/gemini-cli, never to antigravity-cli. Docs
+    # that present antigravity-cli as the binary/command, or pin it to the legacy
+    # version, drift from the canonical `agy --version` source of truth.
+    binary_drift = re.compile(
+        r"antigravity-cli\s+--"
+        r"|Binary:\s*`?antigravity-cli`?"
+        r"|`?antigravity-cli`?\s+binary"
+    )
+    legacy_misattribution = re.compile(r"`?antigravity-cli`?\s+`?" + re.escape(GEMINI_LEGACY_VERSION))
+    doc_paths = [ROOT / "README.md", ROOT / "GEMINI.md", *sorted((ROOT / "references").glob("*.md"))]
+    for path in doc_paths:
+        if not path.is_file():
+            continue
+        rel = path.relative_to(ROOT).as_posix()
+        text = read_text(path)
+        drift = binary_drift.search(text)
+        if drift is not None:
+            raise ValidationError(f"{rel}: binary must be `{RUNTIME_BINARY}`, not antigravity-cli (found {drift.group(0)!r})")
+        legacy = legacy_misattribution.search(text)
+        if legacy is not None:
+            raise ValidationError(f"{rel}: legacy version {GEMINI_LEGACY_VERSION} must not be attributed to antigravity-cli (found {legacy.group(0)!r})")
+    readme = read_text(ROOT / "README.md")
+    require(f"{RUNTIME_BINARY} --version" in readme, f"README.md must cite `{RUNTIME_BINARY} --version` as the freshness command")
+
+
 def validate_all(strict: bool = False) -> None:
     validate_version_surfaces()
     validate_runtime_baseline(strict=strict)
@@ -560,11 +591,12 @@ def validate_all(strict: bool = False) -> None:
     validate_native_boundaries()
     validate_antigravity_policy()
     validate_instruction_docs()
+    validate_binary_naming()
     validate_serena_memories()
     validate_retired_residue()
 
 
-VALIDATORS: dict[str, Callable[[bool], None]] = {
+VALIDATORS: dict[str, Callable[[bool], object]] = {
     "all": validate_all,
     "config": lambda strict: (validate_version_surfaces(), validate_settings(), validate_manifest(), validate_mcp_inventory()),
     "manifest": lambda strict: validate_manifest(),
@@ -580,6 +612,7 @@ VALIDATORS: dict[str, Callable[[bool], None]] = {
     "runtime-channel": lambda strict: validate_runtime_channel_policy(),
     "projection": lambda strict: validate_projection_parity(),
     "instructions": lambda strict: validate_instruction_docs(),
+    "binary-naming": lambda strict: validate_binary_naming(),
     "memories": lambda strict: validate_serena_memories(),
     "native": lambda strict: validate_native_boundaries(),
     "antigravity-native": lambda strict: validate_antigravity_native_config(),
