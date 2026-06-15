@@ -11,7 +11,7 @@
 | Runtime channel | `stable/curl-latest` |
 | GitHub release tag | `1.4.0` |
 
-Antigravity CLI freshness uses `antigravity-cli --version` as the primary
+Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
 The legacy Gemini CLI `@google/gemini-cli` `0.46.0` remains compatible for
 enterprise Standard/Enterprise license holders.
@@ -28,7 +28,7 @@ subagents, hooks, policies, and MCP servers - into a coherent,
 version-controlled, owner-validated setup. The upstream Antigravity CLI binary
 is installed separately via the official installer and is not modified here.
 All changes in this repository are configuration and adapter logic; runtime
-behavior is governed by the installed `antigravity-cli` binary version.
+behavior is governed by the installed `agy` binary version.
 
 ## Native Boundaries
 

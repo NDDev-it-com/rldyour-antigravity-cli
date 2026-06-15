@@ -2,7 +2,7 @@
 
 ## Current Baseline
 
-The adapter targets `antigravity-cli` `0.46.0` and adopts native Antigravity CLI
+The adapter targets Antigravity CLI (`agy`) `1.0.8` and adopts native Antigravity CLI
 surfaces: context files, project settings, extension manifest, TOML commands,
 Agent Skills, subagents, hooks, policies, MCP servers, model routing, and
 headless prompt smoke mode.

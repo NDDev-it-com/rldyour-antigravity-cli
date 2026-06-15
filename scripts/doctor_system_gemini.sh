@@ -17,10 +17,16 @@ while (($#)); do
   shift
 done
 
-if command -v gemini >/dev/null 2>&1; then
-  printf 'gemini: %s\n' "$(gemini --version 2>/dev/null || true)"
+if command -v agy >/dev/null 2>&1; then
+  printf 'agy: %s\n' "$(agy --version 2>/dev/null || true)"
 else
-  printf 'gemini: NOT_INSTALLED\n'
+  printf 'agy: NOT_INSTALLED\n'
+fi
+
+if command -v gemini >/dev/null 2>&1; then
+  printf 'gemini (legacy): %s\n' "$(gemini --version 2>/dev/null || true)"
+else
+  printf 'gemini (legacy): NOT_INSTALLED\n'
 fi
 
 if command -v npm >/dev/null 2>&1; then
