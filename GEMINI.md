@@ -12,7 +12,7 @@ native surfaces for the rldyour AI CLI control plane.
 - Config path: `~/.gemini/antigravity-cli/settings.json`
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
 - Hooks: `~/.gemini/config/hooks.json` (shared with Gemini CLI)
-- Binary: `antigravity-cli` (not `gemini`)
+- Binary: `agy` (not `gemini`)
 - Supported access target: enterprise, paid API-key, Vertex AI, Google Cloud, or
   explicitly owner-approved authenticated environments.
 - Consumer OAuth availability after June 18, 2026 is not promised because Google

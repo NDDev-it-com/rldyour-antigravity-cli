@@ -10,11 +10,10 @@
 | Runtime baseline | Antigravity CLI `1.0.8` |
 | Runtime channel | `stable/curl-latest` |
 | GitHub release tag | `1.4.0` |
-| Pinned commit | `001fe7784a1d6cf27eb4cb94f02b84d95316b19b` |
 
 Antigravity CLI freshness uses `antigravity-cli --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
-The legacy Antigravity CLI `@google/gemini-cli` `0.46.0` remains compatible for
+The legacy Gemini CLI `@google/gemini-cli` `0.46.0` remains compatible for
 enterprise Standard/Enterprise license holders.
 The pinned commit and product version are governed by the root control plane
 `config/repositories.json`.
@@ -22,7 +21,7 @@ The pinned commit and product version are governed by the root control plane
 ## What This Repository Provides
 
 This repository is a configuration package for Antigravity CLI (successor to
-Antigravity CLI), not a fork or copy of the upstream runtime. It wires together
+Gemini CLI), not a fork or copy of the upstream runtime. It wires together
 the native Antigravity CLI configuration surfaces - context files, project
 settings, MCP config, extension manifest, TOML commands, Agent Skills,
 subagents, hooks, policies, and MCP servers - into a coherent,
