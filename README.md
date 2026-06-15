@@ -55,7 +55,7 @@ Active native surfaces:
 Hooks use Gemini's native event-keyed schema: read JSON from stdin, write
 exactly one JSON object to stdout, and send diagnostics to stderr. Gemini
 subagents are internal Antigravity CLI delegation and are not cmux worker terminals.
-Headless `gemini -p` is allowed for smoke, doctor, and CI checks only.
+Headless `agy -p` is allowed for smoke, doctor, and CI checks only.
 
 ## Install / Update / ry-repair
 
@@ -63,7 +63,7 @@ Install the upstream Antigravity CLI runtime:
 
 ```bash
 npm install -g @google/gemini-cli
-gemini --version
+agy --version
 ```
 
 Clone or update this adapter:
@@ -83,8 +83,8 @@ For offline or check-only mode, run the static validation lane (see
 `## Validation`). Runtime doctor:
 
 ```bash
-gemini --version
-gemini -p 'Return exactly READY.' --output-format json
+agy --version
+agy -p 'Return exactly READY.' --output-format json
 ```
 
 The installed-runtime smoke checks require a deliberately configured owner
@@ -249,8 +249,8 @@ Installed-runtime smoke checks (optional; require a deliberately configured
 owner machine with valid authentication):
 
 ```bash
-gemini --version
-gemini -p 'Return exactly READY.' --output-format json
+agy --version
+agy -p 'Return exactly READY.' --output-format json
 ```
 
 The `NOT_PROVEN` policy applies to any validation result that cannot be
