@@ -8,13 +8,13 @@ This document records the current verified control-plane state for the 2026-06-1
 | --- | ---: | --- | ---: |
 - root `rldyour-ai-cli-tools`: n/a (use `git rev-parse HEAD`; this derived document intentionally does not pin root HEAD)
 
-- Claude adapter `rldyour-claudecode`: `1.5.1` at `e9e46560139aa2fcb5e67911590c8426be81fa6a` (Claude Code `2.1.177`)
+- Claude adapter `rldyour-claudecode`: `1.5.2` at `8ae7b0d0bb358360ab2829db96d6c59f2ef1d546` (Claude Code `2.1.177`)
 
-- Codex adapter `rldyour-codex`: `1.5.1` at `5c7b9e2c72b9e163b1398f316402faebbd1e08de` (Codex CLI `0.139.0`)
+- Codex adapter `rldyour-codex`: `1.5.2` at `3905ff4c2c95c710e3ab74fa3ecd924ceb8d865b` (Codex CLI `0.139.0`)
 
-- OpenCode adapter `rldyour-opencode`: `1.5.1` at `850ed67775b122779ed0343723820f14352c691a` (OpenCode `1.17.7`)
+- OpenCode adapter `rldyour-opencode`: `1.5.2` at `875c7f2b49d60bad5d70694329f59f3705f617e7` (OpenCode `1.17.7`)
 
-- Antigravity adapter `rldyour-antigravity-cli`: `1.5.2` at `current HEAD` (Antigravity CLI `1.0.8`)
+- Antigravity adapter `rldyour-antigravity-cli`: `1.5.3` at `7640ec8f4379b71520e090890b1ca45948f2bd7b` (Antigravity CLI `1.0.8`)
 
 - MiMoCode adapter `rldyour-mimocode`: `1.5.1` at `8cf8400bae3ed958e62d528ee028e7721dbfa830` (MiMoCode `0.1.0`)
 
@@ -24,11 +24,11 @@ Stable tuple: all five adapters share the unified `1.5.x` line (Claude Code,
 Codex, OpenCode, Antigravity CLI, and MiMoCode), per the owner-directed
 unification on 2026-06-15. Root meta-release identity:
 `five-config-unified-1.5.x-2026-06-15`. The exact adapter versions above are the
-current supported releases at `1.5.1`.
+current supported releases at `1.5.2`/`1.5.3`.
 
 ## Resolved Since Earlier Audit Notes
 
-- Earlier bootstrap-era and audit-archive current-state notes have been replaced with the verified 2026-06-13 tuple; the current adapter versions are Claude `1.5.1`, Codex `1.5.1`, OpenCode `1.5.1`, Gemini `1.5.1`, and MiMoCode `1.5.1`.
+- Earlier bootstrap-era and audit-archive current-state notes have been replaced with the verified 2026-06-13 tuple; the current adapter versions are Claude `1.5.2`, Codex `1.5.2`, OpenCode `1.5.2`, Gemini `1.5.3`, and MiMoCode `1.5.1`.
 - Root `.gitmodules`, `config/repositories.json`, README module table, adapter `VERSION` files, and adapter release changelogs agree on the current tuple.
 - Approved active inventories: current MCP and browser/provider surfaces are validated from `config/mcp-version-policy.json`, `config/browser-automation-policy.json`, and `config/rldyour-system-contract.json`. Current docs and memories should not retain one-off absence claims for removed tools.
 - `/ry-repair` system convergence is now documented in `docs/ry-repair-sync.md` and governed by `config/ry-repair-sync-contract.json` plus `scripts/ry_repair_sync.py`.
