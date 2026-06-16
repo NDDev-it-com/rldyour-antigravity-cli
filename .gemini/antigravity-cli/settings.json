@@ -1,0 +1,88 @@
+{
+  "$schema": "https://antigravity.google/schemas/settings.schema.json",
+  "context": {
+    "fileName": "GEMINI.md"
+  },
+  "general": {
+    "defaultApprovalMode": "auto_edit",
+    "preferredEditor": "vscode",
+    "checkpointing": {
+      "enabled": true
+    }
+  },
+  "security": {
+    "disableYoloMode": false,
+    "toolSandboxing": false
+  },
+  "ui": {
+    "hideTips": true,
+    "hideBanner": false,
+    "loadingPhrases": "off",
+    "showMemoryUsage": false,
+    "showCitations": true
+  },
+  "privacy": {
+    "usageStatisticsEnabled": false
+  },
+  "hooksConfig": {
+    "enabled": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "name": "session-start-context",
+            "type": "command",
+            "command": "$GEMINI_PROJECT_DIR/.gemini/hooks/session_start_context.sh",
+            "timeout": 5000,
+            "description": "Inject rldyour context without source mutation."
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "read_file|grep_search|run_shell_command|write_file|replace|mcp_.*",
+        "hooks": [
+          {
+            "name": "before-tool-policy",
+            "type": "command",
+            "command": "$GEMINI_PROJECT_DIR/.gemini/hooks/before_tool_policy.sh",
+            "timeout": 5000,
+            "description": "Block destructive shell/git/file and secret-bearing operations."
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "after-agent-post-task-sync",
+            "type": "command",
+            "command": "$GEMINI_PROJECT_DIR/.gemini/hooks/after_agent_post_task_sync.sh",
+            "timeout": 10000,
+            "description": "Report bounded post-task state without recursive loops."
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "exit",
+        "hooks": [
+          {
+            "name": "session-end-cleanup",
+            "type": "command",
+            "command": "$GEMINI_PROJECT_DIR/.gemini/hooks/session_end_cleanup.sh",
+            "timeout": 10000,
+            "description": "Report runtime-marker cleanup state without source mutation."
+          }
+        ]
+      }
+    ]
+  }
+}
