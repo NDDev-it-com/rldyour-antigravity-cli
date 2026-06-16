@@ -14,7 +14,7 @@ This document records the current verified control-plane state for the 2026-06-1
 
 - OpenCode adapter `rldyour-opencode`: `1.5.1` at `850ed67775b122779ed0343723820f14352c691a` (OpenCode `1.17.7`)
 
-- Antigravity adapter `rldyour-antigravity-cli`: `1.5.2` at `b37596636c17a077cd793ce0e3897aa5032d3bf6` (Antigravity CLI `1.0.8`)
+- Antigravity adapter `rldyour-antigravity-cli`: `1.5.2` at `215cf5394292dc79e0ca08bc93a9ec564a76c16e` (Antigravity CLI `1.0.8`)
 
 - MiMoCode adapter `rldyour-mimocode`: `1.5.1` at `8cf8400bae3ed958e62d528ee028e7721dbfa830` (MiMoCode `0.1.0`)
 
