@@ -8,9 +8,9 @@ This document records the current verified control-plane state for the 2026-06-1
 | --- | ---: | --- | ---: |
 - root `rldyour-ai-cli-tools`: n/a (use `git rev-parse HEAD`; this derived document intentionally does not pin root HEAD)
 
-- Claude adapter `rldyour-claudecode`: `1.5.1` at `203f30db5454d840c5236add85c0d201416e9189` (Claude Code `2.1.177`)
+- Claude adapter `rldyour-claudecode`: `1.5.1` at `e9e46560139aa2fcb5e67911590c8426be81fa6a` (Claude Code `2.1.177`)
 
-- Codex adapter `rldyour-codex`: `1.5.1` at `fc4f792e2366858e2ee40d23ec0f2e2ea61d4051` (Codex CLI `0.139.0`)
+- Codex adapter `rldyour-codex`: `1.5.1` at `5c7b9e2c72b9e163b1398f316402faebbd1e08de` (Codex CLI `0.139.0`)
 
 - OpenCode adapter `rldyour-opencode`: `1.5.1` at `850ed67775b122779ed0343723820f14352c691a` (OpenCode `1.17.7`)
 
