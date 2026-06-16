@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.5.2] - 2026-06-16
+
+### Fixed
+
+- MCP URL fixes for Antigravity CLI runtime:
+  - **openai-docs**: replace invalid `mcp.openai.com` with `https://developers.openai.com/mcp` (typo in earlier URL; the MCP server is at the official `developers.openai.com` host, not `mcp.openai.com`).
+  - **figma**: replace local Figma desktop bridge `http://127.0.0.1:3845/mcp` with cloud-hosted `https://mcp.figma.com/mcp` (authenticates with `FIGMA_PAT` environment variable; no local desktop process required).
+  - **deepwiki**: bump tool-call timeout from 120000ms to 180000ms to accommodate slower repository wiki generation.
+- Mirror the MCP URL fixes in `config/mcp-version-policy.json` (policy source of truth) and the tracked module source `.gemini/antigravity-cli/mcp_config.json` so the runtime and policy stay in sync.
+
 ## [1.5.1] - 2026-06-15
 
 ### Changed
