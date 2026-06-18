@@ -514,7 +514,7 @@ def validate_instruction_docs() -> None:
 
 
 def validate_serena_memories() -> None:
-    memories = sorted((ROOT / ".serena/memories").glob("*.md"))
+    memories = sorted(path for path in (ROOT / ".serena/memories").rglob("*.md") if path.is_file())
     if not memories:
         return  # Serena memories are agent-only (published via fullrepo); skip on source-only/CI checkout
     require(len(memories) >= 9, "Gemini adapter must have at least 9 Serena memories")
