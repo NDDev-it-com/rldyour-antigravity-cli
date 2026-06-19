@@ -1,16 +1,16 @@
-# Gemini Antigravity Transition
+# Antigravity Runtime Transition
 
 ## Current Fact
 
-Gemini adapter `1.5.1` has migrated primary runtime to Antigravity CLI `1.0.8`.
-The adapter now targets Antigravity CLI as the primary runtime while maintaining
-backward compatibility with Gemini CLI `0.46.0` for enterprise users.
+Antigravity CLI adapter `1.5.5` targets Antigravity CLI `1.0.8` through the
+`agy` command. Gemini CLI is retired as a supported runtime for this adapter.
 
 ## Migration Status: MIGRATED
 
-Google transitioned unpaid and Google One Gemini CLI users to Antigravity CLI
-on `2026-06-18`. Enterprise Standard/Enterprise license holders retain access
-to Gemini CLI.
+Google transitioned unpaid and Google One users from Gemini CLI to Antigravity
+CLI on `2026-06-18`. That historical product transition is recorded here only
+as migration evidence; this adapter no longer installs, validates, or supports
+Gemini CLI as an active runtime.
 
 ## Antigravity CLI Details
 
@@ -18,7 +18,7 @@ to Gemini CLI.
 - Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
 - Config path: `~/.gemini/antigravity-cli/settings.json`
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
-- Hooks: `~/.gemini/config/hooks.json` (shared with Antigravity CLI)
+- Hooks: `.gemini/hooks/hooks.json` projected into the Antigravity native namespace
 - GitHub: `https://github.com/google-antigravity/antigravity-cli`
 - Latest version: `1.0.8`
 

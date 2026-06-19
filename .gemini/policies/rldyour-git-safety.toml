@@ -1,6 +1,6 @@
 name = "rldyour-git-safety"
-version = "1.5.1"
-scope = "gemini-adapter"
+version = "1.5.5"
+scope = "antigravity-adapter"
 
 [rules]
 force_push = "block"

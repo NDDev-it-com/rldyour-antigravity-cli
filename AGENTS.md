@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This repository is the Antigravity CLI-native rldyour adapter (successor to
-Gemini CLI). Repository artifacts are English. Owner-facing conversation in
-connected agents remains Russian unless explicitly requested otherwise.
+This repository is the Antigravity CLI-native rldyour adapter. Repository
+artifacts are English. Owner-facing conversation in connected agents remains
+Russian unless explicitly requested otherwise.
 
 ## Source Of Truth
 

@@ -6,12 +6,12 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.5.1`.
-- Runtime: Antigravity CLI `1.0.8` (primary), Gemini CLI `0.46.0` (enterprise legacy).
+- Adapter version: `1.5.5`.
+- Runtime: Antigravity CLI `1.0.8`.
 - Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
 - Config path: `~/.gemini/antigravity-cli/settings.json`
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
-- Hooks: `~/.gemini/config/hooks.json` (shared with Gemini CLI)
+- Hooks: `.gemini/hooks/hooks.json` projected into the Antigravity native namespace.
 - Binary: `agy` (not `gemini`)
 - Supported access target: enterprise, paid API-key, Vertex AI, Google Cloud, or
   explicitly owner-approved authenticated environments.
@@ -27,11 +27,11 @@ native surfaces for the rldyour AI CLI control plane.
   historical tools require an explicit inventory and release-policy update.
 - Keep browser routing split: Webwright for long-horizon workflows, Playwright
   CLI for screenshots/flows/visual evidence, Chrome DevTools MCP for debugging.
-- Gemini built-in `browser_agent` is disabled for this release; do not enable it
+- Antigravity built-in `browser_agent` is disabled for this release; do not enable it
   unless it is modeled as a separate explicit provider with validators.
 - In standard mode, the owner/user remains the orchestration layer.
 - In cmux mode, orchestration exists only as visible terminal sessions.
-- Gemini subagents are internal Antigravity CLI delegation, not cmux workers.
+- Antigravity subagents are internal Antigravity CLI delegation, not cmux workers.
 - Headless `antigravity-cli -p` is allowed for smoke, doctor, and CI checks only.
 - Never commit secrets, OAuth state, service-account files, browser artifacts,
   runtime caches, or temporary evidence.

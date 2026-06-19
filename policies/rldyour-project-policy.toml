@@ -1,6 +1,6 @@
 name = "rldyour-project-policy"
-version = "1.5.1"
-scope = "gemini-adapter"
+version = "1.5.5"
+scope = "antigravity-adapter"
 
 [execution]
 standard_mode = "owner is the orchestration layer"

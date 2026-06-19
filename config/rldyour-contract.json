@@ -8,11 +8,10 @@
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
     "runtime_version": "1.0.8",
-    "gemini_legacy": {
-      "runtime_package": "@google/gemini-cli",
-      "runtime_version": "0.46.0"
+    "native_namespace": {
+      "internal_id": "gemini",
+      "status": "Antigravity CLI native compatibility namespace, not a supported runtime product"
     },
-    "gemini_legacy_compatible": true,
     "license": "AGPL-3.0-or-later"
   },
   "native_surfaces": [
@@ -55,6 +54,7 @@
   "hard_invariants": [
     "no_active_playwright_mcp",
     "no_active_semgrep",
+    "no_gemini_cli_runtime_support",
     "gemini_subagents_are_not_cmux_orchestration",
     "headless_prompt_is_smoke_doctor_ci_only",
     "cmux_orchestrator_mode_requires_visible_terminal_sessions"
