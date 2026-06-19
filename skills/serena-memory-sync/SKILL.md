@@ -1,15 +1,15 @@
 ---
 name: serena-memory-sync
-description: "Синхронизируй fact-only Serena memories для Gemini adapter. EN: Serena memory sync."
+description: "Синхронизируй fact-only Serena memories для Antigravity CLI adapter. EN: Serena memory sync."
 ---
 
 # Purpose
 
 Keep `.serena/memories` synchronized with verified current facts.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Gemini memories describe Gemini adapter files and runtime facts only.
+Antigravity memories describe Antigravity CLI adapter files and runtime facts only.
 
 # When To Use
 

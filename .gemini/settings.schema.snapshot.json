@@ -1,11 +1,12 @@
 {
-  "schema": "https://geminicli.com/schemas/settings.schema.json",
-  "snapshot_verified_on": "2026-06-12",
-  "purpose": "Repository policy snapshot for documented Antigravity CLI 0.46.0 settings categories; the 0.46.0 npm package includes bundle/docs/reference/configuration.md but does not ship a standalone schemas/settings.schema.json file.",
-  "official_reference": "https://geminicli.com/docs/reference/configuration/",
+  "schema": "NOT_PROVEN",
+  "snapshot_verified_on": "2026-06-19",
+  "purpose": "Repository policy snapshot for Antigravity CLI settings categories. No standalone Antigravity CLI settings schema file or current packaged settings reference is proven in this tree.",
+  "official_reference": "NOT_PROVEN",
   "runtime_package": "antigravity-cli",
-  "runtime_version": "0.46.0",
-  "runtime_package_reference": "bundle/docs/reference/configuration.md",
+  "runtime_binary": "agy",
+  "runtime_version": "1.0.8",
+  "runtime_package_reference": "NOT_PROVEN",
   "runtime_package_schema_file": "NOT_PROVEN",
   "documented_repository_categories": [
     "context",

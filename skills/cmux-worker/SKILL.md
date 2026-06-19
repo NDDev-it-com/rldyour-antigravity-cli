@@ -1,15 +1,15 @@
 ---
 name: cmux-worker
-description: "Работай как видимый cmux worker terminal для Gemini. EN: visible cmux Gemini worker terminal."
+description: "Работай как видимый cmux worker terminal для Antigravity CLI. EN: visible cmux Antigravity worker terminal."
 ---
 
 # Purpose
 
 Perform a scoped worker task in a visible cmux terminal session.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Gemini subagents are internal delegation and are not cmux worker terminals.
+Antigravity subagents are internal delegation and are not cmux worker terminals.
 
 # When To Use
 

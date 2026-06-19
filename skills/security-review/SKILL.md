@@ -1,15 +1,18 @@
 ---
 name: security-review
-description: "Проверь безопасность Gemini adapter: hooks, MCP, secrets, auth. EN: security review."
+description: "Проверь безопасность Antigravity CLI adapter: hooks, MCP, secrets, auth. EN: security review."
 ---
 
 # Purpose
 
 Find safety, secrets, auth, hook, MCP, and release risks before they ship.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Gemini committed settings use the `auto_edit` approval mode (maximal committable owner autonomy); full YOLO is launcher-only (`gemini --approval-mode=yolo`).
+Antigravity committed settings use the `auto_edit` approval mode, the maximal
+committable owner-autonomy posture currently proven for this adapter. Do not
+copy retired legacy runtime `--approval-mode=yolo` semantics into active
+Antigravity runtime docs or launchers.
 
 # When To Use
 

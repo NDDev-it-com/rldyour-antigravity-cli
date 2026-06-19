@@ -1,17 +1,17 @@
 ---
 name: ry-start
-description: "Выполни полный Gemini rldyour task lifecycle. EN: full Gemini rldyour task lifecycle."
+description: "Выполни полный Antigravity rldyour task lifecycle. EN: full Antigravity rldyour task lifecycle."
 ---
 
 # Purpose
 
-Implement a scoped task in this Gemini adapter with validated code, docs, and
+Implement a scoped task in this Antigravity CLI adapter with validated code, docs, and
 sync state.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Use Gemini-native commands, skills, subagents, hooks, policies, and settings.
-Gemini subagents are local delegation helpers, not cmux orchestration.
+Use Antigravity-native commands, skills, subagents, hooks, policies, and settings.
+Antigravity subagents are local delegation helpers, not cmux orchestration.
 
 # When To Use
 
@@ -27,7 +27,7 @@ Use when the owner asks Antigravity CLI to implement or repair a scoped task.
 
 1. Gather enough context before editing.
 2. Plan the smallest coherent change.
-3. Implement using local patterns and Gemini-native surfaces.
+3. Implement using local patterns and Antigravity-native surfaces.
 4. Run scope-matching validators and tests.
 5. Sync memories/docs/fullrepo only when project policy allows and facts changed.
 

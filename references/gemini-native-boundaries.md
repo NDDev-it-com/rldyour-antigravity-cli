@@ -18,5 +18,5 @@ Claude Code slash-command files, Codex plugin manifests, and OpenCode command
 JSON are not Antigravity runtime surfaces.
 
 Antigravity subagents are internal Antigravity CLI delegation and are not cmux worker
-terminals. Headless `gemini -p` is allowed for smoke, doctor, and CI checks, not
-as a persistent orchestrator.
+terminals. Headless `agy -p` is allowed for smoke, doctor, and CI checks, not as
+a persistent orchestrator.

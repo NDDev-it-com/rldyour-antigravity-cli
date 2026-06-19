@@ -1,6 +1,6 @@
 ---
 name: ry-newp
-description: "Спроектируй новый Gemini/rldyour project scope. EN: design a new Gemini/rldyour project scope."
+description: "Спроектируй новый Antigravity/rldyour project scope. EN: design a new Antigravity/rldyour project scope."
 ---
 
 # Purpose
@@ -8,9 +8,9 @@ description: "Спроектируй новый Gemini/rldyour project scope. EN
 Design a new project, adapter surface, command, skill, policy, or validation
 scope before implementation.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Author designs in Gemini-native terms: TOML commands, Agent Skills, subagents,
+Author designs in Antigravity-native terms: TOML commands, Agent Skills, subagents,
 hooks JSON protocol, policies, settings, extension manifest, and MCP servers.
 
 # When To Use
@@ -43,7 +43,7 @@ Do not scaffold, install, publish, or commit before explicit approval.
 
 # Acceptance Checks
 
-The design names source-of-truth files, native Gemini surfaces, and verification
+The design names source-of-truth files, native Antigravity surfaces, and verification
 commands.
 
 # Failure Reporting

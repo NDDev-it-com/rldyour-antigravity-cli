@@ -1,6 +1,6 @@
 ---
 name: ry-review
-description: "Проведи read-only Gemini rldyour review. EN: read-only Gemini rldyour review."
+description: "Проведи read-only Antigravity rldyour review. EN: read-only Antigravity rldyour review."
 ---
 
 # Purpose
@@ -8,9 +8,9 @@ description: "Проведи read-only Gemini rldyour review. EN: read-only Gemi
 Review a requested scope for bugs, drift, release risk, security issues, and
 native-boundary violations.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Use Gemini-native evidence gathering. Subagents may analyze when policy allows,
+Use Antigravity-native evidence gathering. Subagents may analyze when policy allows,
 but they must not mutate source or act as cmux orchestrators.
 
 # When To Use
