@@ -13,12 +13,10 @@ python3 scripts/validate_instruction_docs.py --strict
 
 if python3 - <<'PY' >/dev/null 2>&1
 import pytest
+import pytest_cov
 PY
 then
   python3 -m pytest -q
-elif command -v uv >/dev/null 2>&1; then
-  uv run --with pytest --with pytest-cov python -m pytest -q
 else
-  python3 -m pip install --user pytest pytest-cov
-  python3 -m pytest -q
+  printf 'skip: pytest/pytest-cov unavailable; offline fast validators completed without network installs\n'
 fi
