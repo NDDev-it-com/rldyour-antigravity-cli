@@ -2,11 +2,15 @@
   "schema_version": 1,
   "runtime": "antigravity-cli",
   "runtime_binary": "agy",
-  "gemini_legacy": {
-    "runtime_package": "@google/gemini-cli",
-    "runtime_version": "0.46.0",
-    "status": "enterprise-only-legacy",
-    "compatibility": "gemini_extension_manifest still loads in antigravity-cli"
+  "runtime_package": "antigravity-cli",
+  "native_namespace": {
+    "internal_id": "gemini",
+    "paths": [
+      ".gemini/",
+      "GEMINI.md",
+      "gemini-extension.json"
+    ],
+    "status": "Antigravity CLI native compatibility namespace; not runtime product support"
   },
   "target_runtime_version": "1.0.8",
   "target_channel": "stable/curl-latest",

@@ -13,15 +13,13 @@
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
-The legacy Gemini CLI `@google/gemini-cli` `0.46.0` remains compatible for
-enterprise Standard/Enterprise license holders.
 The pinned commit and product version are governed by the root control plane
 `config/repositories.json`.
 
 ## What This Repository Provides
 
-This repository is a configuration package for Antigravity CLI (successor to
-Gemini CLI), not a fork or copy of the upstream runtime. It wires together
+This repository is a configuration package for Antigravity CLI, not a fork or
+copy of the upstream runtime. It wires together
 the native Antigravity CLI configuration surfaces - context files, project
 settings, MCP config, extension manifest, TOML commands, Agent Skills,
 subagents, hooks, policies, and MCP servers - into a coherent,
@@ -32,7 +30,9 @@ behavior is governed by the installed `agy` binary version.
 
 ## Native Boundaries
 
-Gemini runtime configuration is represented through Gemini-native files only.
+Antigravity runtime configuration is represented through Antigravity native
+files only; `.gemini/`, `GEMINI.md`, and `gemini-extension.json` are native
+namespace filenames retained for Antigravity compatibility.
 Claude Code slash-command files, Codex plugin manifests, and OpenCode command
 JSON are not Gemini runtime surfaces and are not present here.
 
@@ -45,16 +45,16 @@ Active native surfaces:
 - `.gemini/commands/**/*.toml` - custom commands (13 TOML files across browser,
   flow, release, ry, security, and serena groups).
 - `.gemini/skills/*/SKILL.md` - Agent Skills (14 skills).
-- `.gemini/agents/*.md` - Gemini subagents (7 agents: browser-reviewer,
+- `.gemini/agents/*.md` - Antigravity subagents (7 agents: browser-reviewer,
   codebase-investigator, design-reviewer, antigravity-cli-specialist,
   release-reviewer, security-reviewer, serena-curator).
 - `.gemini/hooks/` - native hook scripts for SessionStart, BeforeTool,
   AfterAgent, and SessionEnd events.
 - `.gemini/policies/*.toml` - policy extension data.
 
-Hooks use Gemini's native event-keyed schema: read JSON from stdin, write
-exactly one JSON object to stdout, and send diagnostics to stderr. Gemini
-subagents are internal Antigravity CLI delegation and are not cmux worker terminals.
+Hooks use the native event-keyed schema: read JSON from stdin, write exactly
+one JSON object to stdout, and send diagnostics to stderr. Antigravity subagents
+are internal Antigravity CLI delegation and are not cmux worker terminals.
 Headless `agy -p` is allowed for smoke, doctor, and CI checks only.
 
 ## Install / Update / ry-repair
@@ -62,7 +62,7 @@ Headless `agy -p` is allowed for smoke, doctor, and CI checks only.
 Install the upstream Antigravity CLI runtime:
 
 ```bash
-npm install -g @google/gemini-cli
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 agy --version
 ```
 
@@ -96,7 +96,7 @@ machine with valid authentication.
 | --- | ---: |
 | Agent Skills (`.gemini/skills/*/SKILL.md`) | 14 |
 | TOML commands (`.gemini/commands/**/*.toml`) | 13 |
-| Gemini subagents (`.gemini/agents/*.md`) | 7 |
+| Antigravity subagents (`.gemini/agents/*.md`) | 7 |
 | Hook scripts (`.gemini/hooks/`) | 4 |
 | MCP servers (`.gemini/settings.json`) | 11 |
 

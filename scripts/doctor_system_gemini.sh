@@ -23,18 +23,6 @@ else
   printf 'agy: NOT_INSTALLED\n'
 fi
 
-if command -v gemini >/dev/null 2>&1; then
-  printf 'gemini (legacy): %s\n' "$(gemini --version 2>/dev/null || true)"
-else
-  printf 'gemini (legacy): NOT_INSTALLED\n'
-fi
-
-if command -v npm >/dev/null 2>&1; then
-  printf 'npm @google/gemini-cli latest: %s\n' "$(npm view @google/gemini-cli version 2>/dev/null || printf NOT_PROVEN)"
-else
-  printf 'npm: NOT_INSTALLED\n'
-fi
-
 for key in GEMINI_API_KEY GOOGLE_API_KEY GOOGLE_GENAI_USE_VERTEXAI GOOGLE_CLOUD_PROJECT GOOGLE_CLOUD_LOCATION; do
   value="${!key-}"
   if [[ -n "$value" ]]; then
@@ -47,4 +35,3 @@ for key in GEMINI_API_KEY GOOGLE_API_KEY GOOGLE_GENAI_USE_VERTEXAI GOOGLE_CLOUD_
     printf '%s=UNSET\n' "$key"
   fi
 done
-

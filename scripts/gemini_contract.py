@@ -16,8 +16,8 @@ VERSION = "1.5.5"
 RUNTIME_VERSION = "1.0.8"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
-GEMINI_LEGACY_PACKAGE = "@google/gemini-cli"
-GEMINI_LEGACY_VERSION = "0.46.0"
+RETIRED_GEMINI_PACKAGE = "@google/gemini-cli"
+RETIRED_GEMINI_VERSION = "0.46.0"
 EXPECTED_MCP = [
     "serena",
     "chrome-devtools",
@@ -128,6 +128,9 @@ def validate_version_surfaces() -> None:
 def validate_runtime_baseline(strict: bool = False) -> None:
     baseline = load_json(ROOT / "config/gemini-baseline.json")
     require(baseline["runtime"] == "antigravity-cli", "runtime must be antigravity-cli")
+    require(baseline["runtime_binary"] == RUNTIME_BINARY, "runtime binary must be agy")
+    require(baseline["runtime_package"] == RUNTIME_PACKAGE, "runtime package must be antigravity-cli")
+    require("gemini_legacy" not in baseline, "baseline must not model Gemini CLI as a supported runtime")
     require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.8")
     require(baseline["target_channel"] == "stable/curl-latest", "target channel must be stable/curl-latest")
     priority = baseline["source_of_truth_priority"]
@@ -473,6 +476,7 @@ def validate_antigravity_policy() -> None:
     require("2026-06-18" in doc and baseline["antigravity_transition"]["date"] == "2026-06-18", "transition date required")
     require("MIGRATED" in doc, "Antigravity transition doc must mark status MIGRATED")
     require("Antigravity CLI" in doc, "Antigravity CLI must be mentioned in transition doc")
+    require("retired as a supported runtime" in doc, "transition doc must mark Gemini CLI runtime support retired")
     require("enterprise" in doc.lower() and "api-key" in doc.lower() and "vertex" in doc.lower(), "supported access channels required")
 
 
@@ -486,7 +490,7 @@ def validate_runtime_channel_policy() -> None:
         "preview-tag",
         "nightly-tag",
     }
-    require(required.issubset(forbidden), "Gemini runtime channel policy must reject nightly/preview/latest-redirect drift")
+    require(required.issubset(forbidden), "Antigravity runtime channel policy must reject nightly/preview/latest-redirect drift")
 
 
 def validate_projection_parity() -> None:
@@ -511,6 +515,32 @@ def validate_instruction_docs() -> None:
     for phrase in [VERSION, RUNTIME_VERSION, RUNTIME_PACKAGE, "approved active inventory", "Antigravity"]:
         require(phrase in combined, f"instruction docs must mention {phrase}")
     require("YOLO" in combined and "launcher" in combined, "docs must keep YOLO launcher-only")
+
+
+def validate_product_naming() -> None:
+    active_paths = [
+        ROOT / "README.md",
+        ROOT / "AGENTS.md",
+        ROOT / "GEMINI.md",
+        ROOT / "NOTICE",
+        ROOT / "config/gemini-baseline.json",
+        ROOT / "config/rldyour-contract.json",
+        ROOT / "config/current-claim-rules.json",
+        ROOT / "scripts/install_system_gemini.sh",
+        ROOT / "scripts/doctor_system_gemini.sh",
+        ROOT / "references/gemini-surface-adoption.md",
+    ]
+    forbidden = ("Gemini CLI", RETIRED_GEMINI_PACKAGE, RETIRED_GEMINI_VERSION)
+    for path in active_paths:
+        text = read_text(path)
+        for phrase in forbidden:
+            if phrase in text:
+                raise ValidationError(
+                    f"{path.relative_to(ROOT).as_posix()}: active surface must not present retired Gemini CLI runtime phrase {phrase!r}"
+                )
+    transition = read_text(ROOT / "references/gemini-antigravity-transition.md")
+    if "Gemini CLI" in transition:
+        require("retired as a supported runtime" in transition, "transition doc Gemini CLI references must be explicitly retired")
 
 
 def validate_serena_memories() -> None:
@@ -547,16 +577,13 @@ def validate_retired_residue() -> None:
 
 def validate_binary_naming() -> None:
     # Product, runtime, and package name is "antigravity-cli"; the invoked binary
-    # is `agy` (config/gemini-baseline.json runtime_binary). The legacy Gemini CLI
-    # version 0.46.0 belongs to @google/gemini-cli, never to antigravity-cli. Docs
-    # that present antigravity-cli as the binary/command, or pin it to the legacy
-    # version, drift from the canonical `agy --version` source of truth.
+    # is `agy` (config/gemini-baseline.json runtime_binary).
     binary_drift = re.compile(
         r"antigravity-cli\s+--"
         r"|Binary:\s*`?antigravity-cli`?"
         r"|`?antigravity-cli`?\s+binary"
     )
-    legacy_misattribution = re.compile(r"`?antigravity-cli`?\s+`?" + re.escape(GEMINI_LEGACY_VERSION))
+    legacy_misattribution = re.compile(r"`?antigravity-cli`?\s+`?" + re.escape(RETIRED_GEMINI_VERSION))
     doc_paths = [ROOT / "README.md", ROOT / "GEMINI.md", *sorted((ROOT / "references").glob("*.md"))]
     for path in doc_paths:
         if not path.is_file():
@@ -568,7 +595,7 @@ def validate_binary_naming() -> None:
             raise ValidationError(f"{rel}: binary must be `{RUNTIME_BINARY}`, not antigravity-cli (found {drift.group(0)!r})")
         legacy = legacy_misattribution.search(text)
         if legacy is not None:
-            raise ValidationError(f"{rel}: legacy version {GEMINI_LEGACY_VERSION} must not be attributed to antigravity-cli (found {legacy.group(0)!r})")
+            raise ValidationError(f"{rel}: retired version {RETIRED_GEMINI_VERSION} must not be attributed to antigravity-cli (found {legacy.group(0)!r})")
     readme = read_text(ROOT / "README.md")
     require(f"{RUNTIME_BINARY} --version" in readme, f"README.md must cite `{RUNTIME_BINARY} --version` as the freshness command")
 
@@ -591,6 +618,7 @@ def validate_all(strict: bool = False) -> None:
     validate_native_boundaries()
     validate_antigravity_policy()
     validate_instruction_docs()
+    validate_product_naming()
     validate_binary_naming()
     validate_serena_memories()
     validate_retired_residue()
@@ -612,6 +640,7 @@ VALIDATORS: dict[str, Callable[[bool], object]] = {
     "runtime-channel": lambda strict: validate_runtime_channel_policy(),
     "projection": lambda strict: validate_projection_parity(),
     "instructions": lambda strict: validate_instruction_docs(),
+    "naming": lambda strict: validate_product_naming(),
     "binary-naming": lambda strict: validate_binary_naming(),
     "memories": lambda strict: validate_serena_memories(),
     "native": lambda strict: validate_native_boundaries(),
@@ -621,7 +650,7 @@ VALIDATORS: dict[str, Callable[[bool], object]] = {
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Validate rldyour Gemini adapter surfaces.")
+    parser = argparse.ArgumentParser(description="Validate rldyour Antigravity CLI adapter surfaces.")
     parser.add_argument("target", choices=sorted(VALIDATORS), nargs="?", default="all")
     parser.add_argument("--strict", action="store_true")
     parser.add_argument("--strict-native-schema", action="store_true")
@@ -634,7 +663,7 @@ def main(argv: list[str] | None = None) -> int:
     except ValidationError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-    print(f"ok: Gemini {args.target} validation passed")
+    print(f"ok: Antigravity {args.target} validation passed")
     return 0
 
 
