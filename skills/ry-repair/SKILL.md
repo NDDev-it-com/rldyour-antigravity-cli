@@ -5,12 +5,12 @@ description: "Запусти rldyour repair для Antigravity CLI configuration
 
 # Purpose
 
-Repair and synchronize this Gemini adapter against repository source of truth.
+Repair and synchronize this Antigravity CLI adapter against repository source of truth.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
 Use `GEMINI.md`, `.gemini/settings.json`, `gemini-extension.json`, TOML
-commands, Gemini Agent Skills, Gemini subagents, hooks, and policies.
+commands, Antigravity Agent Skills, Antigravity subagents, hooks, and policies.
 
 # When To Use
 
@@ -22,12 +22,12 @@ memories, or release metadata may be stale.
 - User request and scope.
 - Current git state.
 - `config/rldyour-contract.json`.
-- Gemini baseline and native surface files.
+- Antigravity baseline and native surface files.
 
 # Procedure
 
 1. Read source-of-truth files before editing.
-2. Validate native Gemini surfaces.
+2. Validate native Antigravity surfaces.
 3. Fix verified drift with the smallest coherent change.
 4. Run scope-matching validators and tests.
 5. Report exact pass/fail results.

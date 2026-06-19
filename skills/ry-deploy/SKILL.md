@@ -1,16 +1,16 @@
 ---
 name: ry-deploy
-description: "Подготовь Gemini deploy/release handoff. EN: prepare Gemini deploy or release handoff."
+description: "Подготовь Antigravity deploy/release handoff. EN: prepare Antigravity deploy or release handoff."
 ---
 
 # Purpose
 
-Prepare and verify deployment, release, or publication work for Gemini adapter
+Prepare and verify deployment, release, or publication work for Antigravity CLI adapter
 changes.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Gemini headless prompts are allowed for smoke/doctor/CI checks only. Persistent
+Antigravity headless prompts are allowed for smoke/doctor/CI checks only. Persistent
 orchestration remains cmux visible-terminal-only.
 
 # When To Use

@@ -7,10 +7,10 @@ description: "Проверь browser/UI поведение через Webwright,
 
 Collect browser evidence for UI flows, screenshots, traces, and runtime defects.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Gemini delegates browser work through documented providers; Playwright and
-Webwright are not Gemini MCP servers.
+Antigravity delegates browser work through documented providers; Playwright and
+Webwright are not Antigravity MCP servers.
 
 # When To Use
 

@@ -1,15 +1,15 @@
 ---
 name: flow-post-task-sync
-description: "Сделай финальную синхронизацию Gemini adapter: docs, Serena memories, checks, release evidence. EN: post-task sync."
+description: "Сделай финальную синхронизацию Antigravity CLI adapter: docs, Serena memories, checks, release evidence. EN: post-task sync."
 ---
 
 # Purpose
 
 Finish a task without leaving semantic drift, runtime markers, or stale memory.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Post-task sync updates Gemini-native files only when verified facts changed.
+Post-task sync updates Antigravity-native files only when verified facts changed.
 
 # When To Use
 
@@ -37,7 +37,7 @@ Do not store chat logs, speculation, secrets, tokens, caches, or browser evidenc
 
 # Acceptance Checks
 
-Memory schema and semantic validators plus scope-specific Gemini validators.
+Memory schema and semantic validators plus scope-specific Antigravity validators.
 
 # Failure Reporting
 

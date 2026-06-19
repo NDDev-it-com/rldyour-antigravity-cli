@@ -23,10 +23,10 @@ remain local and ignored.
 
 Committed Antigravity project settings use the `auto_edit` approval mode: the maximal
 owner-autonomy posture that Antigravity CLI accepts in committed config (it
-auto-approves edits without prompting). Full YOLO (auto-approve every action,
-including shell) can only be enabled through the launcher
-(`antigravity-cli --approval-mode=yolo`); Antigravity CLI silently downgrades a committed
-`yolo` value to default, so YOLO must never be written into committed settings.
+auto-approves edits without prompting). Full shell-command YOLO flags are
+`NOT_PROVEN` until the installed-runtime lane verifies the current `agy --help`
+contract, so launchers must not claim unverified legacy approval semantics.
+Unverified `yolo` values must never be written into committed settings.
 
 ## Reporting
 

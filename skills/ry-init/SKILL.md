@@ -1,15 +1,15 @@
 ---
 name: ry-init
-description: "Инициализируй Gemini adapter scope без изменений. EN: initialize Gemini adapter scope read-only."
+description: "Инициализируй Antigravity CLI adapter scope без изменений. EN: initialize Antigravity CLI adapter scope read-only."
 ---
 
 # Purpose
 
-Build a verified context pack for Gemini adapter work before implementation.
+Build a verified context pack for Antigravity CLI adapter work before implementation.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Use Gemini `GEMINI.md`, project settings, TOML commands, Agent Skills,
+Use Antigravity `GEMINI.md`, project settings, TOML commands, Agent Skills,
 subagents, hooks, policies, and MCP server config. This skill is not a Claude
 slash command, Codex managed agent, OpenCode command, or cmux orchestrator.
 
@@ -27,7 +27,7 @@ Use when the user asks to initialize, inspect, onboard, or prepare for work.
 # Procedure
 
 1. Read source-of-truth files and relevant memories first.
-2. Map Gemini native surfaces, runtime baselines, MCP inventory, browser
+2. Map Antigravity native surfaces, runtime baselines, MCP inventory, browser
    routing, cmux boundary, and quality gates.
 3. Identify unknowns and mark unsupported claims `NOT_PROVEN`.
 4. Do not mutate files, git state, system configs, or fullrepo.

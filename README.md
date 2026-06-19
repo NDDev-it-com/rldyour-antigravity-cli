@@ -34,7 +34,7 @@ Antigravity runtime configuration is represented through Antigravity native
 files only; `.gemini/`, `GEMINI.md`, and `gemini-extension.json` are native
 namespace filenames retained for Antigravity compatibility.
 Claude Code slash-command files, Codex plugin manifests, and OpenCode command
-JSON are not Gemini runtime surfaces and are not present here.
+JSON are not Antigravity runtime surfaces and are not present here.
 
 Active native surfaces:
 
@@ -124,9 +124,10 @@ Only providers listed in the approved active inventory may be configured.
 Removed or historical tools require an explicit inventory and release-policy
 update before reintroduction.
 
-Gemini built-in `browser_agent` is disabled for this adapter release. It is not
-a silent replacement for any provider above and must be added as a separately
-validated explicit provider with dedicated validators before any future use.
+The native built-in `browser_agent` is disabled for this adapter release. It is
+not a silent replacement for any provider above and must be added as a
+separately validated explicit provider with dedicated validators before any
+future use.
 
 ### MCP Inventory Detail
 
@@ -185,17 +186,14 @@ Committed `.gemini/settings.json` sets `general.defaultApprovalMode =
 "auto_edit"` - the maximal owner-autonomy posture that Antigravity CLI accepts in
 committed configuration. `auto_edit` auto-approves file edits without prompting.
 `security.disableYoloMode = false` and `security.toolSandboxing = false` are set
-explicitly to preserve full-auto launcher capability.
+explicitly to preserve the maximal committed owner-autonomy posture currently
+proven for Antigravity CLI.
 
-Full YOLO (auto-approve every action, including shell commands) is
-launcher-only:
-
-```bash
-GEMINI_SANDBOX=false gemini --approval-mode=yolo
-```
-
-Antigravity CLI silently downgrades a committed `yolo` value to the default approval
-mode. Writing `yolo` into committed settings has no effect and must not be done.
+Full shell-command YOLO flags for Antigravity CLI are `NOT_PROVEN` until the
+installed-runtime lane verifies the current `agy --help` contract. Do not copy
+retired legacy runtime `--approval-mode=yolo` semantics into Antigravity
+launchers or docs. Writing an unverified `yolo` value into committed settings
+has no effect and must not be done.
 
 Permissions are not a sandbox. This adapter is designed for an owner workstation
 with owner-trusted tools and reviewed MCP servers. It is not suitable as-is for
@@ -203,10 +201,10 @@ untrusted multi-user or production environments.
 
 ### Secrets
 
-Do not commit Gemini API keys, Google API keys, OAuth material, service-account
-JSON, Google Cloud ADC files, cookies, browser profile state, or MCP provider
-tokens. `.env.example` documents accepted local variable names; real values must
-remain local and git-ignored.
+Do not commit Antigravity, Google model, or Google API keys, OAuth material,
+service-account JSON, Google Cloud ADC files, cookies, browser profile state, or
+MCP provider tokens. `.env.example` documents accepted local variable names;
+real values must remain local and git-ignored.
 
 ### MCP Trust Boundary
 
@@ -221,8 +219,7 @@ release-policy update.
 Antigravity CLI adapter `1.5.5` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
-Google announced a transition of unpaid and Google One Antigravity CLI users to
-Antigravity CLI. Antigravity CLI is out of scope for this adapter release. See
+legacy runtime support is retired for active use in this adapter. See
 `references/gemini-antigravity-transition.md`.
 
 ## Validation

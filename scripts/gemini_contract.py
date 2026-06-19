@@ -325,7 +325,7 @@ def validate_skills() -> None:
     skill_names: set[str] = set()
     required = [
         "# Purpose",
-        "# Native Gemini Boundary",
+        "# Native Antigravity Boundary",
         "# When To Use",
         "# Inputs",
         "# Procedure",

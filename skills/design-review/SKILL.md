@@ -7,7 +7,7 @@ description: "Проведи дизайн/visual review с evidence и dynamic m
 
 Evaluate visual implementation against a Figma export, screenshot, image, or spec.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
 Use Figma and Chrome DevTools MCP where available; use Playwright CLI for
 deterministic visual evidence.

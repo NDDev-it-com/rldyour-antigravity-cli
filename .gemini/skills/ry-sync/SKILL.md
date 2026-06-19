@@ -1,17 +1,17 @@
 ---
 name: ry-sync
-description: "Синхронизируй Gemini docs, memories, git и fullrepo. EN: synchronize Gemini docs, memories, git, and fullrepo."
+description: "Синхронизируй Antigravity docs, memories, git и fullrepo. EN: synchronize Antigravity docs, memories, git, and fullrepo."
 ---
 
 # Purpose
 
-Finalize Gemini adapter work into synchronized source, docs, memories, git,
+Finalize Antigravity CLI adapter work into synchronized source, docs, memories, git,
 GitHub, and fullrepo state.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Use Gemini-native docs and runtime surfaces. Fullrepo is a branch policy, not a
-Gemini runtime feature.
+Use Antigravity-native docs and runtime surfaces. Fullrepo is a branch policy, not a
+Antigravity runtime feature.
 
 # When To Use
 

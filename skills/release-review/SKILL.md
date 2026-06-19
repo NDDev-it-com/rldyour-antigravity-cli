@@ -1,6 +1,6 @@
 ---
 name: release-review
-description: "Проверь release readiness Gemini adapter и public CI policy. EN: release review."
+description: "Проверь release readiness Antigravity CLI adapter и public CI policy. EN: release review."
 ---
 
 # Purpose
@@ -8,9 +8,9 @@ description: "Проверь release readiness Gemini adapter и public CI polic
 Validate that current release surfaces, CI, tags, metadata, and archives are
 coherent.
 
-# Native Gemini Boundary
+# Native Antigravity Boundary
 
-Release review validates Gemini-native config and public adapter policy.
+Release review validates Antigravity-native config and public adapter policy.
 
 # When To Use
 
@@ -23,7 +23,7 @@ Version files, changelog, workflows, validators, tests, and release artifacts.
 # Procedure
 
 1. Check version parity.
-2. Check native Gemini surfaces.
+2. Check native Antigravity surfaces.
 3. Check workflows and release metadata.
 4. Check archive hygiene.
 5. Verify GitHub Release evidence when credentials allow.
