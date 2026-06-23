@@ -80,7 +80,7 @@ no retired tool names in active root docs).
 
 Context7 registry drift (resolved): the owner directed Context7 to track the
 latest published version everywhere it is used. All local-stdio adapters
-(Claude, Codex, Gemini, MiMoCode) now pin `@upstash/context7-mcp@3.2.1` (npm
+(Claude, Codex, Gemini, MiMoCode) now pin `@upstash/context7-mcp@3.2.2` (npm
 latest); Claude moved off its prior `2.2.5` hold after the `3.2.1` stdio MCP
 `initialize` runtime smoke verified the server starts, so the Claude
 `override_reason` was removed. OpenCode continues to use the always-current
