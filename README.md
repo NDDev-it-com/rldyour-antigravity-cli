@@ -7,7 +7,7 @@
 | Surface | Value |
 | --- | ---: |
 | Adapter version | `1.6.0` |
-| Runtime baseline | Antigravity CLI `1.0.8` |
+| Runtime baseline | Antigravity CLI `1.0.11` |
 | Runtime channel | `stable/curl-latest` |
 | GitHub release tag | `1.6.0` |
 
