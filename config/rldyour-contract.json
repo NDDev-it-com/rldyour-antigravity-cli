@@ -7,7 +7,7 @@
     "runtime": "antigravity-cli",
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
-    "runtime_version": "1.0.8",
+    "runtime_version": "1.0.11",
     "native_namespace": {
       "internal_id": "gemini",
       "status": "Antigravity CLI native compatibility namespace, not a supported runtime product"

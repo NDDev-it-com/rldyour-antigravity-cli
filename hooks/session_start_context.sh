@@ -20,7 +20,7 @@ import os
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
 version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.6.0")
 message = (
-    f"rldyour-antigravity-cli adapter={version} runtime=antigravity-cli@1.0.8; "
+    f"rldyour-antigravity-cli adapter={version} runtime=antigravity-cli@1.0.11; "
     "standard mode is owner-led; cmux orchestration is visible-terminal-only; "
     "browser routing is Webwright, Playwright CLI, and Chrome DevTools MCP; "
     "only approved inventory providers are active; supported auth is enterprise, "

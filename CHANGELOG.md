@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Advance Antigravity CLI runtime baseline from `1.0.8` to `1.0.11` (upstream `google-antigravity/antigravity-cli` GitHub release `1.0.11`, published 2026-06-24, non-draft; `/releases/latest` resolves to `1.0.11`). Verified `2026-06-25`.
 
 ## [1.6.0] - 2026-06-24
 
