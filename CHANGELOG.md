@@ -6,8 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+
+## [1.6.1] - 2026-06-25
+
 ### Changed
 
+- Refresh CLI runtime baselines to latest (Claude Code 2.1.190, Codex 0.142.0, OpenCode 1.17.9, Antigravity CLI 1.0.11, MiMoCode 0.1.3); resolve adapter instruction-doc and surface-adoption drift.
 - Advance Antigravity CLI runtime baseline from `1.0.8` to `1.0.11` (upstream `google-antigravity/antigravity-cli` GitHub release `1.0.11`, published 2026-06-24, non-draft; `/releases/latest` resolves to `1.0.11`). Verified `2026-06-25`.
 
 ## [1.6.0] - 2026-06-24
