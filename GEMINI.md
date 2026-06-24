@@ -6,7 +6,7 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.5.5`.
+- Adapter version: `1.6.0`.
 - Runtime: Antigravity CLI `1.0.8`.
 - Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
 - Config path: `~/.gemini/antigravity-cli/settings.json`
