@@ -7,7 +7,7 @@ surfaces: context files, project settings, extension manifest, TOML commands,
 Agent Skills, subagents, hooks, policies, MCP servers, model routing, and
 headless prompt smoke mode.
 
-Antigravity built-in `browser_agent` is intentionally disabled in `1.6.0`; browser
+Antigravity built-in `browser_agent` is intentionally disabled in `1.6.1`; browser
 work remains routed through Webwright, Playwright CLI + Skills, and Chrome
 DevTools MCP until a separate provider model and validator prove otherwise.
 
