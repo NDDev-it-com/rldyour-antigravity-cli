@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-06-26
 Last verified: 2026-06-26
-Last commit: f031b9ecb437c92579b84aa967cc6d0d7b0cfe8c chore(release): antigravity 1.6.1
+Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.0 tracked context
 Scope: Antigravity CLI Serena memory rules
 Area: SERENA
 -->
@@ -38,5 +38,5 @@ Record Serena memory maintenance rules.
 
 ## Last verified
 - date: 2026-06-25
-- commit: `f031b9ecb437c92579b84aa967cc6d0d7b0cfe8c`
+- commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
 - checked by: antigravity 1.7.0 tracked-context migration
