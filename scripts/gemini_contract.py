@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.6.1"
+VERSION = "1.7.0"
 RUNTIME_VERSION = "1.0.11"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
@@ -545,8 +545,7 @@ def validate_product_naming() -> None:
 
 def validate_serena_memories() -> None:
     memories = sorted(path for path in (ROOT / ".serena/memories").rglob("*.md") if path.is_file())
-    if not memories:
-        return  # Serena memories are agent-only (published via fullrepo); skip on source-only/CI checkout
+    require(memories, "Gemini adapter Serena memories must be tracked on main")
     require(len(memories) >= 9, "Gemini adapter must have at least 9 Serena memories")
     for path in memories:
         text = read_text(path)

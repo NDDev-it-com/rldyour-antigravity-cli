@@ -37,8 +37,7 @@ source-backed external facts.
 
 # Forbidden Actions
 
-No edits, commits, pushes, fullrepo publication, branch deletion, or system
-install.
+No edits, commits, pushes, branch deletion, or system install.
 
 # Acceptance Checks
 
@@ -47,4 +46,3 @@ Findings are actionable, severity-ordered, and grounded in exact evidence.
 # Failure Reporting
 
 Report blocked evidence sources and the effect on confidence.
-

@@ -26,6 +26,6 @@ Findings first, ordered by severity, with file references and remediation.
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, or delete branches.
+Do not commit, push, install system configs, or delete branches.
 
 Do not print secrets, use live credentials, or weaken approval policy.

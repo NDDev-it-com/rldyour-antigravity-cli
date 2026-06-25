@@ -29,7 +29,7 @@ Use when the owner asks Antigravity CLI to implement or repair a scoped task.
 2. Plan the smallest coherent change.
 3. Implement using local patterns and Antigravity-native surfaces.
 4. Run scope-matching validators and tests.
-5. Sync memories/docs/fullrepo only when project policy allows and facts changed.
+5. Sync memories/docs/git state only when project policy allows and facts changed.
 
 # Evidence Required
 
@@ -49,4 +49,3 @@ that reference it.
 # Failure Reporting
 
 Lead with blockers and exact failed commands, then list safe next actions.
-

@@ -89,7 +89,7 @@ confirms every pinned Context7 version is published.
 
 ## Current Intentional Boundaries
 
-- The control plane coordinates adapter pins, contracts, release policy, validation lanes, root maintenance skills, launcher policy, and fullrepo/Serena memory sync. Adapter implementation changes still belong in the adapter repositories first.
+- The control plane coordinates adapter pins, contracts, release policy, validation lanes, root maintenance skills, launcher policy, and Serena memory sync. Adapter implementation changes still belong in the adapter repositories first.
 - Owner-standard full-auto remains intentional: Codex uses the `rldyour-yolo` legacy sandbox dialect, Claude exposes the trusted owner bypass posture, and OpenCode allows primary owner contexts to use broad native permission keys while reviewer roles remain constrained.
 - Historical changelog entries may mention old runtime pins or earlier release versions. Historical entries are not current configuration.
 - Live-network and installed-runtime gates require local tools, authentication, and current machine state. Static gates must not claim live GitHub or installed CLI parity unless those gates actually ran.
@@ -116,13 +116,18 @@ python3 scripts/validate_release_line_semantics.py --line 1.3 --scope all --stri
 python3 -m pytest -q
 ```
 
-## Fullrepo Publication Boundary
+## Tracked Agent Context Boundary
 
-Documentation/config changes tracked on `main` and agent-only Serena/instruction changes are released in two phases: commit the tracked source changes first, then publish or restore the `fullrepo` context so it references the new root HEAD. `validate_fullrepo_sync.py` is expected to fail on an uncommitted overlay that changes non-agent files; that is a release-process signal, not a reason to weaken the fullrepo gate.
+Documentation, instruction files, and durable Serena memories are tracked on
+`main` as normal source. Runtime-local cache, review scratch files, diagnostics,
+markers, tokens, cookies, credentials, and browser artifacts stay ignored.
+Current validation checks the working tree directly; no overlay branch is
+restored or published during release.
 
 ```bash
-python3 modules/rldyour-codex/plugins/rldyour-flow/scripts/fullrepo_sync.py --publish
-python3 scripts/validate_fullrepo_sync.py --scope all --require-adapter-fullrepo --strict --allow-generated-artifacts --timeout 20
+python3 scripts/validate_serena_memory_schema.py --strict
+python3 scripts/validate_serena_memory_semantics.py --strict
+python3 scripts/scan_text_security.py
 ```
 
 ## Repair Rule

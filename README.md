@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.6.1` |
+| Adapter version | `1.7.0` |
 | Runtime baseline | Antigravity CLI `1.0.11` |
 | Runtime channel | `stable/curl-latest` |
-| GitHub release tag | `1.6.1` |
+| GitHub release tag | `1.7.0` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -148,14 +148,14 @@ declared in `.gemini/settings.json` under `mcpServers`:
 | `figma` | HTTP (local) | Figma design context and code connect |
 | `openai-docs` | HTTP/SSE | OpenAI API documentation |
 
-## Memory / Fullrepo Model
+## Memory Model
 
 Normal `main` history carries source-controlled configuration artifacts:
 `.gemini/` surfaces, `config/`, `references/`, `scripts/`, tests, and
-`CHANGELOG.md`. Agent-only context files - `AGENTS.md`, `GEMINI.md`,
-`.serena/project.yml`, and `.serena/memories/` - are kept on the separate
-`fullrepo` overlay branch and are not committed to `main` history once
-`fullrepo` is initialized.
+`CHANGELOG.md`. Durable agent context files - `AGENTS.md`, `GEMINI.md`,
+`.serena/project.yml`, and `.serena/memories/` - are tracked on `main` as
+normal source. Runtime-local Serena cache, review scratch files, diagnostics,
+markers, local state, tokens, cookies, and credentials stay ignored.
 
 Serena memory domains active for this adapter:
 
@@ -175,8 +175,8 @@ Rules, Last Verified). Chat logs, speculation, secrets, tokens, cookies, and
 credentials must not be stored.
 
 Freshness contract: re-verify memories after each adapter release and after any
-upstream Antigravity CLI version change. The `fullrepo` sync script publishes the
-overlay with safe force-with-lease.
+upstream Antigravity CLI version change. Memory updates are committed with the
+source change that makes their facts true.
 
 ## Security Boundary
 
@@ -216,7 +216,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.6.1` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.0` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See

@@ -1,6 +1,6 @@
 ---
 name: cmux-worker
-description: "Воркер cmux v3 для Antigravity CLI: cmux worker role, typed task envelope, heartbeat, scoped JSON report, no push/fullrepo. Используй для: cmux worker, worker report. EN triggers: cmux v3 worker. EN: cmux v3 worker."
+description: "Воркер cmux v3 для Antigravity CLI: cmux worker role, typed task envelope, heartbeat, scoped JSON report, no push. Используй для: cmux worker, worker report. EN triggers: cmux v3 worker. EN: cmux v3 worker."
 ---
 
 # Purpose
@@ -56,7 +56,7 @@ Completion authority is a schema-valid report at `$(git rev-parse --git-common-d
 
 # Forbidden Actions
 
-- Do not push, force-push, tag, publish fullrepo, delete branches, mutate project policy, run system install, or run final sync.
+- Do not push, force-push, tag, delete branches, mutate project policy, run system install, or run final sync.
 - Do not delegate nested visible workers.
 - Do not create hidden or daemon-style orchestration processes.
 - Do not treat native subagents, Gemini namespace compatibility, hooks, or background tasks as rldyour cmux workers.
