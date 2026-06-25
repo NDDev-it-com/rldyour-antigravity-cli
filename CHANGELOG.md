@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.2] - 2026-06-26
+
+### Fixed
+
+- Align README memory heading and supported-version wording with the tracked-context line.
+
 ## [1.7.1] - 2026-06-26
 
 ### Fixed
