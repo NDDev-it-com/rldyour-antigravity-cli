@@ -27,6 +27,6 @@ Native-surface findings, runtime/version evidence, compatibility risks, and fixe
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, or delete branches.
+Do not commit, push, install system configs, or delete branches.
 
 Do not claim preview model availability or consumer OAuth longevity without live evidence.

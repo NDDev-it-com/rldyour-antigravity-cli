@@ -21,7 +21,7 @@ Use when the user asks to initialize, inspect, onboard, or prepare for work.
 
 - User scope and constraints.
 - `GEMINI.md`, `AGENTS.md`, and `config/rldyour-contract.json`.
-- Current git/submodule/fullrepo state.
+- Current git/submodule state.
 - Relevant Serena memories and validator entry points.
 
 # Procedure
@@ -30,7 +30,7 @@ Use when the user asks to initialize, inspect, onboard, or prepare for work.
 2. Map Antigravity native surfaces, runtime baselines, MCP inventory, browser
    routing, cmux boundary, and quality gates.
 3. Identify unknowns and mark unsupported claims `NOT_PROVEN`.
-4. Do not mutate files, git state, system configs, or fullrepo.
+4. Do not mutate files, git state, or system configs.
 5. Return a compact context pack with exact paths and safe next steps.
 
 # Evidence Required
@@ -39,8 +39,8 @@ Git state, source paths, memory names, validator names, and current tuple facts.
 
 # Forbidden Actions
 
-No edits, commits, pushes, branch deletion, fullrepo publication, system
-install, or background/headless orchestration.
+No edits, commits, pushes, branch deletion, system install, or
+background/headless orchestration.
 
 # Acceptance Checks
 
@@ -49,4 +49,3 @@ Context report names exact source-of-truth files and unresolved gaps.
 # Failure Reporting
 
 Report missing context, blocked evidence, and the next read-only command.
-

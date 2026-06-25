@@ -29,7 +29,7 @@ Provider used, URL/state, viewport matrix, artifact paths, findings, confidence.
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, delete branches,
+Do not commit, push, install system configs, delete branches,
 or spawn background browser daemons.
 
 Do not introduce unapproved browser providers or background browser daemons.

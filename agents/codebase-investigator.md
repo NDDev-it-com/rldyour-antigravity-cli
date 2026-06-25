@@ -26,6 +26,6 @@ Return changed-state summary, evidence paths, risks, and `NOT_PROVEN` gaps.
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, delete branches,
+Do not commit, push, install system configs, delete branches,
 or spawn background orchestrators.
 

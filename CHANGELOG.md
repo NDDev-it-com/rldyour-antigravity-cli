@@ -7,6 +7,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.0] - 2026-06-26
+
+### Changed
+
+- Track durable Serena context on `main` and retire the separate `fullrepo`
+  branch model for Antigravity CLI adapter releases.
+- Update Antigravity commands, skills, subagents, docs, branch-protection
+  policy, and validators to treat `.serena/project.yml` and
+  `.serena/memories/` as normal source while keeping runtime-local cache,
+  review scratch files, diagnostics, markers, tokens, cookies, and credentials
+  ignored.
+
+### Removed
+
+- Removed the `fullrepo` branch-protection policy and active fullrepo
+  publication guidance from current Antigravity adapter surfaces.
+
 ## [1.6.1] - 2026-06-25
 
 ### Changed

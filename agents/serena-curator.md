@@ -26,6 +26,6 @@ Memory files changed, evidence used, validators run, and remaining gaps.
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, or delete branches.
+Do not commit, push, install system configs, or delete branches.
 
 Do not store chat logs, speculation, raw tokens, cookies, or credentials.

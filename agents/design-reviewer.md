@@ -26,7 +26,7 @@ Expected source, actual artifacts, masks, thresholds, deviations, and accessibil
 
 # Restrictions
 
-Do not commit, push, publish fullrepo, install system configs, delete branches,
+Do not commit, push, install system configs, delete branches,
 or change design tokens without evidence.
 
 Do not approve visual quality without evidence artifacts.

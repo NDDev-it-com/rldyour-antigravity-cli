@@ -1,6 +1,6 @@
 # Contributing
 
-This repository is a rldyour AI CLI configuration for Codex: plugin marketplace, system install, MCP servers, hooks, managed agents, runtime validation, and Serena memory. It is maintained by [@rldyourmnd](https://github.com/rldyourmnd). Contributions are welcome under the project's AGPL-3.0-or-later license, but the maintainer keeps final authority on direction, plugin boundaries, runtime pins, validation gates, and the agent-only `fullrepo` workflow.
+This repository is a rldyour AI CLI configuration for Antigravity CLI: Gemini-compatible command, skill, subagent, hook, MCP, browser-routing, runtime-validation, and Serena-memory surfaces. It is maintained by [@rldyourmnd](https://github.com/rldyourmnd). Contributions are welcome under the project's AGPL-3.0-or-later license, but the maintainer keeps final authority on direction, native boundaries, runtime pins, validation gates, and tracked agent context.
 
 By submitting a pull request, you certify that you have the right to license the contribution under AGPL-3.0-or-later.
 
@@ -28,7 +28,6 @@ Use the devcontainer in `.devcontainer/` when you need a clean, production-like 
 
 - `main`: primary integration branch. Auto-running CI gates fast/runtime/release/MCP smoke on every push and pull request.
 - `feat/<topic>`, `fix/<topic>`, `chore/<topic>`: feature/fix/chore branches. Open a pull request targeting `main`.
-- `fullrepo`: portable agent-only context branch. Maintained by repository tooling with `--force-with-lease`. Do not push to it manually.
 
 ## Pull Requests
 
@@ -36,8 +35,8 @@ Use the devcontainer in `.devcontainer/` when you need a clean, production-like 
 - Title format: Conventional Commits (`type(scope): description`). Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, `style`, `ci`, `build`. Scope is the plugin or area, lowercase.
 - Description must include intent, surface touched, evidence (validation logs, screenshots when relevant), and risks.
 - Keep commits atomic. Split unrelated implementation, tests/validators,
-  docs/instructions, license/metadata, generated artifacts, and Serena/fullrepo
-  sync when they are independently reviewable. Squash trivial fixups before
+  docs/instructions, license/metadata, generated artifacts, and Serena memory
+  updates when they are independently reviewable. Squash trivial fixups before
   review.
 - Do not rewrite already-pushed history without explicit maintainer approval;
   use a follow-up commit for published branches.
@@ -70,7 +69,7 @@ A pull request is mergeable only when these checks complete and pass. Maintainer
 - Keep external GitHub Actions pinned to full commit SHAs. `scripts/validate_action_pins.py` enforces this.
 - Add or update an ADR under `docs/adr/` for non-trivial architecture, release, CI, hook, MCP, or governance decisions.
 - Update `VERSION` and `CHANGELOG.md` for release behavior changes. Use Keep a Changelog format.
-- Update Serena memories under `.serena/memories/` and instruction docs (`AGENTS.md`, `.claude/CLAUDE.md`) from verified code/config facts after durable workflow changes. These files are agent-only and live on the `fullrepo` branch, not on `main`.
+- Update Serena memories under `.serena/memories/` and instruction docs (`AGENTS.md`, `GEMINI.md`) from verified code/config facts after durable workflow changes. Durable agent context is tracked on `main`; runtime-local cache, scratch, diagnostics, markers, tokens, cookies, and credentials stay ignored.
 - Conventional Commit messages are required: `type(scope): description`, imperative mood, lowercase, no trailing period, 72-char max.
 
 ## Releases

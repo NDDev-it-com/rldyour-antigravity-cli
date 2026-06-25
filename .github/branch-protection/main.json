@@ -23,6 +23,6 @@
   "notes": [
     "This file documents the desired branch protection state for the public main branch.",
     "Required status checks must use the exact job names emitted by .github/workflows/*.yml.",
-    "Maintainer keeps administrative access for release and fullrepo synchronization; force pushes remain disabled."
+    "Maintainer keeps administrative access for release operations; force pushes remain disabled."
   ]
 }

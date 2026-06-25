@@ -4,7 +4,7 @@ prompt = """
 Run a read-only rldyour review for the requested scope.
 
 Required behavior:
-- Treat this as review-only: do not edit, commit, push, publish fullrepo, or install system configs.
+- Treat this as review-only: do not edit, commit, push, or install system configs.
 - Lead with findings ordered by severity and cite exact files, commands, and evidence.
 - Check Gemini-native boundaries, browser-provider routing, MCP inventory, cmux visible-terminal semantics, release/version drift, and Serena memory evidence.
 - Use subagents only as Gemini-internal analysis helpers when policy allows; they are not cmux orchestrators.
@@ -12,4 +12,3 @@ Required behavior:
 
 User args: {{args}}
 """
-

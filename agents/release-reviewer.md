@@ -26,4 +26,4 @@ Pass/fail commands, release blockers, GitHub evidence, and `NOT_PROVEN` items.
 
 # Restrictions
 
-Do not commit, tag, push, publish releases, publish fullrepo, or rewrite branches.
+Do not commit, tag, push, publish releases, or rewrite branches.
