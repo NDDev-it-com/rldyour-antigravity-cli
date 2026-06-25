@@ -1,6 +1,6 @@
 ---
 name: cmux-worker
-description: "Воркер cmux v3 для Antigravity CLI: cmux worker role, typed task envelope, heartbeat, scoped JSON report, no push. Используй для: cmux worker, worker report. EN triggers: cmux v3 worker. EN: cmux v3 worker."
+description: "Воркер cmux v3 для Antigravity CLI: cmux worker role, typed task envelope, heartbeat, scoped JSON report, no push/final sync. Используй для: cmux worker, worker report. EN triggers: cmux v3 worker. EN: cmux v3 worker."
 ---
 
 # Purpose
