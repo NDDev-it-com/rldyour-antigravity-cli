@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-06-26
 Last verified: 2026-06-26
-Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.4 tracked context
+Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
 Scope: Antigravity CLI browser-provider routing
 Area: BROWSER
 -->
@@ -38,4 +38,4 @@ Record browser-provider routing for Gemini workflows.
 ## Last verified
 - date: 2026-06-25
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.4 tracked-context migration
+- checked by: antigravity 1.7.5 tracked-context migration
