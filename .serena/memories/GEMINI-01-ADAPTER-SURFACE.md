@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-06-26
 Last verified: 2026-06-26
-Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.2 tracked context
+Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.3 tracked context
 Scope: Antigravity CLI adapter implementation surface
 Area: GEMINI
 -->
@@ -15,10 +15,10 @@ official Google replacement for the sunset `gemini` CLI.
 
 ## Current Facts
 
-- Adapter version is `1.7.2`.
+- Adapter version is `1.7.3`.
 - Runtime configuration uses Gemini-native surfaces, not Claude, Codex, or OpenCode runtime files.
 - Native surfaces include `GEMINI.md`, settings JSON, extension manifest, TOML commands, Agent Skills, subagents, hooks, policies, MCP servers, and headless prompt smoke mode.
-- Runtime binary is `agy`; target runtime version is `1.0.11`.
+- Runtime binary is `agy`; target runtime version is `1.0.12`.
 - Adapter HEAD is governed by the root control-plane `config/repositories.json`.
 
 ## Operational Rules
@@ -33,7 +33,7 @@ official Google replacement for the sunset `gemini` CLI.
 
 - date: 2026-06-25
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.2 tracked-context migration
+- checked by: antigravity 1.7.3 tracked-context migration
 
 ## Evidence
 
