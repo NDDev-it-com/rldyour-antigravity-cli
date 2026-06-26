@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.3] - 2026-06-26
+
+### Changed
+
+- Refresh CLI runtime and MCP pins to latest stable versions.
+
 ## [1.7.2] - 2026-06-26
 
 ### Fixed

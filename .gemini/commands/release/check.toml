@@ -5,7 +5,7 @@ Check release readiness for this Antigravity adapter.
 
 Required checks:
 - Adapter version surfaces match VERSION.
-- Antigravity CLI baseline is `agy` 1.0.11 unless live stable evidence proves a newer target.
+- Antigravity CLI baseline is `agy` 1.0.12 unless live stable evidence proves a newer target.
 - Native Antigravity surfaces validate.
 - MCP inventory is exactly the 11 active servers.
 - Antigravity transition policy is documented.
