@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.7] - 2026-06-27
+
+- Align the Antigravity settings schema snapshot with the `1.0.13` runtime baseline.
+
 ## [1.7.6] - 2026-06-27
 
 - Refresh the Antigravity CLI runtime baseline from `1.0.12` to `1.0.13` using the official upstream release.
