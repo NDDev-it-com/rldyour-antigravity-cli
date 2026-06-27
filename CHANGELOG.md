@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.6] - 2026-06-27
+
+- Refresh the Antigravity CLI runtime baseline from `1.0.12` to `1.0.13` using the official upstream release.
+
 ## [1.7.5] - 2026-06-27
 
 ### Changed
