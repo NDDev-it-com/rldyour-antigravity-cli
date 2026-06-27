@@ -2,7 +2,7 @@
 
 ## Current Fact
 
-Antigravity CLI adapter `1.7.5` targets Antigravity CLI `1.0.12` through the
+Antigravity CLI adapter `1.7.6` targets Antigravity CLI `1.0.13` through the
 `agy` command. Gemini CLI is retired as a supported runtime for this adapter.
 
 ## Migration Status: MIGRATED
@@ -20,7 +20,7 @@ Gemini CLI as an active runtime.
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
 - Hooks: `.gemini/hooks/hooks.json` projected into the Antigravity native namespace
 - GitHub: `https://github.com/google-antigravity/antigravity-cli`
-- Latest version: `1.0.12`
+- Latest version: `1.0.13`
 
 ## Supported Access Targets
 
