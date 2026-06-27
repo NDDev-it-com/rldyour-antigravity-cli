@@ -41,4 +41,4 @@ Record Antigravity CLI runtime baseline and source-of-truth policy.
 ## Last verified
 - date: 2026-06-25
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.6 tracked-context migration
+- checked by: antigravity 1.7.7 tracked-context migration
