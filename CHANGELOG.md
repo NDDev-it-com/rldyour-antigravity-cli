@@ -45,6 +45,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.10] - 2026-06-29
+
+### Fixed
+
+- Install pytest dependencies in required CI validation workflows.
+
 ## [1.7.9] - 2026-06-29
 
 ### Fixed
