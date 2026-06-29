@@ -32,6 +32,8 @@ jobs:
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.13"
+      - name: Install validation dependencies
+        run: python3 -m pip install --user pytest pytest-cov
       - name: Resolve release version
         env:
           INPUT_VERSION: ${{ inputs.version }}
@@ -71,8 +73,9 @@ jobs:
           set -euo pipefail
           mkdir -p dist
           git archive --format=zip --prefix=rldyour-antigravity-cli/ -o dist/rldyour-antigravity-cli-source.zip HEAD
-          sha256sum dist/rldyour-antigravity-cli-source.zip > dist/SHA256SUMS
-          printf '{"name":"rldyour-antigravity-cli","version":"%s","sbom":"source-only"}\n' "$(cat VERSION)" > dist/sbom.spdx.json
+          python3 scripts/release_sbom.py --output dist/sbom.spdx.json
+          sha256sum dist/rldyour-antigravity-cli-source.zip dist/sbom.spdx.json > dist/SHA256SUMS
+          python3 scripts/validate_release_assets.py dist
       - name: Attest source archive
         uses: actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26 # v4.1.0
         with:
