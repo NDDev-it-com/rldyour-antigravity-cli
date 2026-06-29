@@ -45,6 +45,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.9] - 2026-06-29
+
+### Fixed
+
+- Enforce five-adapter validation parity and structured release evidence
+
+## [1.7.8] - 2026-06-29
+
+### Fixed
+
+- Enforce five-adapter validation parity and structured release evidence
+
 ## [1.7.0] - 2026-06-26
 
 ### Changed
