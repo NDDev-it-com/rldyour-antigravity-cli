@@ -9,7 +9,7 @@ the root control plane explicitly pins them.
 
 | Version | Supported |
 | --- | --- |
-| Current exact tag `1.7.10` | yes |
+| Current exact tag `1.7.11` | yes |
 | Older minor / major lines | no |
 
 ## Secrets
