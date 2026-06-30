@@ -45,6 +45,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.11] - 2026-06-30
+
+### Fixed
+
+- Fix published release artifact proof and Antigravity MCP parity.
+
 ## [1.7.10] - 2026-06-29
 
 ### Fixed
