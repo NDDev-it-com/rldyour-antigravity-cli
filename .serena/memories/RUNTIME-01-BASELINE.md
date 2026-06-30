@@ -16,7 +16,7 @@ Record Antigravity CLI runtime baseline and source-of-truth policy.
 
 - Runtime is `antigravity-cli`.
 - Runtime binary is `agy`.
-- Target runtime version is `1.0.13`.
+- Target runtime version is `1.0.14`.
 - Primary latest source is `agy --version`, with GitHub Releases as release provenance.
 - Legacy Gemini CLI `0.46.0` remains compatibility context only for enterprise legacy users.
 - Installed runtime smoke requires authentication and is not mandatory for
