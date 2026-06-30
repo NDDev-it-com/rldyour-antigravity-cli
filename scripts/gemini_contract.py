@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.10"
+VERSION = "1.7.11"
 RUNTIME_VERSION = "1.0.13"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
@@ -171,12 +171,44 @@ def validate_mcp_map(mcp: dict[str, Any], source: str) -> None:
             require("url" in spec or "httpUrl" in spec or "serverUrl" in spec, f"{source}: MCP spec needs command, url, httpUrl, or serverUrl for {alias}")
 
 
+def normalize_mcp_spec(spec: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: spec[key]
+        for key in sorted(spec)
+        if key in {"command", "args", "env", "url", "httpUrl", "serverUrl", "timeout"}
+    }
+
+
+def validate_mcp_surface_equivalence(
+    manifest: dict[str, Any],
+    settings: dict[str, Any],
+    antigravity_mcp: dict[str, Any],
+) -> None:
+    surfaces = {
+        "gemini-extension.json": manifest["mcpServers"],
+        ".gemini/settings.json": settings["mcpServers"],
+        ".gemini/antigravity-cli/mcp_config.json": antigravity_mcp["mcpServers"],
+    }
+    canonical = surfaces[".gemini/antigravity-cli/mcp_config.json"]
+    for alias in EXPECTED_MCP:
+        expected = normalize_mcp_spec(canonical[alias])
+        for source, mcp in surfaces.items():
+            actual = normalize_mcp_spec(mcp[alias])
+            require(
+                actual == expected,
+                f"{source}: MCP spec for {alias} must match .gemini/antigravity-cli/mcp_config.json",
+            )
+
+
 def validate_mcp_inventory() -> None:
     manifest = load_json(ROOT / "gemini-extension.json")
     settings = load_json(ROOT / ".gemini/settings.json")
+    antigravity_mcp = load_json(ROOT / ".gemini/antigravity-cli/mcp_config.json")
     contract = load_json(ROOT / "config/rldyour-contract.json")
     validate_mcp_map(manifest["mcpServers"], "gemini-extension.json")
     validate_mcp_map(settings["mcpServers"], ".gemini/settings.json")
+    validate_mcp_map(antigravity_mcp["mcpServers"], ".gemini/antigravity-cli/mcp_config.json")
+    validate_mcp_surface_equivalence(manifest, settings, antigravity_mcp)
     require(sorted(contract["mcp_servers"]) == sorted(EXPECTED_MCP), "contract MCP list must match expected inventory")
 
 
@@ -289,7 +321,9 @@ def validate_antigravity_native_config() -> None:
     mcp = load_json(mcp_path)
     require("mcpServers" in mcp, "antigravity-cli mcp_config must define mcpServers")
     validate_mcp_map(mcp["mcpServers"], ".gemini/antigravity-cli/mcp_config.json")
+    manifest = load_json(ROOT / "gemini-extension.json")
     gemini_settings = load_json(ROOT / ".gemini/settings.json")
+    validate_mcp_surface_equivalence(manifest, gemini_settings, mcp)
     require(
         settings["general"]["defaultApprovalMode"] == gemini_settings["general"]["defaultApprovalMode"],
         "antigravity-cli native settings approval mode must match .gemini/settings.json",
