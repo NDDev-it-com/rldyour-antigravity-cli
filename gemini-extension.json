@@ -1,6 +1,6 @@
 {
   "name": "rldyour-antigravity-cli",
-  "version": "1.7.11",
+  "version": "1.7.12",
   "description": "rldyour Antigravity CLI configuration: commands, skills, subagents, hooks, MCP, browser routing, Serena memory, and release workflows.",
   "contextFileName": "GEMINI.md",
   "settings": [

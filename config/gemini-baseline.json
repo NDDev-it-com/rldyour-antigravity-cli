@@ -12,7 +12,7 @@
     ],
     "status": "Antigravity CLI native compatibility namespace; not runtime product support"
   },
-  "target_runtime_version": "1.0.13",
+  "target_runtime_version": "1.0.14",
   "target_channel": "stable/curl-latest",
   "verified_on": "2026-06-26",
   "source_of_truth_priority": [
