@@ -2,12 +2,12 @@
 
 ## Current Baseline
 
-The adapter targets Antigravity CLI (`agy`) `1.0.13` and adopts native Antigravity CLI
+The adapter targets Antigravity CLI (`agy`) `1.0.14` and adopts native Antigravity CLI
 surfaces: context files, project settings, extension manifest, TOML commands,
 Agent Skills, subagents, hooks, policies, MCP servers, model routing, and
 headless prompt smoke mode.
 
-Antigravity built-in `browser_agent` is intentionally disabled in `1.7.11`; browser
+Antigravity built-in `browser_agent` is intentionally disabled in `1.7.12`; browser
 work remains routed through Webwright, Playwright CLI + Skills, and Chrome
 DevTools MCP until a separate provider model and validator prove otherwise.
 
