@@ -155,23 +155,26 @@
         "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}",
         "X-MCP-Toolsets": "context,repos,issues,pull_requests,users"
       },
-      "timeout": 120000
+      "timeout": 180000
     },
     "deepwiki": {
       "url": "https://mcp.deepwiki.com/mcp",
-      "timeout": 120000
+      "timeout": 180000
     },
     "grep": {
       "url": "https://mcp.grep.app",
-      "timeout": 120000
+      "timeout": 180000
     },
     "figma": {
-      "url": "http://127.0.0.1:3845/mcp",
-      "timeout": 120000
+      "url": "https://mcp.figma.com/mcp",
+      "timeout": 180000,
+      "env": {
+        "FIGMA_PAT": "${FIGMA_PAT}"
+      }
     },
     "openai-docs": {
-      "url": "https://mcp.openai.com",
-      "timeout": 120000
+      "url": "https://developers.openai.com/mcp",
+      "timeout": 180000
     }
   }
 }
