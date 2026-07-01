@@ -8,7 +8,7 @@
     "playwright-cli": {
       "kind": "low-level-browser-automation",
       "mcp": false,
-      "version": "0.1.14"
+      "version": "0.1.15"
     },
     "chrome-devtools-mcp": {
       "kind": "devtools-debugging",
