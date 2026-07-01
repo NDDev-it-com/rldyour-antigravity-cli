@@ -45,6 +45,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.13] - 2026-07-01
+
+### Changed
+
+- Refresh Codex CLI 0.142.5 and Playwright CLI 0.1.15 adapter baselines.
+- Align Playwright CLI browser provider pin to 0.1.15.
+
 ## [1.7.12] - 2026-06-30
 
 ### Fixed
