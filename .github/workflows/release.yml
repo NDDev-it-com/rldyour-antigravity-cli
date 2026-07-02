@@ -77,11 +77,11 @@ jobs:
           sha256sum dist/rldyour-antigravity-cli-source.zip dist/sbom.spdx.json > dist/SHA256SUMS
           python3 scripts/validate_release_assets.py dist
       - name: Attest source archive
-        uses: actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26 # v4.1.0
+        uses: actions/attest@a1948c3f048ba23858d222213b7c278aabede763 # v4.1.1
         with:
           subject-path: dist/rldyour-antigravity-cli-source.zip
       - name: Attest SBOM
-        uses: actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26 # v4.1.0
+        uses: actions/attest@a1948c3f048ba23858d222213b7c278aabede763 # v4.1.1
         with:
           subject-path: dist/sbom.spdx.json
       - name: Create GitHub Release
