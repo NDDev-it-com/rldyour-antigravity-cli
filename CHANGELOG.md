@@ -45,6 +45,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.15] - 2026-07-03
+
+### Fixed
+
+- Refresh Antigravity runtime baseline.
+
 ## [1.7.14] - 2026-07-03
 
 ### Fixed
