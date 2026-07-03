@@ -1,6 +1,6 @@
 [project]
 name = "rldyour-antigravity-cli"
-version = "1.7.15"
+version = "1.7.16"
 description = "rldyour AI CLI configuration for Antigravity CLI: native extensions, GEMINI.md context, commands, skills, subagents, hooks, MCP, browser-provider routing, Serena memory, and runtime validation."
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
