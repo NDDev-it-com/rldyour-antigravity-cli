@@ -7,6 +7,20 @@ Area: BROWSER
 
 # BROWSER-01-VALIDATION
 
+## Purpose
+Maintain durable Antigravity CLI adapter knowledge for `BROWSER-01-VALIDATION`.
+
+## Current Facts
+- Current facts are recorded in the source-of-truth, facts, and evidence sections below.
+
+## Operational Rules
+- Current code, configuration, tests, and live runtime evidence override stale memory text.
+- Keep this memory fact-only and update it after verified Antigravity adapter changes.
+
+## Last Verified
+2026-07-04
+
+
 ## Scope
 browser-visible validation and debugging workflows
 

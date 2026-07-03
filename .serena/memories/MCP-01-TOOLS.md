@@ -7,6 +7,20 @@ Area: MCP
 
 # MCP-01-TOOLS
 
+## Purpose
+Maintain durable Antigravity CLI adapter knowledge for `MCP-01-TOOLS`.
+
+## Current Facts
+- Current facts are recorded in the source-of-truth, facts, and evidence sections below.
+
+## Operational Rules
+- Current code, configuration, tests, and live runtime evidence override stale memory text.
+- Keep this memory fact-only and update it after verified Antigravity adapter changes.
+
+## Last Verified
+2026-07-04
+
+
 ## Scope
 MCP runtime transport and pin policy
 

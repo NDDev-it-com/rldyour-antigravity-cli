@@ -7,6 +7,20 @@ Area: FLOW
 
 # FLOW-01-SDLC
 
+## Purpose
+Maintain durable Antigravity CLI adapter knowledge for `FLOW-01-SDLC`.
+
+## Current Facts
+- Current facts are recorded in the source-of-truth, facts, and evidence sections below.
+
+## Operational Rules
+- Current code, configuration, tests, and live runtime evidence override stale memory text.
+- Keep this memory fact-only and update it after verified Antigravity adapter changes.
+
+## Last Verified
+2026-07-04
+
+
 ## Scope
 rldyour SDLC command lifecycle
 

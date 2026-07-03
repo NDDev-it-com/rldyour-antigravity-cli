@@ -7,6 +7,20 @@ Area: GEMINI
 
 # GEMINI-01-ADAPTER-SURFACE
 
+## Purpose
+Maintain durable Antigravity CLI adapter knowledge for `GEMINI-01-ADAPTER-SURFACE`.
+
+## Current Facts
+- Current facts are recorded in the source-of-truth, facts, and evidence sections below.
+
+## Operational Rules
+- Current code, configuration, tests, and live runtime evidence override stale memory text.
+- Keep this memory fact-only and update it after verified Antigravity adapter changes.
+
+## Last Verified
+2026-07-04
+
+
 ## Scope
 GEMINI repository knowledge
 
