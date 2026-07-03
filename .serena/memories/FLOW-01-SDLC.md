@@ -1,41 +1,35 @@
 <!-- Memory Metadata
-Last updated: 2026-06-26
-Last verified: 2026-06-26
+Last updated: 2026-05-22
 Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
-Scope: Antigravity CLI SDLC flow rules
+Scope: rldyour SDLC command lifecycle
 Area: FLOW
 -->
 
 # FLOW-01-SDLC
 
-## Purpose
+## Scope
+rldyour SDLC command lifecycle
 
-Record Antigravity adapter SDLC flow rules.
-
-## Current Facts
-
-- `/ry:repair`, `/ry:start`, `/flow:post-task-sync`, browser, release, Serena,
-  and security command surfaces are TOML Gemini commands.
-- Post-task sync updates docs and Serena memories only from verified facts.
-
-## Evidence
-
-- `.gemini/commands/ry/repair.toml`
-- `.gemini/commands/ry/start.toml`
-- `.gemini/commands/flow/post-task-sync.toml`
-- `.gemini/skills/flow-post-task-sync/SKILL.md`
-
-## Operational Rules
-
-- Do not add background orchestrators or hidden worker jobs.
-- In standard mode the owner remains the orchestration layer.
-
-## Last Verified
-
-2026-06-11
-
+## Current source of truth
+- `path:README.md`
 
 ## Last verified
-- date: 2026-06-25
+- date: 2026-05-22
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.7 tracked-context migration
+- checked by: Codex ry-start memory taxonomy sync
+
+## Facts
+- Flow memories record ry-init, ry-start, ry-newp, ry-review, ry-repair, ry-deploy, and ry-sync behavior.
+
+## Evidence
+- `commit:56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
+- `path:README.md`
+
+## Known pitfalls
+- Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.
+
+## Update policy
+Update after verified changes to the referenced source-of-truth files.
+
+## Delete / merge policy
+- Delete or merge only when the referenced source-of-truth files no longer support this memory and the replacement memory preserves the durable facts.

@@ -1,44 +1,35 @@
 <!-- Memory Metadata
-Last updated: 2026-06-26
-Last verified: 2026-06-26
+Last updated: 2026-05-22
 Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
-Scope: Antigravity CLI runtime baseline
+Scope: CLI runtime and package baselines
 Area: RUNTIME
 -->
 
 # RUNTIME-01-BASELINE
 
-## Purpose
+## Scope
+CLI runtime and package baselines
 
-Record Antigravity CLI runtime baseline and source-of-truth policy.
-
-## Current Facts
-
-- Runtime is `antigravity-cli`.
-- Runtime binary is `agy`.
-- Target runtime version is `1.0.14`.
-- Primary latest source is `agy --version`, with GitHub Releases as release provenance.
-- Legacy Gemini CLI `0.46.0` remains compatibility context only for enterprise legacy users.
-- Installed runtime smoke requires authentication and is not mandatory for
-  source-only validation.
-
-## Evidence
-
-- `config/gemini-baseline.json`
-- `README.md`
-- `references/gemini-surface-adoption.md`
-
-## Operational Rules
-
-- Do not use unscoped package names such as `antigravity-cli` or `gemini/cli`.
-- Do not fail source-only validation because preview models are unavailable.
-
-## Last Verified
-
-2026-06-11
-
+## Current source of truth
+- `path:README.md`
 
 ## Last verified
-- date: 2026-06-25
+- date: 2026-05-22
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.7 tracked-context migration
+- checked by: Codex ry-start memory taxonomy sync
+
+## Facts
+- Runtime memories record pinned CLI/package baselines and freshness checks.
+
+## Evidence
+- `commit:56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
+- `path:README.md`
+
+## Known pitfalls
+- Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.
+
+## Update policy
+Update after verified changes to the referenced source-of-truth files.
+
+## Delete / merge policy
+- Delete or merge only when the referenced source-of-truth files no longer support this memory and the replacement memory preserves the durable facts.
