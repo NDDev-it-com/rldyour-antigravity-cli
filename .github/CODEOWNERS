@@ -1,2 +1,17 @@
+# Global owners for all files in this repository.
 * @rldyourmnd
 
+# Security and governance-sensitive paths.
+.github/** @rldyourmnd
+.github/workflows/** @rldyourmnd
+.github/dependabot.yml @rldyourmnd
+.github/CODEOWNERS @rldyourmnd
+
+# Runtime configuration and native control surfaces.
+/.gemini/ @rldyourmnd
+/GEMINI.md @rldyourmnd
+/README.md @rldyourmnd
+/SECURITY.md @rldyourmnd
+/config/ @rldyourmnd
+/scripts/ @rldyourmnd
+/validate_* @rldyourmnd

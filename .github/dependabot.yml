@@ -3,7 +3,14 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: "UTC"
     open-pull-requests-limit: 5
     commit-message:
       prefix: "chore"
+      include: scope
+    labels:
+      - dependencies
+      - ci
