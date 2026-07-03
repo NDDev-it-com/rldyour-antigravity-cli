@@ -3,11 +3,11 @@
   "adapter": {
     "id": "gemini",
     "name": "rldyour-antigravity-cli",
-    "version": "1.7.14",
+    "version": "1.7.15",
     "runtime": "antigravity-cli",
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
-    "runtime_version": "1.0.14",
+    "runtime_version": "1.0.16",
     "native_namespace": {
       "internal_id": "gemini",
       "status": "Antigravity CLI native compatibility namespace, not a supported runtime product"
