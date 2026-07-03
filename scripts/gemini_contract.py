@@ -12,8 +12,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.14"
-RUNTIME_VERSION = "1.0.14"
+VERSION = "1.7.15"
+RUNTIME_VERSION = "1.0.16"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
 RETIRED_GEMINI_PACKAGE = "@google/gemini-cli"
@@ -131,7 +131,7 @@ def validate_runtime_baseline(strict: bool = False) -> None:
     require(baseline["runtime_binary"] == RUNTIME_BINARY, "runtime binary must be agy")
     require(baseline["runtime_package"] == RUNTIME_PACKAGE, "runtime package must be antigravity-cli")
     require("gemini_legacy" not in baseline, "baseline must not model Gemini CLI as a supported runtime")
-    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.14")
+    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.16")
     require(baseline["target_channel"] == "stable/curl-latest", "target channel must be stable/curl-latest")
     priority = baseline["source_of_truth_priority"]
     require(priority[0] == "agy --version", "agy version must be primary source of truth")
