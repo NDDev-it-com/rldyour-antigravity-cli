@@ -1,5 +1,5 @@
 name = "rldyour-browser-routing"
-version = "1.7.16"
+version = "1.7.17"
 scope = "antigravity-adapter"
 
 [providers]
