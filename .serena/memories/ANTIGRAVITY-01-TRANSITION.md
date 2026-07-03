@@ -35,4 +35,4 @@ Record Antigravity CLI access risk from the Antigravity transition.
 2026-06-19
 
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.15 tracked-context migration
+- checked by: antigravity 1.7.16 tracked-context migration
