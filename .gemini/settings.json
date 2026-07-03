@@ -109,7 +109,7 @@
     "chrome-devtools": {
       "command": "bunx",
       "args": [
-        "chrome-devtools-mcp@1.4.0",
+        "chrome-devtools-mcp@1.5.0",
         "--headless",
         "--isolated",
         "--no-usage-statistics",
@@ -127,7 +127,7 @@
     "shadcn": {
       "command": "bunx",
       "args": [
-        "shadcn@4.12.0",
+        "shadcn@4.13.0",
         "mcp"
       ],
       "timeout": 120000
