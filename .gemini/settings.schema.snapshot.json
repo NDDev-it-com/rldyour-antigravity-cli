@@ -1,11 +1,11 @@
 {
   "schema": "NOT_PROVEN",
-  "snapshot_verified_on": "2026-06-25",
+  "snapshot_verified_on": "2026-07-03",
   "purpose": "Repository policy snapshot for Antigravity CLI settings categories. No standalone Antigravity CLI settings schema file or current packaged settings reference is proven in this tree.",
   "official_reference": "NOT_PROVEN",
   "runtime_package": "antigravity-cli",
   "runtime_binary": "agy",
-  "runtime_version": "1.0.14",
+  "runtime_version": "1.0.16",
   "runtime_package_reference": "NOT_PROVEN",
   "runtime_package_schema_file": "NOT_PROVEN",
   "documented_repository_categories": [
