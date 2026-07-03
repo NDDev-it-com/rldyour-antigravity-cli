@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-07-03
 Last verified: 2026-07-03
-Last commit: 62d3934d280dc2ffb3e57debe9a54b0de9869b98 chore(release): gemini 1.7.15 (other)
+Last commit: 62d3934d280dc2ffb3e57debe9a54b0de9869b98 chore(release): gemini 1.7.16 (other)
 Scope: Antigravity CLI release validation
 Area: RELEASE
 -->
@@ -14,7 +14,7 @@ Record release validation requirements for the current Antigravity adapter relea
 
 ## Current Facts
 
-- Current adapter release is `1.7.15`.
+- Current adapter release is `1.7.16`.
 - Initial adapter release was recorded in the changelog.
 - Previous stable adapter releases are historical changelog facts, not current release targets.
 - Only exact current numeric tags are supported.
@@ -43,4 +43,4 @@ Record release validation requirements for the current Antigravity adapter relea
 ## Last verified
 - date: 2026-07-03
 - commit: `62d3934d280dc2ffb3e57debe9a54b0de9869b98`
-- checked by: antigravity 1.7.15 tracked-context migration and tracked memory refresh
+- checked by: antigravity 1.7.16 tracked-context migration and tracked memory refresh

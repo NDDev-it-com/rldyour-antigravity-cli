@@ -15,7 +15,7 @@ official Google replacement for the sunset `gemini` CLI.
 
 ## Current Facts
 
-- Adapter version is `1.7.15`.
+- Adapter version is `1.7.16`.
 - Runtime configuration uses Gemini-native surfaces, not Claude, Codex, or OpenCode runtime files.
 - Native surfaces include `GEMINI.md`, settings JSON, extension manifest, TOML commands, Agent Skills, subagents, hooks, policies, MCP servers, and headless prompt smoke mode.
 - Runtime binary is `agy`; target runtime version is `1.0.14`.
@@ -33,7 +33,7 @@ official Google replacement for the sunset `gemini` CLI.
 
 - date: 2026-06-25
 - commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: antigravity 1.7.15 tracked-context migration
+- checked by: antigravity 1.7.16 tracked-context migration
 
 ## Evidence
 
