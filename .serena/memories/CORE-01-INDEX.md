@@ -1,5 +1,6 @@
 <!-- Memory Metadata
 Last updated: 2026-05-22
+Last verified: 2026-05-22
 Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
 Scope: repository identity and source-of-truth map
 Area: CORE
