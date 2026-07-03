@@ -7,6 +7,20 @@ Area: SECURITY
 
 # SECURITY-01-POSTURE
 
+## Purpose
+Maintain durable Antigravity CLI adapter knowledge for `SECURITY-01-POSTURE`.
+
+## Current Facts
+- Current facts are recorded in the source-of-truth, facts, and evidence sections below.
+
+## Operational Rules
+- Current code, configuration, tests, and live runtime evidence override stale memory text.
+- Keep this memory fact-only and update it after verified Antigravity adapter changes.
+
+## Last Verified
+2026-07-04
+
+
 ## Scope
 security posture and blocking/warning policy
 
