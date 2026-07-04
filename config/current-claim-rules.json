@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "current_claims": {
-    "adapter_version": "1.7.20",
+    "adapter_version": "1.7.21",
     "runtime_version": "1.0.16",
     "mcp_server_count": 11,
     "playwright_mcp_active": false,
