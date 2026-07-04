@@ -3,12 +3,15 @@
   "required_status_checks": [
     "Validate",
     "Pytest",
-    "Actionlint",
-    "CodeQL",
-    "Secret scan",
+    "Actionlint / actionlint",
+    "CodeQL (python) / CodeQL (python)",
+    "CodeQL (actions) / CodeQL (actions)",
+    "Secret scan / Gitleaks secret scan",
     "Dependency check",
-    "Scorecard",
-    "Cross-platform smoke"
+    "Scorecard / OSSF Scorecard analysis",
+    "Cross-platform smoke / smoke (ubuntu-latest)",
+    "Cross-platform smoke / smoke (windows-latest)",
+    "Cross-platform smoke / smoke (macos-latest)"
   ],
   "strict_required_status_checks": true,
   "allow_force_pushes": false,
