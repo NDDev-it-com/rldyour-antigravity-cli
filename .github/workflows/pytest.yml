@@ -20,16 +20,31 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411  # v2.19.4
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
       - name: Set up Python
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: "3.13"
-      - name: Install pytest runtime
-        run: python3 -m pip install pytest pytest-cov
+
+      - name: Install pytest runtime (pinned)
+        run: python3 -m pip install "pytest==9.1.1" "pytest-cov==7.1.0"
+
       - name: Run pytest
-        run: python3 -m pytest -q
+        run: |
+          python3 -m pytest -q \
+            --junitxml=pytest.xml \
+            --cov=scripts \
+            --cov-report=xml:coverage.xml
+
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
