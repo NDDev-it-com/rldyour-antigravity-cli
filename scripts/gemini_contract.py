@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.24"
+VERSION = "1.7.25"
 RUNTIME_VERSION = "1.0.16"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
