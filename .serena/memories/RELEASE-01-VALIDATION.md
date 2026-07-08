@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-05-22
 Last verified: 2026-05-22
-Last commit: 62d3934d280dc2ffb3e57debe9a54b0de9869b98 chore(release): gemini 1.7.24 (other)
+Last commit: 62d3934d280dc2ffb3e57debe9a54b0de9869b98 chore(release): gemini 1.7.25 (other)
 Scope: release readiness, versioning, and artifact hygiene
 Area: RELEASE
 -->
