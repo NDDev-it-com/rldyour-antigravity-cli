@@ -44,6 +44,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.7.26] - 2026-07-10
+
+### Changed
+
+- Route all three Antigravity Chrome DevTools MCP surfaces through the exact
+  managed CloakBrowser wrapper, forbid fallback, and align Playwright CLI to
+  `0.1.17`.
+- Refresh the Antigravity CLI runtime baseline to `1.1.0` and delegate runtime
+  installation to the bootstrap's verified generation-pinned artifacts.
+- Pin reusable CI workflows to the checksum-closed `nddev-ci-workflows` `0.5.1`
+  release commit.
 
 ## [1.7.25] - 2026-07-08
 

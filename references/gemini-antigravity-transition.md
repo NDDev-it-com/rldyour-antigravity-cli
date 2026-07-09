@@ -2,7 +2,7 @@
 
 ## Current Fact
 
-Antigravity CLI adapter `1.7.25` targets Antigravity CLI `1.0.16` through the
+Antigravity CLI adapter `1.7.26` targets Antigravity CLI `1.1.0` through the
 `agy` command. Gemini CLI is retired as a supported runtime for this adapter.
 
 ## Migration Status: MIGRATED
@@ -15,12 +15,12 @@ Gemini CLI as an active runtime.
 ## Antigravity CLI Details
 
 - Binary: `agy` (alias of `antigravity`)
-- Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
+- Install: bootstrap-owned generation-pinned artifact with digest verification
 - Config path: `~/.gemini/antigravity-cli/settings.json`
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
 - Hooks: `.gemini/hooks/hooks.json` projected into the Antigravity native namespace
 - GitHub: `https://github.com/google-antigravity/antigravity-cli`
-- Latest version: `1.0.16`
+- Latest version: `1.1.0`
 
 ## Supported Access Targets
 

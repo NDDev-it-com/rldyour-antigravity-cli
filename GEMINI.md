@@ -6,9 +6,9 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.7.25`.
-- Runtime: Antigravity CLI `1.0.16`.
-- Install: `curl -fsSL https://antigravity.google/cli/install.sh | bash`
+- Adapter version: `1.7.26`.
+- Runtime: Antigravity CLI `1.1.0`.
+- Install owner: `rldyour-new-mac-or-ubuntu` generation-pinned artifact channel
 - Config path: `~/.gemini/antigravity-cli/settings.json`
 - MCP config: `~/.gemini/antigravity-cli/mcp_config.json`
 - Hooks: `.gemini/hooks/hooks.json` projected into the Antigravity native namespace.

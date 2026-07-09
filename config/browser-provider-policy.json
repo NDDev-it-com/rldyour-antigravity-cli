@@ -1,5 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "required_backend": "cloakbrowser",
+  "fallback_allowed": false,
   "providers": {
     "webwright": {
       "kind": "high-level-browser-workflow",
@@ -8,12 +10,19 @@
     "playwright-cli": {
       "kind": "low-level-browser-automation",
       "mcp": false,
-      "version": "0.1.15"
+      "version": "0.1.17"
     },
     "chrome-devtools-mcp": {
       "kind": "devtools-debugging",
       "mcp": true,
-      "version": "1.2.0"
+      "version": "1.5.0",
+      "transport": {
+        "command": "/bin/sh",
+        "args": [
+          "-c",
+        "exec \"$HOME/.local/bin/chrome-devtools-mcp\" --headless --isolated --no-usage-statistics --no-performance-crux"
+        ]
+      }
     }
   },
   "routing": {

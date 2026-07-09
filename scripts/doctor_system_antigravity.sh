@@ -43,8 +43,8 @@ version="$(agy --version 2>&1 || true)"
 if [[ "$redact" == "true" ]]; then
   version="$(printf '%s' "$version" | sed -E 's/(token|key|secret|password)=([^[:space:]]+)/\1=REDACTED/Ig')"
 fi
-if [[ "$version" == *"1.0.16"* ]]; then
+if [[ "$version" == *"1.1.0"* ]]; then
   printf '{"status":"OK","runtime":"antigravity-cli","binary":"agy","version":%s}\n' "$(python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))' <<<"$version")"
 else
-  printf '{"status":"NOT_PROVEN","runtime":"antigravity-cli","binary":"agy","reason":"version output does not contain 1.0.16","version":%s}\n' "$(python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))' <<<"$version")"
+  printf '{"status":"NOT_PROVEN","runtime":"antigravity-cli","binary":"agy","reason":"version output does not contain 1.1.0","version":%s}\n' "$(python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))' <<<"$version")"
 fi

@@ -12,8 +12,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.25"
-RUNTIME_VERSION = "1.0.16"
+VERSION = "1.7.26"
+RUNTIME_VERSION = "1.1.0"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
 RETIRED_GEMINI_PACKAGE = "@google/gemini-cli"
@@ -30,6 +30,12 @@ EXPECTED_MCP = [
     "grep",
     "figma",
     "openai-docs",
+]
+CHROME_COMMAND = "/bin/sh"
+CHROME_ARGS = [
+    "-c",
+    'exec "$HOME/.local/bin/chrome-devtools-mcp" --headless --isolated '
+    "--no-usage-statistics --no-performance-crux",
 ]
 NATIVE_MCP_KEYS = {
     "command",
@@ -131,8 +137,14 @@ def validate_runtime_baseline(strict: bool = False) -> None:
     require(baseline["runtime_binary"] == RUNTIME_BINARY, "runtime binary must be agy")
     require(baseline["runtime_package"] == RUNTIME_PACKAGE, "runtime package must be antigravity-cli")
     require("gemini_legacy" not in baseline, "baseline must not model Gemini CLI as a supported runtime")
-    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.0.16")
-    require(baseline["target_channel"] == "stable/curl-latest", "target channel must be stable/curl-latest")
+    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.1.0")
+    require(
+        baseline["target_channel"] == "rldyour-bootstrap-generation-pinned-artifact",
+        "target channel must be the bootstrap-owned generation-pinned artifact",
+    )
+    require(baseline["upstream_release"] == RUNTIME_VERSION, "upstream release must match the runtime")
+    require(baseline["installer_owner"] == "rldyour-new-mac-or-ubuntu", "bootstrap must own runtime installation")
+    require(baseline["remote_script_execution"] is False, "remote installer scripts must remain disabled")
     priority = baseline["source_of_truth_priority"]
     require(priority[0] == "agy --version", "agy version must be primary source of truth")
     transition = baseline["antigravity_transition"]
@@ -167,6 +179,11 @@ def validate_mcp_map(mcp: dict[str, Any], source: str) -> None:
             require(isinstance(spec["command"], str) and spec["command"], f"{source}: command must be a non-empty string for {alias}")
             require(isinstance(spec.get("args", []), list), f"{source}: args must be a list for {alias}")
             require(" " not in spec["command"], f"{source}: command must not shell-concatenate args for {alias}")
+            if alias == "chrome-devtools":
+                require(
+                    spec["command"] == CHROME_COMMAND and spec.get("args") == CHROME_ARGS,
+                    f"{source}: chrome-devtools must use the exact managed CloakBrowser wrapper",
+                )
         else:
             require("url" in spec or "httpUrl" in spec or "serverUrl" in spec, f"{source}: MCP spec needs command, url, httpUrl, or serverUrl for {alias}")
 
@@ -461,10 +478,20 @@ def validate_hook_script_json(script: Path, event: str) -> None:
 
 def validate_browser_routing() -> None:
     policy = load_json(ROOT / "config/browser-provider-policy.json")
+    require(policy.get("schema_version") == 2, "browser provider policy schema must be 2")
+    require(policy.get("required_backend") == "cloakbrowser", "CloakBrowser must be the required backend")
+    require(policy.get("fallback_allowed") is False, "browser fallback must remain disabled")
     providers = policy["providers"]
     require(providers["webwright"]["mcp"] is False, "Webwright must not be MCP")
     require(providers["playwright-cli"]["mcp"] is False, "Playwright CLI must not be MCP")
     require(providers["chrome-devtools-mcp"]["mcp"] is True, "Chrome DevTools MCP must remain active")
+    require(providers["playwright-cli"].get("version") == "0.1.17", "Playwright CLI pin must be 0.1.17")
+    require(providers["chrome-devtools-mcp"].get("version") == "1.5.0", "Chrome DevTools MCP pin must be 1.5.0")
+    require(
+        providers["chrome-devtools-mcp"].get("transport")
+        == {"command": CHROME_COMMAND, "args": CHROME_ARGS},
+        "browser policy must carry the exact managed wrapper transport",
+    )
     browser_agent = policy.get("gemini_builtin_browser_agent") or {}
     require(browser_agent.get("enabled") is False, "Gemini built-in browser_agent must be disabled for this release")
     require(

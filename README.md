@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.7.25` |
-| Runtime baseline | Antigravity CLI `1.0.16` |
-| Runtime channel | `stable/curl-latest` |
-| GitHub release tag | `1.7.25` |
+| Adapter version | `1.7.26` |
+| Runtime baseline | Antigravity CLI `1.1.0` |
+| Runtime channel | bootstrap-owned generation-pinned artifact |
+| GitHub release tag | `1.7.26` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -59,12 +59,17 @@ Headless `agy -p` is allowed for smoke, doctor, and CI checks only.
 
 ## Install / Update / ry-repair
 
-Install the upstream Antigravity CLI runtime:
+Install the runtime through the parent bootstrap's verified artifact channel:
 
 ```bash
-curl -fsSL https://antigravity.google/cli/install.sh | bash
+bash scripts/bootstrap.sh --platform <macos|ubuntu> --profile <desktop|server> --apply
 agy --version
 ```
+
+The bootstrap verifies the platform artifact digest, verifies the macOS signer
+where applicable, disables self-update, and publishes a tamper-evident
+`~/.local/bin/agy` launcher. This adapter never executes a streamed remote
+installer.
 
 Clone or update this adapter:
 
@@ -216,7 +221,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.7.25` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.26` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See

@@ -27,8 +27,8 @@ done
 # Verify required CLI binary is on PATH before any non-dry-run work
 if [[ "$apply" -eq 1 ]]; then
   if ! command -v agy >/dev/null 2>&1; then
-    printf "error: Antigravity CLI requires the 'agy' CLI on PATH. Install with:\n" >&2
-    printf '  curl -fsSL https://antigravity.google/cli/install.sh | bash\n' >&2
+    printf "error: Antigravity CLI requires the managed 'agy' CLI on PATH.\n" >&2
+    printf 'Run the rldyour-new-mac-or-ubuntu bootstrap; remote installer streams are unsupported.\n' >&2
     exit 1
   fi
   # Clean up legacy rldyour-gemini extension (renamed in 1.4.0 to rldyour-antigravity-cli)
