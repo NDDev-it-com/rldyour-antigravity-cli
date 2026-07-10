@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-07-10
 Last verified: 2026-07-10
-Last commit: eaed204f9dac5b022f62bb673e36a0b96d915cdc feat(browser): enforce managed Cloak routing
+Last commit: c74adf6766b1fb1c88c019d20f78dab65ae5e932 feat(browser): enforce managed CloakBrowser skill boundary
 Scope: browser-visible validation and debugging workflows
 Area: BROWSER
 -->
@@ -33,16 +33,24 @@ browser-visible validation and debugging workflows
 
 ## Last verified
 - date: 2026-07-10
-- commit: `eaed204f9dac5b022f62bb673e36a0b96d915cdc`
-- checked by: Antigravity browser transport release validation
+- commit: `c74adf6766b1fb1c88c019d20f78dab65ae5e932`
+- checked by: Antigravity fail-closed browser policy validation
 
 ## Facts
-- Webwright, Playwright CLI, and Chrome DevTools MCP must attach to the bootstrap-owned CloakBrowser backend.
-- The only configured browser MCP transport is `/bin/sh -c` executing `~/.local/bin/chrome-devtools-mcp` with the managed privacy flags.
-- Direct `bunx`/`npx` Chrome DevTools package transport and raw, stock, or in-app browser fallback are forbidden.
+- Every browser action first runs exact
+  `$HOME/.local/bin/cloakbrowser-cdp-health`; missing or nonzero health stops as
+  `NOT_PROVEN` with no fallback.
+- Active browser execution is limited to exact managed Playwright CLI and the
+  exact managed Chrome DevTools MCP transport. `run-code` and `--filename` are
+  forbidden.
+- `webwright-task` is compatibility intent routed through `browser:validate`.
+  Webwright runtime, built-in/raw browser surfaces, direct packages, alternate
+  CDP/executable/config paths, and fallbacks are forbidden.
+- Both browser skills, both browser-aware agents, and both browser commands
+  carry the exact mandatory boundary and match their `.gemini` projections.
 
 ## Evidence
-- `commit:eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- `commit:c74adf6766b1fb1c88c019d20f78dab65ae5e932`
 - `path:README.md`
 - `path:config/browser-provider-policy.json`
 - `path:references/browser-provider-routing.md`

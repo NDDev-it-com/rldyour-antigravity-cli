@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-07-10
 Last verified: 2026-07-10
-Last commit: d527419c9c727aa54ef49e9a71e09203469f5ca0 fix(browser): enforce managed Cloak transport policy
+Last commit: c74adf6766b1fb1c88c019d20f78dab65ae5e932 feat(browser): enforce managed CloakBrowser skill boundary
 Scope: CLI runtime and package baselines
 Area: RUNTIME
 -->
@@ -32,16 +32,17 @@ CLI runtime and package baselines
 
 ## Last verified
 - date: 2026-07-10
-- commit: `d527419c9c727aa54ef49e9a71e09203469f5ca0`
-- checked by: Antigravity runtime and MCP refresh boundary validation
+- commit: `c74adf6766b1fb1c88c019d20f78dab65ae5e932`
+- checked by: Antigravity runtime and browser boundary validation
 
 ## Facts
 - The supported runtime binary is `agy` from Antigravity CLI `1.1.0`.
 - Runtime installation remains a bootstrap-owned generation-pinned artifact with digest verification; this adapter does not execute remote installer scripts.
-- Adapter patch `1.7.28` refreshes two MCP packages without changing the Antigravity runtime baseline.
+- Adapter patch `1.7.29` hardens browser execution without changing the
+  Antigravity runtime baseline.
 
 ## Evidence
-- `commit:d527419c9c727aa54ef49e9a71e09203469f5ca0`
+- `commit:c74adf6766b1fb1c88c019d20f78dab65ae5e932`
 - `path:README.md`
 - `path:config/gemini-baseline.json`
 - `path:references/gemini-antigravity-transition.md`

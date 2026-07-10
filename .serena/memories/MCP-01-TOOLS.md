@@ -1,7 +1,7 @@
 <!-- Memory Metadata
 Last updated: 2026-07-10
 Last verified: 2026-07-10
-Last commit: d527419c9c727aa54ef49e9a71e09203469f5ca0 fix(browser): enforce managed Cloak transport policy
+Last commit: c74adf6766b1fb1c88c019d20f78dab65ae5e932 feat(browser): enforce managed CloakBrowser skill boundary
 Scope: MCP runtime transport and pin policy
 Area: MCP
 -->
@@ -34,18 +34,20 @@ MCP runtime transport and pin policy
 
 ## Last verified
 - date: 2026-07-10
-- commit: `d527419c9c727aa54ef49e9a71e09203469f5ca0`
-- checked by: Antigravity MCP refresh compatibility and parity validation
+- commit: `c74adf6766b1fb1c88c019d20f78dab65ae5e932`
+- checked by: Antigravity MCP transport and projection validation
 
 ## Facts
 - The active inventory contains exactly 11 MCP servers and all three Antigravity MCP projections must remain byte-equivalent after normalization.
 - Sequential Thinking is pinned to `@modelcontextprotocol/server-sequential-thinking@2026.7.4`; Context7 is pinned to `@upstash/context7-mcp@3.2.3`.
 - npm metadata, stdio `initialize`, `tools/list`, safe-call, and an isolated `0 vulnerabilities` audit provide compatibility evidence for the refreshed pins.
-- `chrome-devtools` uses `/bin/sh -c` to execute the bootstrap-owned `~/.local/bin/chrome-devtools-mcp` wrapper; no direct package launcher is allowed.
+- `chrome-devtools` uses `/bin/sh -c` to execute the bootstrap-owned
+  `$HOME/.local/bin/chrome-devtools-mcp` wrapper; no direct package launcher is
+  allowed.
 - CloakBrowser identity, endpoint, health, and version remain owned by the bootstrap rather than this adapter.
 
 ## Evidence
-- `commit:d527419c9c727aa54ef49e9a71e09203469f5ca0`
+- `commit:c74adf6766b1fb1c88c019d20f78dab65ae5e932`
 - `path:.gemini/antigravity-cli/mcp_config.json`
 - `path:config/mcp-runtime-versions.env`
 - `path:docs/audit-resolution.md`
