@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+
+## [1.7.30] - 2026-07-10
+
+### Changed
+
+- Adopt the verified Antigravity CLI 1.1.1 runtime and immutable platform artifacts.
+
 ## [1.7.29] - 2026-07-10
 
 ### Security
