@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.7.29` |
-| Runtime baseline | Antigravity CLI `1.1.0` |
+| Adapter version | `1.7.30` |
+| Runtime baseline | Antigravity CLI `1.1.1` |
 | Runtime channel | bootstrap-owned generation-pinned artifact |
-| GitHub release tag | `1.7.29` |
+| GitHub release tag | `1.7.30` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -227,7 +227,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.7.29` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.30` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See
