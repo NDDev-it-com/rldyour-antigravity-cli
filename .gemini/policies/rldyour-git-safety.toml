@@ -1,5 +1,5 @@
 name = "rldyour-git-safety"
-version = "1.7.27"
+version = "1.7.28"
 scope = "antigravity-adapter"
 
 [rules]

@@ -18,6 +18,8 @@ This is the Antigravity CLI-side memory for `rldyour-antigravity-cli`.
 - Antigravity runtime source is `antigravity-cli` with baseline pins in
   `config/gemini-baseline.json`.
 - MCP runtime pins are fixed by the extension manifest and shell install workflow.
+- `config/mcp-runtime-versions.env` pins Sequential Thinking `2026.7.4` and
+  Context7 `3.2.3`; all active MCP projections and contract claims must match.
 
 ## Native Boundaries
 

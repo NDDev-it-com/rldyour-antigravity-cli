@@ -12,10 +12,16 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.27"
+VERSION = "1.7.28"
 RUNTIME_VERSION = "1.1.0"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
+SEQUENTIAL_THINKING_MCP_VERSION = "2026.7.4"
+CONTEXT7_MCP_VERSION = "3.2.3"
+MCP_RUNTIME_SPECS = {
+    "sequential-thinking": f"@modelcontextprotocol/server-sequential-thinking@{SEQUENTIAL_THINKING_MCP_VERSION}",
+    "context7": f"@upstash/context7-mcp@{CONTEXT7_MCP_VERSION}",
+}
 RETIRED_GEMINI_PACKAGE = "@google/gemini-cli"
 RETIRED_GEMINI_VERSION = "0.46.0"
 EXPECTED_MCP = [
@@ -147,6 +153,19 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def load_env_assignments(path: Path) -> dict[str, str]:
+    assignments: dict[str, str] = {}
+    for raw_line in read_text(path).splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        require("=" in line, f"{path.relative_to(ROOT)}: invalid env assignment: {raw_line!r}")
+        key, value = line.split("=", 1)
+        require(bool(key) and bool(value), f"{path.relative_to(ROOT)}: empty env key or value")
+        assignments[key] = value
+    return assignments
+
+
 def require(condition: object, message: str) -> None:
     if not condition:
         raise ValidationError(message)
@@ -164,6 +183,8 @@ def validate_version_surfaces() -> None:
     require(manifest["version"] == VERSION, "gemini-extension version must match VERSION")
     contract = load_json(ROOT / "config/rldyour-contract.json")
     require(contract["adapter"]["version"] == VERSION, "contract adapter version must match VERSION")
+    claims = load_json(ROOT / "config/current-claim-rules.json")["current_claims"]
+    require(claims["adapter_version"] == VERSION, "current claim adapter version must match VERSION")
 
 
 def validate_runtime_baseline(strict: bool = False) -> None:
@@ -262,6 +283,45 @@ def validate_mcp_inventory() -> None:
     validate_mcp_map(antigravity_mcp["mcpServers"], ".gemini/antigravity-cli/mcp_config.json")
     validate_mcp_surface_equivalence(manifest, settings, antigravity_mcp)
     require(sorted(contract["mcp_servers"]) == sorted(EXPECTED_MCP), "contract MCP list must match expected inventory")
+    validate_mcp_runtime_pins(
+        {
+            "gemini-extension.json": manifest["mcpServers"],
+            ".gemini/settings.json": settings["mcpServers"],
+            ".gemini/antigravity-cli/mcp_config.json": antigravity_mcp["mcpServers"],
+        },
+        contract,
+    )
+
+
+def validate_mcp_runtime_pins(surfaces: dict[str, dict[str, Any]], contract: dict[str, Any]) -> None:
+    versions = load_env_assignments(ROOT / "config/mcp-runtime-versions.env")
+    require(
+        versions.get("SEQUENTIAL_THINKING_MCP_VERSION") == SEQUENTIAL_THINKING_MCP_VERSION,
+        f"Sequential Thinking MCP version must be {SEQUENTIAL_THINKING_MCP_VERSION}",
+    )
+    require(
+        versions.get("CONTEXT7_MCP_VERSION") == CONTEXT7_MCP_VERSION,
+        f"Context7 MCP version must be {CONTEXT7_MCP_VERSION}",
+    )
+    for source, mcp in surfaces.items():
+        for alias, package_spec in MCP_RUNTIME_SPECS.items():
+            server = mcp.get(alias) or {}
+            require(server.get("command") == "bunx", f"{source}: {alias} must use bunx")
+            require(server.get("args") == [package_spec], f"{source}: {alias} must pin {package_spec}")
+    require(contract.get("mcp_runtime_pins") == MCP_RUNTIME_SPECS, "contract MCP runtime pins must match canonical specs")
+    claims = load_json(ROOT / "config/current-claim-rules.json")["current_claims"]
+    require(
+        claims.get("sequential_thinking_mcp_version") == SEQUENTIAL_THINKING_MCP_VERSION,
+        "current claim Sequential Thinking MCP version must match",
+    )
+    require(claims.get("context7_mcp_version") == CONTEXT7_MCP_VERSION, "current claim Context7 MCP version must match")
+    for relative in ("README.md", "docs/audit-resolution.md"):
+        text = read_text(ROOT / relative)
+        for package_spec in MCP_RUNTIME_SPECS.values():
+            require(package_spec in text, f"{relative}: missing current MCP package pin {package_spec}")
+    audit = read_text(ROOT / "docs/audit-resolution.md")
+    for marker in ("initialize", "tools/list", "safe-call", "0 vulnerabilities"):
+        require(marker in audit, f"docs/audit-resolution.md: missing MCP compatibility evidence marker {marker}")
 
 
 def validate_manifest() -> None:

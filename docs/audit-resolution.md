@@ -78,14 +78,15 @@ historical evidence under the current `v1.17.6` baseline), and F-015
 (`validate_retired_tool_residue.py --strict-no-tool-names-in-active-docs` is green;
 no retired tool names in active root docs).
 
-Context7 registry drift (resolved): the owner directed Context7 to track the
-latest published version everywhere it is used. All local-stdio adapters
-(Claude, Codex, Gemini, MiMoCode) now pin `@upstash/context7-mcp@3.2.2` (npm
-latest); Claude moved off its prior `2.2.5` hold after the `3.2.1` stdio MCP
-`initialize` runtime smoke verified the server starts, so the Claude
-`override_reason` was removed. OpenCode continues to use the always-current
-hosted endpoint `https://mcp.context7.com/mcp`. The MCP registry-freshness gate
-confirms every pinned Context7 version is published.
+MCP registry drift (resolved): local-stdio adapters now pin
+`@modelcontextprotocol/server-sequential-thinking@2026.7.4` and
+`@upstash/context7-mcp@3.2.3`, both npm `latest` at verification time. The
+coordinated compatibility probe completed stdio `initialize`, `tools/list`, and
+a safe-call against both packages; the isolated dependency audit reported
+`0 vulnerabilities`. OpenCode continues to use the always-current hosted
+Context7 endpoint. Static parity validation binds the env source, three active
+Antigravity MCP surfaces, contract claims, docs, and regression tests to the
+same exact package specs.
 
 ## Current Intentional Boundaries
 

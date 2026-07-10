@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.7.27` |
+| Adapter version | `1.7.28` |
 | Runtime baseline | Antigravity CLI `1.1.0` |
 | Runtime channel | bootstrap-owned generation-pinned artifact |
-| GitHub release tag | `1.7.27` |
+| GitHub release tag | `1.7.28` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -160,6 +160,12 @@ declared in `.gemini/settings.json` under `mcpServers`:
 | `figma` | HTTP (local) | Figma design context and code connect |
 | `openai-docs` | HTTP/SSE | OpenAI API documentation |
 
+Current refreshed package pins are
+`@modelcontextprotocol/server-sequential-thinking@2026.7.4` and
+`@upstash/context7-mcp@3.2.3`. `config/mcp-runtime-versions.env` owns their
+version literals; all three active Antigravity MCP surfaces and
+`config/rldyour-contract.json` must remain exact projections of those pins.
+
 ## Repository Context / Serena Memory
 
 Normal `main` history carries source-controlled configuration artifacts:
@@ -228,7 +234,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.7.27` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.28` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See

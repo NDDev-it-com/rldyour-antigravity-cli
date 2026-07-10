@@ -44,6 +44,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.7.28] - 2026-07-10
+
+### Changed
+
+- Refresh Sequential Thinking MCP to `2026.7.4` and Context7 MCP to `3.2.3`
+  after npm metadata, stdio initialize/tool/safe-call compatibility, and
+  zero-vulnerability audit evidence.
+- Enforce env, runtime projection, contract, docs, and regression-test parity
+  for both refreshed MCP package pins.
+
 ## [1.7.27] - 2026-07-10
 
 ### Fixed

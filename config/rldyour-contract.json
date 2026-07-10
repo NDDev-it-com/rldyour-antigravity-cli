@@ -3,7 +3,7 @@
   "adapter": {
     "id": "gemini",
     "name": "rldyour-antigravity-cli",
-    "version": "1.7.27",
+    "version": "1.7.28",
     "runtime": "antigravity-cli",
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
@@ -45,6 +45,10 @@
     "figma",
     "openai-docs"
   ],
+  "mcp_runtime_pins": {
+    "sequential-thinking": "@modelcontextprotocol/server-sequential-thinking@2026.7.4",
+    "context7": "@upstash/context7-mcp@3.2.3"
+  },
   "browser_provider_model": {
     "transport_owner": "bootstrap",
     "required_backend": "cloakbrowser",

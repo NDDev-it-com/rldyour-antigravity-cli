@@ -38,6 +38,11 @@ underscores. Configure only providers listed in the approved active inventory.
 Removed or historical tools must not be reintroduced unless the owner updates
 the inventory and release policy.
 
+`config/mcp-runtime-versions.env` owns package pin literals. Sequential
+Thinking is `2026.7.4` and Context7 is `3.2.3`; `gemini-extension.json`, both
+`.gemini` runtime MCP surfaces, contract claims, docs, and tests must remain in
+exact parity.
+
 ## Browser Policy
 
 Route browser tasks through Webwright, Playwright CLI + Skills, and Chrome
