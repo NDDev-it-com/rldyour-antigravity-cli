@@ -3,7 +3,7 @@
   "adapter": {
     "id": "gemini",
     "name": "rldyour-antigravity-cli",
-    "version": "1.7.28",
+    "version": "1.7.29",
     "runtime": "antigravity-cli",
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
@@ -52,11 +52,17 @@
   "browser_provider_model": {
     "transport_owner": "bootstrap",
     "required_backend": "cloakbrowser",
-    "managed_wrapper_root": "~/.local/bin",
-    "webwright": "high-level long-horizon browser workflows attached to bootstrap-owned CloakBrowser",
-    "playwright-cli": "low-level screenshots, snapshots, traces, and visual evidence through bootstrap-owned CloakBrowser",
-    "chrome-devtools-mcp": "console, network, performance, Lighthouse, memory, and live debugging through ~/.local/bin/chrome-devtools-mcp",
-    "gemini_builtin_browser_agent": "disabled for this release; NOT_PROVEN as a separate provider until explicitly modeled"
+    "managed_wrapper_root": "$HOME/.local/bin",
+    "health_gate": "$HOME/.local/bin/cloakbrowser-cdp-health before every browser action",
+    "active_providers": [
+      "playwright-cli",
+      "chrome-devtools-mcp"
+    ],
+    "playwright-cli": "exact managed executable for flows, screenshots, snapshots, traces, visual evidence, and long-horizon stepwise workflows",
+    "chrome-devtools-mcp": "exact managed transport for console, network, runtime, layout, performance, Lighthouse, memory, and live debugging",
+    "webwright-task": "compatibility intent routed through browser:validate; Webwright runtime execution forbidden",
+    "fallback_allowed": false,
+    "gemini_builtin_browser_agent": "disabled; outside the bootstrap-owned CloakBrowser trust boundary"
   },
   "hard_invariants": [
     "no_active_playwright_mcp",

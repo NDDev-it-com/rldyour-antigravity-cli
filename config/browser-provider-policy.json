@@ -1,22 +1,30 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "required_backend": "cloakbrowser",
   "transport_owner": "bootstrap",
-  "managed_wrapper_root": "~/.local/bin",
+  "managed_wrapper_root": "$HOME/.local/bin",
   "fallback_allowed": false,
+  "health_gate": {
+    "command": "$HOME/.local/bin/cloakbrowser-cdp-health",
+    "required_before_every_action": true,
+    "failure_result": "NOT_PROVEN"
+  },
+  "active_providers": [
+    "playwright-cli",
+    "chrome-devtools-mcp"
+  ],
   "providers": {
-    "webwright": {
-      "kind": "high-level-browser-workflow",
-      "mcp": false,
-      "backend": "cloakbrowser",
-      "transport_owner": "bootstrap"
-    },
     "playwright-cli": {
-      "kind": "low-level-browser-automation",
+      "kind": "browser-automation",
       "mcp": false,
       "version": "0.1.17",
       "backend": "cloakbrowser",
-      "transport_owner": "bootstrap"
+      "transport_owner": "bootstrap",
+      "executable": "$HOME/.local/bin/playwright-cli",
+      "forbidden_arguments": [
+        "run-code",
+        "--filename"
+      ]
     },
     "chrome-devtools-mcp": {
       "kind": "devtools-debugging",
@@ -34,30 +42,37 @@
     }
   },
   "routing": {
-    "long_horizon_web_task": "webwright",
+    "long_horizon_web_task": "playwright-cli",
     "screenshots_snapshots_traces": "playwright-cli",
-    "console_network_performance_memory_lighthouse": "chrome-devtools-mcp"
+    "console_network_runtime_layout_performance_memory_lighthouse": "chrome-devtools-mcp"
   },
-  "forbidden_active_providers": [
+  "compatibility_workflows": {
+    "webwright-task": {
+      "route": "browser:validate",
+      "runtime_provider": "webwright",
+      "runtime_execution_allowed": false,
+      "failure_result": "NOT_PROVEN"
+    }
+  },
+  "forbidden_runtime_providers": [
+    "webwright",
+    "stock-browser",
+    "raw-browser",
+    "in-app-browser",
+    "browser_agent",
+    "node_repl",
+    "computer-use",
     "playwright-mcp",
-    "@playwright/mcp",
-    "semgrep",
-    "semgrep-mcp"
-  ],
-  "forbidden_direct_chrome_devtools_launchers": [
-    "bunx",
-    "npx"
-  ],
-  "forbidden_browser_fallbacks": [
-    "raw",
-    "stock",
-    "in-app"
+    "raw-playwright",
+    "direct-package-browser-provider",
+    "alternate-cdp",
+    "alternate-browser-executable",
+    "alternate-browser-config"
   ],
   "gemini_builtin_browser_agent": {
     "enabled": false,
-    "reason": "This adapter release keeps the canonical provider matrix as Webwright, Playwright CLI, and Chrome DevTools MCP. Gemini built-in browser_agent is not enabled until separately modeled and validated.",
+    "reason": "Antigravity built-in browser_agent is outside the bootstrap-owned CloakBrowser trust boundary.",
     "must_not_replace": [
-      "webwright",
       "playwright-cli",
       "chrome-devtools-mcp"
     ]

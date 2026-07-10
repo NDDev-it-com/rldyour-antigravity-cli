@@ -9,7 +9,7 @@ if [[ -f "$script_dir/../VERSION" ]]; then
 elif [[ -f "$script_dir/../../VERSION" ]]; then
   adapter_version="$(<"$script_dir/../../VERSION")"
 else
-  adapter_version="1.7.28"
+  adapter_version="1.7.29"
 fi
 export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="$adapter_version"
 printf '%s\n' "rldyour-antigravity-cli SessionStart hook received input" >&2
@@ -19,13 +19,13 @@ import json
 import os
 
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
-version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.28")
+version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.29")
 message = (
     f"rldyour-antigravity-cli adapter={version} runtime=antigravity-cli@1.1.0; "
     "standard mode is owner-led; cmux orchestration is visible-terminal-only; "
-    "browser routing is Webwright, Playwright CLI, and Chrome DevTools MCP through "
-    "bootstrap-owned CloakBrowser and the managed ~/.local/bin/chrome-devtools-mcp wrapper; "
-    "direct bunx/npx and raw/stock/in-app browser fallback are forbidden; "
+    "every browser action requires exact managed CloakBrowser health; execution is limited "
+    "to exact managed Playwright CLI and Chrome DevTools MCP wrappers; Webwright runtime, "
+    "browser_agent, direct packages, alternate CDP/config/executables, and fallback are forbidden; "
     "only approved inventory providers are active; supported auth is enterprise, "
     "API-key, Vertex, Google Cloud, or owner-approved."
 )

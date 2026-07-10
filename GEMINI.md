@@ -6,7 +6,7 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.7.28`.
+- Adapter version: `1.7.29`.
 - Runtime: Antigravity CLI `1.1.0`.
 - MCP refresh: Sequential Thinking `2026.7.4`; Context7 `3.2.3`.
 - Install owner: `rldyour-new-mac-or-ubuntu` generation-pinned artifact channel
@@ -26,15 +26,15 @@ native surfaces for the rldyour AI CLI control plane.
   `gemini-extension.json`, TOML commands, skills, agents, hooks, and policies.
 - Configure only providers listed in the approved active inventory; removed or
   historical tools require an explicit inventory and release-policy update.
-- Keep browser routing split: Webwright for long-horizon workflows, Playwright
-  CLI for screenshots/flows/visual evidence, Chrome DevTools MCP for debugging.
-- All browser providers must attach to bootstrap-owned CloakBrowser. The only
-  configured browser MCP transport is the managed
-  `~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-  package transport is forbidden. Raw, stock, and in-app browser fallback is
+- Run exact `$HOME/.local/bin/cloakbrowser-cdp-health` before every browser
+  action. Missing or nonzero health stops as `NOT_PROVEN` with no fallback.
+- Execute only exact `$HOME/.local/bin/playwright-cli` or the exact configured
+  managed `$HOME/.local/bin/chrome-devtools-mcp` transport. `run-code` and
+  `--filename` are forbidden.
+- Treat `webwright-task` as compatibility intent routed to `browser:validate`.
+  Webwright runtime, Antigravity built-in `browser_agent`, raw/in-app providers,
+  package runners, alternate CDP/executables/configs, and fallbacks are
   forbidden.
-- Antigravity built-in `browser_agent` is disabled for this release; do not enable it
-  unless it is modeled as a separate explicit provider with validators.
 - In standard mode, the owner/user remains the orchestration layer.
 - In cmux mode, orchestration exists only as visible terminal sessions.
 - Antigravity subagents are internal Antigravity CLI delegation, not cmux workers.

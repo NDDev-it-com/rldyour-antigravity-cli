@@ -50,8 +50,10 @@ environmental artifacts of that sandbox, not control-plane defects:
   PASS for root plus five adapters, and every adapter numeric tag resolves
   exactly to its `expected_head` GitHub Release. The live-network lane already
   wired CI provenance; releases are now persisted as evidence (below).
-- F-006 (Webwright strict provenance): proven green live; the sandbox failure was
-  DNS only.
+- F-006 (historical Webwright provenance): the live proof was valid for that
+  audit, but adapter `1.7.29` retires Webwright runtime execution fail-closed.
+  Provenance is no longer an active release requirement; `webwright-task` is
+  compatibility intent routed through the two managed CloakBrowser providers.
 
 Durable hardening applied (root control plane only - no adapter source needed):
 

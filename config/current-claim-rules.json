@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "current_claims": {
-    "adapter_version": "1.7.28",
+    "adapter_version": "1.7.29",
     "runtime_version": "1.1.0",
     "mcp_server_count": 11,
     "sequential_thinking_mcp_version": "2026.7.4",

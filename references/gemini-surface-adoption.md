@@ -7,15 +7,15 @@ surfaces: context files, project settings, extension manifest, TOML commands,
 Agent Skills, subagents, hooks, policies, MCP servers, model routing, and
 headless prompt smoke mode.
 
-Antigravity built-in `browser_agent` is intentionally disabled in `1.7.28`; browser
-work remains routed through Webwright, Playwright CLI + Skills, and Chrome
-DevTools MCP until a separate provider model and validator prove otherwise.
+Antigravity built-in `browser_agent` is disabled. Every browser action requires
+exact `$HOME/.local/bin/cloakbrowser-cdp-health` and may execute only through
+exact managed `$HOME/.local/bin/playwright-cli` or the configured managed
+`$HOME/.local/bin/chrome-devtools-mcp` transport. Missing health stops as
+`NOT_PROVEN`; no fallback is allowed.
 
-All browser providers must attach to bootstrap-owned CloakBrowser. The only
-configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+`webwright-task` is compatibility intent routed through `browser:validate`.
+Webwright runtime, raw/stock/in-app Browser, package runners, alternate CDP,
+executables/configs, and fallbacks are forbidden.
 
 ## Evidence
 

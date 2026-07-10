@@ -1,29 +1,27 @@
-# Browser Provider Routing
+# Fail-Closed Browser Provider Routing
 
-Use the shared rldyour provider model:
+Antigravity inherits the bootstrap-owned CloakBrowser trust boundary. Every
+browser action starts with exact `$HOME/.local/bin/cloakbrowser-cdp-health`.
+Missing or nonzero health produces `NOT_PROVEN` and stops the workflow; no
+fallback is allowed.
 
-- Webwright: high-level long-horizon web workflows, reusable scripts,
-  screenshots/logs/evidence, and final-script reproduction.
-- Playwright CLI + Skills: deterministic UI automation, screenshots, snapshots,
-  traces, responsive matrices, and visual evidence.
-- Chrome DevTools MCP: console, network, performance, Lighthouse, memory, heap,
-  and live Chrome debugging. Every Antigravity MCP surface invokes the exact
-  `~/.local/bin/chrome-devtools-mcp` wrapper; the bootstrap owns CloakBrowser
-  identity, the fixed endpoint, and its health gate.
+Exactly two execution providers are active:
 
-All browser providers must attach to bootstrap-owned CloakBrowser. The only
-configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+- `$HOME/.local/bin/playwright-cli` `0.1.17` handles flows, screenshots,
+  snapshots, traces, responsive matrices, visual evidence, and long-horizon
+  stepwise workflows. `run-code`, `--filename`, raw Playwright, package-runner
+  invocation, alternate executables, and alternate configs are forbidden.
+- Chrome DevTools MCP `1.5.0` handles console, network, runtime, DOM/layout,
+  performance, Lighthouse, and memory through the exact managed
+  `$HOME/.local/bin/chrome-devtools-mcp` transport in Antigravity configuration.
 
-Gemini built-in `browser_agent` is disabled for this release. It is not a silent
-replacement for any provider above and must be added as a separately validated
-provider before use.
+`webwright-task` remains compatibility intent only. It routes through
+`browser:validate`; Webwright runtime is never installed, imported, or run. Stock/raw/
+in-app Browser, Antigravity `browser_agent`, `node_repl`, computer-use,
+Playwright MCP, raw Playwright, direct browser packages, alternate CDP,
+executables/configs, and all fallback paths remain forbidden.
 
-Current provider boundary:
-
-- Configure only providers listed in the approved active inventory.
-- Webwright remains a non-MCP provider/harness.
-- Removed or historical tools require an explicit inventory and release-policy
-  update before they can become active.
+`config/browser-provider-policy.json` is the machine-readable authority. The
+source policy in `policies/rldyour-browser-routing.toml` is projected
+byte-for-byte to `.gemini/policies/`. Browser skills, agents, and commands each
+carry the exact mandatory boundary and are also projected byte-for-byte.

@@ -1,23 +1,33 @@
 name = "rldyour-browser-routing"
-version = "1.7.28"
+version = "1.7.29"
 scope = "antigravity-adapter"
 
 [providers]
-webwright = "high-level long-horizon web workflows and reusable scripts"
-playwright_cli = "low-level screenshots, snapshots, traces, and visual evidence"
-chrome_devtools_mcp = "console, network, performance, Lighthouse, memory, live Chrome debugging"
+active = ["playwright-cli", "chrome-devtools-mcp"]
+playwright_cli = "$HOME/.local/bin/playwright-cli"
+chrome_devtools_mcp = "$HOME/.local/bin/chrome-devtools-mcp"
+
+[compatibility]
+webwright_task = "routing intent only; use browser:validate; Webwright runtime forbidden"
 
 [transport]
 owner = "bootstrap"
 backend = "cloakbrowser"
-managed_wrapper_root = "~/.local/bin"
-chrome_devtools_mcp = "~/.local/bin/chrome-devtools-mcp"
+managed_wrapper_root = "$HOME/.local/bin"
+health_command = "$HOME/.local/bin/cloakbrowser-cdp-health"
+health_before_every_action = true
+failure_result = "NOT_PROVEN"
 
 [forbidden]
+webwright_runtime = true
 playwright_mcp = true
-webwright_mcp = true
-direct_bunx_chrome_devtools = true
-direct_npx_chrome_devtools = true
+builtin_browser_agent = true
+node_repl = true
+computer_use = true
+direct_browser_package = true
+alternate_cdp = true
+alternate_browser_executable = true
+alternate_browser_config = true
 raw_browser_fallback = true
 stock_browser_fallback = true
 in_app_browser_fallback = true

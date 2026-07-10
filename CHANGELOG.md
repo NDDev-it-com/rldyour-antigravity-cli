@@ -1,48 +1,29 @@
 # Changelog
 
-## [1.7.7] - 2026-06-27
-
-- Align the Antigravity settings schema snapshot with the `1.0.13` runtime baseline.
-
-## [1.7.6] - 2026-06-27
-
-- Refresh the Antigravity CLI runtime baseline from `1.0.12` to `1.0.13` using the official upstream release.
-
-## [1.7.5] - 2026-06-27
-
-### Changed
-
-- Refresh shadcn MCP runtime pin to the latest published 4.12.0 release.
-
-## [1.7.4] - 2026-06-26
-
-### Changed
-
-- Sync Serena release memories after runtime and MCP refresh.
-
-## [1.7.3] - 2026-06-26
-
-### Changed
-
-- Refresh CLI runtime and MCP pins to latest stable versions.
-
-## [1.7.2] - 2026-06-26
-
-### Fixed
-
-- Align README memory heading and supported-version wording with the tracked-context line.
-
-## [1.7.1] - 2026-06-26
-
-### Fixed
-
-- Sync generated cmux worker/orchestrator skill projections with the tracked-context branch model.
-
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and adapter versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.7.29] - 2026-07-10
+
+### Security
+
+- Reduce browser execution to the bootstrap-owned CloakBrowser boundary: exact
+  managed Playwright CLI and Chrome DevTools MCP transports, mandatory health
+  verification before every browser action, and no fallback.
+- Retain `webwright-task` only as compatibility intent routed through
+  `browser:validate`; forbid Webwright runtime, Antigravity built-in/raw browser
+  surfaces, package runners, and alternate CDP/executable/config paths.
+- Enforce the exact boundary across both browser skills, both browser-aware
+  agents, both browser commands, their byte-identical `.gemini` projections,
+  the machine policy, source TOML policy, docs, hooks, and contract.
+
+### Changed
+
+- Preserve the verified Antigravity CLI `1.1.0`, Playwright CLI `0.1.17`, and
+  Chrome DevTools MCP `1.5.0` runtime baselines.
 
 ## [1.7.28] - 2026-07-10
 
@@ -185,6 +166,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Fixed
 
 - Enforce five-adapter validation parity and structured release evidence
+
+## [1.7.7] - 2026-06-27
+
+### Fixed
+
+- Align the Antigravity settings schema snapshot with the `1.0.13` runtime
+  baseline.
+
+## [1.7.6] - 2026-06-27
+
+### Changed
+
+- Refresh the Antigravity CLI runtime baseline from `1.0.12` to `1.0.13` using
+  the official upstream release.
+
+## [1.7.5] - 2026-06-27
+
+### Changed
+
+- Refresh shadcn MCP runtime pin to the latest published 4.12.0 release.
+
+## [1.7.4] - 2026-06-26
+
+### Changed
+
+- Sync Serena release memories after runtime and MCP refresh.
+
+## [1.7.3] - 2026-06-26
+
+### Changed
+
+- Refresh CLI runtime and MCP pins to latest stable versions.
+
+## [1.7.2] - 2026-06-26
+
+### Fixed
+
+- Align README memory heading and supported-version wording with the
+  tracked-context line.
+
+## [1.7.1] - 2026-06-26
+
+### Fixed
+
+- Sync generated cmux worker/orchestrator skill projections with the
+  tracked-context branch model.
 
 ## [1.7.0] - 2026-06-26
 

@@ -52,12 +52,13 @@ python3 scripts/validate_instruction_docs.py --strict
 
 ## Browser/Provider Boundary
 
-- Webwright: orchestration-level browser routing.
-- Playwright CLI: low-level UI evidence.
-- Chrome DevTools MCP: console/network/performance traces.
+Before every browser action, run exact
+`$HOME/.local/bin/cloakbrowser-cdp-health`. Execute only exact managed
+`$HOME/.local/bin/playwright-cli` or the configured exact managed
+`$HOME/.local/bin/chrome-devtools-mcp` transport; missing health stops as
+`NOT_PROVEN` and no fallback is allowed.
 
-All browser providers must attach to bootstrap-owned CloakBrowser. The only
-configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+`webwright-task` is compatibility intent only. Webwright runtime,
+`browser_agent`, `node_repl`, computer-use, MCP-based Playwright browser
+control, raw/stock/in-app Browser, direct packages, alternate
+CDP/executables/configs, `run-code`, and `--filename` are forbidden.

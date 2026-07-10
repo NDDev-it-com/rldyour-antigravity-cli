@@ -1,20 +1,32 @@
 name = "browser:design-review"
-description = "RU: визуальная/design проверка. EN: visual and design review with screenshots, masks, and deviation reporting."
+description = "RU: визуальная/design проверка через managed CloakBrowser. EN: managed visual and design review."
 prompt = """
 Review visual/design implementation.
 
-Required evidence:
-- Expected source path, URL, Figma export, or reference image.
-- Actual screenshot paths for desktop and mobile viewports.
-- Dynamic-region masks and threshold policy.
-- Pixel, layout, typography, color/token, accessibility, DOM/ARIA, and false-positive notes.
-- Provider used: Playwright CLI, Chrome DevTools MCP, or Webwright.
+## Mandatory CloakBrowser Boundary
 
-All browser providers must attach to bootstrap-owned CloakBrowser. The only
-configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+This boundary applies before every browser action:
+
+1. Run exactly:
+
+   ```bash
+   $HOME/.local/bin/cloakbrowser-cdp-health
+   ```
+
+   If the command is missing or exits nonzero, stop immediately and report `NOT_PROVEN`.
+2. Browser execution is permitted only through:
+   - the exact `$HOME/.local/bin/playwright-cli` executable; `run-code` and `--filename` are forbidden;
+   - the approved Chrome DevTools MCP transport, exactly `/bin/sh -c 'exec "$HOME/.local/bin/chrome-devtools-mcp" --headless --isolated --no-usage-statistics --no-performance-crux'`.
+3. Never execute the Webwright Python runtime, stock/raw/in-app Browser, `browser_agent`, `node_repl`, computer-use, Playwright MCP, raw Playwright, `bunx`, `npx`, direct package invocations, alternate CDP endpoints, alternate browser executables, alternate browser configs, or any fallback. No fallback is allowed.
+
+`webwright-task` is compatibility intent routed to `browser:validate`; it never
+authorizes Webwright runtime execution.
+
+Use Figma MCP for expected design data, managed Playwright CLI for screenshots,
+and managed Chrome DevTools MCP only for DOM/runtime diagnosis. Rerun health
+before every browser action. Return exact expected source, desktop/mobile
+artifacts, masks, thresholds, deviations, accessibility notes, and
+`NOT_PROVEN` gaps.
 
 User args: {{args}}
 """

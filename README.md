@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.7.28` |
+| Adapter version | `1.7.29` |
 | Runtime baseline | Antigravity CLI `1.1.0` |
 | Runtime channel | bootstrap-owned generation-pinned artifact |
-| GitHub release tag | `1.7.28` |
+| GitHub release tag | `1.7.29` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -115,31 +115,24 @@ Commands are grouped into: `browser`, `flow`, `release`, `ry`, `security`, and
 
 ## Browser / Design / DevTools Routing
 
-Browser work follows the shared rldyour provider model with three distinct roles:
+Browser work has exactly two execution providers behind the bootstrap-owned
+CloakBrowser boundary. Every browser action first runs exact
+`$HOME/.local/bin/cloakbrowser-cdp-health`; missing or nonzero health stops as
+`NOT_PROVEN`, with no fallback:
 
-All browser providers attach to bootstrap-owned CloakBrowser. Browser
-installation, endpoint identity, and health gates stay outside this adapter.
-The only configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+- **Managed Playwright CLI** (`$HOME/.local/bin/playwright-cli`, runtime
+  `0.1.17`) - flows, screenshots, snapshots, traces, responsive matrices,
+  visual evidence, and long-horizon stepwise workflows. `run-code` and
+  `--filename` are forbidden.
+- **Managed Chrome DevTools MCP** (`chrome-devtools`, runtime `1.5.0`) -
+  console, network, runtime, DOM/layout, performance, Lighthouse, and memory
+  through the exact configured wrapper.
 
-- **Webwright** - high-level, long-horizon browser workflows, reusable evidence
-  scripts, screenshots, logs, and final-script reproduction. Webwright is a
-  provider/harness, not an MCP server.
-- **Playwright CLI + Skills** - deterministic UI automation, screenshots,
-  snapshots, traces, responsive matrices, and visual evidence.
-- **Chrome DevTools MCP** (`chrome-devtools`) - console, network, performance,
-  Lighthouse, memory, heap, and live Chrome debugging.
-
-Only providers listed in the approved active inventory may be configured.
-Removed or historical tools require an explicit inventory and release-policy
-update before reintroduction.
-
-The native built-in `browser_agent` is disabled for this adapter release. It is
-not a silent replacement for any provider above and must be added as a
-separately validated explicit provider with dedicated validators before any
-future use.
+`webwright-task` is compatibility intent routed to `browser:validate`; it never
+authorizes Webwright runtime execution. Stock/raw/in-app Browser,
+`browser_agent`, `node_repl`, computer-use, Playwright MCP, raw Playwright,
+direct browser packages, alternate CDP/executable/config paths, and every
+fallback are forbidden.
 
 ### MCP Inventory Detail
 
@@ -149,7 +142,7 @@ declared in `.gemini/settings.json` under `mcpServers`:
 | Server | Transport | Role |
 | --- | --- | --- |
 | `serena` | stdio (`uvx`) | LSP-based code intelligence and Serena memory |
-| `chrome-devtools` | stdio (managed `~/.local/bin/chrome-devtools-mcp` wrapper) | CloakBrowser live debugging and DevTools |
+| `chrome-devtools` | stdio (managed `$HOME/.local/bin/chrome-devtools-mcp` wrapper) | CloakBrowser live debugging and DevTools |
 | `sequential-thinking` | stdio (`bunx`) | Structured reasoning chains |
 | `shadcn` | stdio (`bunx`) | shadcn/ui component registry |
 | `dart-flutter` | stdio (`dart`) | Dart/Flutter LSP and pub tools |
@@ -234,7 +227,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.7.28` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.29` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See

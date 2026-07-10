@@ -45,15 +45,17 @@ exact parity.
 
 ## Browser Policy
 
-Route browser tasks through Webwright, Playwright CLI + Skills, and Chrome
-DevTools MCP according to `references/browser-provider-routing.md`. Keep
-Webwright as a non-MCP harness and keep Playwright CLI-only.
+Before every browser action, run exact
+`$HOME/.local/bin/cloakbrowser-cdp-health`; missing or nonzero health stops as
+`NOT_PROVEN`. Execute only exact `$HOME/.local/bin/playwright-cli` or the exact
+managed `$HOME/.local/bin/chrome-devtools-mcp` transport in project
+configuration. `run-code` and `--filename` are forbidden.
 
-All browser providers must attach to bootstrap-owned CloakBrowser. The only
-configured browser MCP transport is the managed
-`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
-package transport is forbidden. Raw, stock, and in-app browser fallback is
-forbidden.
+`webwright-task` is compatibility intent routed to `browser:validate`; the
+Webwright runtime is retired fail-closed. Stock/raw/in-app Browser,
+`browser_agent`, `node_repl`, computer-use, Playwright MCP, raw Playwright,
+direct browser packages, alternate CDP/executable/config paths, and all
+fallbacks are forbidden. See `references/browser-provider-routing.md`.
 
 ## cmux Boundary
 

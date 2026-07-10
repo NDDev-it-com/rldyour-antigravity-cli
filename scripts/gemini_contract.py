@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.28"
+VERSION = "1.7.29"
 RUNTIME_VERSION = "1.1.0"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
@@ -43,6 +43,9 @@ CHROME_ARGS = [
     'exec "$HOME/.local/bin/chrome-devtools-mcp" --headless --isolated '
     "--no-usage-statistics --no-performance-crux",
 ]
+HEALTH_COMMAND = "$HOME/.local/bin/cloakbrowser-cdp-health"
+PLAYWRIGHT_CLI = "$HOME/.local/bin/playwright-cli"
+CHROME_WRAPPER = "$HOME/.local/bin/chrome-devtools-mcp"
 NATIVE_MCP_KEYS = {
     "command",
     "args",
@@ -91,13 +94,15 @@ RETIRED_ALLOWED = {
     "config/rldyour-contract.json",
     "references/browser-provider-routing.md",
 }
-BROWSER_POLICY_SURFACES = [
+BROWSER_DOC_SURFACES = [
     "README.md",
     "AGENTS.md",
     ".claude/CLAUDE.md",
     "GEMINI.md",
     "references/browser-provider-routing.md",
     "references/gemini-surface-adoption.md",
+]
+BROWSER_EXECUTION_SURFACES = [
     "skills/browser-validation/SKILL.md",
     "skills/design-review/SKILL.md",
     "commands/browser/validate.toml",
@@ -111,12 +116,13 @@ BROWSER_POLICY_SURFACES = [
     ".gemini/agents/browser-reviewer.md",
     ".gemini/agents/design-reviewer.md",
 ]
+BROWSER_POLICY_SURFACES = BROWSER_DOC_SURFACES + BROWSER_EXECUTION_SURFACES
 BROWSER_POLICY_MARKERS = [
-    "bootstrap-owned",
-    "CloakBrowser",
-    "~/.local/bin/chrome-devtools-mcp",
-    "Direct `bunx`/`npx` Chrome DevTools package transport is forbidden.",
-    "Raw, stock, and in-app browser fallback is forbidden.",
+    "$HOME/.local/bin/cloakbrowser-cdp-health",
+    "$HOME/.local/bin/playwright-cli",
+    "$HOME/.local/bin/chrome-devtools-mcp",
+    "webwright-task",
+    "Webwright runtime",
 ]
 DIRECT_CHROME_PACKAGE_RE = re.compile(
     r"\b(?:bunx|npx)\b\s+(?:--yes\s+)?chrome-devtools-mcp(?:@[^\s`\"'|]+)?",
@@ -126,6 +132,141 @@ DIRECT_CHROME_COMMAND_RE = re.compile(
     r"(?:[\"']?command[\"']?\s*[:=]\s*[\"']?(?:bunx|npx)[\"']?).{0,200}chrome-devtools-mcp",
     re.IGNORECASE | re.DOTALL,
 )
+MANDATORY_BROWSER_BOUNDARY = """## Mandatory CloakBrowser Boundary
+
+This boundary applies before every browser action:
+
+1. Run exactly:
+
+   ```bash
+   $HOME/.local/bin/cloakbrowser-cdp-health
+   ```
+
+   If the command is missing or exits nonzero, stop immediately and report `NOT_PROVEN`.
+2. Browser execution is permitted only through:
+   - the exact `$HOME/.local/bin/playwright-cli` executable; `run-code` and `--filename` are forbidden;
+   - the approved Chrome DevTools MCP transport, exactly `/bin/sh -c 'exec "$HOME/.local/bin/chrome-devtools-mcp" --headless --isolated --no-usage-statistics --no-performance-crux'`.
+3. Never execute the Webwright Python runtime, stock/raw/in-app Browser, `browser_agent`, `node_repl`, computer-use, Playwright MCP, raw Playwright, `bunx`, `npx`, direct package invocations, alternate CDP endpoints, alternate browser executables, alternate browser configs, or any fallback. No fallback is allowed."""
+FORBIDDEN_BROWSER_SHELL_PATTERNS = (
+    re.compile(r"(^|[;&|]\s*)(?:bunx|npx)\b"),
+    re.compile(
+        r"(^|[;&|]\s*)(?:python(?:3)?|uv\s+run\s+python(?:3)?)\b.*\bwebwright\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"(^|[;&|]\s*)playwright\b"),
+)
+EXPECTED_BROWSER_POLICY: dict[str, Any] = {
+    "schema_version": 3,
+    "required_backend": "cloakbrowser",
+    "transport_owner": "bootstrap",
+    "managed_wrapper_root": "$HOME/.local/bin",
+    "fallback_allowed": False,
+    "health_gate": {
+        "command": HEALTH_COMMAND,
+        "required_before_every_action": True,
+        "failure_result": "NOT_PROVEN",
+    },
+    "active_providers": ["playwright-cli", "chrome-devtools-mcp"],
+    "providers": {
+        "playwright-cli": {
+            "kind": "browser-automation",
+            "mcp": False,
+            "version": "0.1.17",
+            "backend": "cloakbrowser",
+            "transport_owner": "bootstrap",
+            "executable": PLAYWRIGHT_CLI,
+            "forbidden_arguments": ["run-code", "--filename"],
+        },
+        "chrome-devtools-mcp": {
+            "kind": "devtools-debugging",
+            "mcp": True,
+            "version": "1.5.0",
+            "backend": "cloakbrowser",
+            "transport_owner": "bootstrap",
+            "transport": {"command": CHROME_COMMAND, "args": CHROME_ARGS},
+        },
+    },
+    "routing": {
+        "long_horizon_web_task": "playwright-cli",
+        "screenshots_snapshots_traces": "playwright-cli",
+        "console_network_runtime_layout_performance_memory_lighthouse": "chrome-devtools-mcp",
+    },
+    "compatibility_workflows": {
+        "webwright-task": {
+            "route": "browser:validate",
+            "runtime_provider": "webwright",
+            "runtime_execution_allowed": False,
+            "failure_result": "NOT_PROVEN",
+        }
+    },
+    "forbidden_runtime_providers": [
+        "webwright",
+        "stock-browser",
+        "raw-browser",
+        "in-app-browser",
+        "browser_agent",
+        "node_repl",
+        "computer-use",
+        "playwright-mcp",
+        "raw-playwright",
+        "direct-package-browser-provider",
+        "alternate-cdp",
+        "alternate-browser-executable",
+        "alternate-browser-config",
+    ],
+    "gemini_builtin_browser_agent": {
+        "enabled": False,
+        "reason": "Antigravity built-in browser_agent is outside the bootstrap-owned CloakBrowser trust boundary.",
+        "must_not_replace": ["playwright-cli", "chrome-devtools-mcp"],
+    },
+}
+EXPECTED_BROWSER_SOURCE_POLICY: dict[str, Any] = {
+    "name": "rldyour-browser-routing",
+    "version": VERSION,
+    "scope": "antigravity-adapter",
+    "providers": {
+        "active": ["playwright-cli", "chrome-devtools-mcp"],
+        "playwright_cli": PLAYWRIGHT_CLI,
+        "chrome_devtools_mcp": CHROME_WRAPPER,
+    },
+    "compatibility": {
+        "webwright_task": "routing intent only; use browser:validate; Webwright runtime forbidden"
+    },
+    "transport": {
+        "owner": "bootstrap",
+        "backend": "cloakbrowser",
+        "managed_wrapper_root": "$HOME/.local/bin",
+        "health_command": HEALTH_COMMAND,
+        "health_before_every_action": True,
+        "failure_result": "NOT_PROVEN",
+    },
+    "forbidden": {
+        "webwright_runtime": True,
+        "playwright_mcp": True,
+        "builtin_browser_agent": True,
+        "node_repl": True,
+        "computer_use": True,
+        "direct_browser_package": True,
+        "alternate_cdp": True,
+        "alternate_browser_executable": True,
+        "alternate_browser_config": True,
+        "raw_browser_fallback": True,
+        "stock_browser_fallback": True,
+        "in_app_browser_fallback": True,
+    },
+}
+EXPECTED_BROWSER_CONTRACT = {
+    "transport_owner": "bootstrap",
+    "required_backend": "cloakbrowser",
+    "managed_wrapper_root": "$HOME/.local/bin",
+    "health_gate": "$HOME/.local/bin/cloakbrowser-cdp-health before every browser action",
+    "active_providers": ["playwright-cli", "chrome-devtools-mcp"],
+    "playwright-cli": "exact managed executable for flows, screenshots, snapshots, traces, visual evidence, and long-horizon stepwise workflows",
+    "chrome-devtools-mcp": "exact managed transport for console, network, runtime, layout, performance, Lighthouse, memory, and live debugging",
+    "webwright-task": "compatibility intent routed through browser:validate; Webwright runtime execution forbidden",
+    "fallback_allowed": False,
+    "gemini_builtin_browser_agent": "disabled; outside the bootstrap-owned CloakBrowser trust boundary",
+}
 MEMORY_SECTIONS = [
     "## Purpose",
     "## Current Facts",
@@ -185,6 +326,33 @@ def validate_version_surfaces() -> None:
     require(contract["adapter"]["version"] == VERSION, "contract adapter version must match VERSION")
     claims = load_json(ROOT / "config/current-claim-rules.json")["current_claims"]
     require(claims["adapter_version"] == VERSION, "current claim adapter version must match VERSION")
+    lock = load_toml(ROOT / "uv.lock")
+    local_packages = [
+        package
+        for package in lock.get("package", [])
+        if package.get("name") == "rldyour-antigravity-cli"
+    ]
+    require(
+        len(local_packages) == 1 and local_packages[0].get("version") == VERSION,
+        "uv.lock local package version must match VERSION",
+    )
+    for relative in (
+        "policies/rldyour-browser-routing.toml",
+        "policies/rldyour-git-safety.toml",
+        "policies/rldyour-project-policy.toml",
+    ):
+        require(
+            load_toml(ROOT / relative).get("version") == VERSION,
+            f"{relative} version must match VERSION",
+        )
+    hook = read_text(ROOT / "hooks/session_start_context.sh")
+    require(
+        f'adapter_version="{VERSION}"' in hook
+        and f'RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "{VERSION}"' in hook,
+        "session-start hook fallback versions must match VERSION",
+    )
+    for relative in ("README.md", "GEMINI.md", "SECURITY.md", "CHANGELOG.md"):
+        require(VERSION in read_text(ROOT / relative), f"{relative} must mention VERSION")
 
 
 def validate_runtime_baseline(strict: bool = False) -> None:
@@ -571,6 +739,87 @@ def validate_hook_script_json(script: Path, event: str) -> None:
     require(proc.stdout.strip().startswith("{") and proc.stdout.strip().endswith("}"), f"{script.relative_to(ROOT)}: stdout must contain only JSON")
 
 
+def browser_bash_blocks(text: str) -> list[list[str]]:
+    blocks: list[list[str]] = []
+    current: list[str] | None = None
+    for line in text.splitlines():
+        if line.strip() == "```bash":
+            current = []
+            continue
+        if line.strip() == "```" and current is not None:
+            blocks.append(current)
+            current = None
+            continue
+        if current is not None:
+            current.append(line)
+    return blocks
+
+
+def require_exact_browser_provider_mentions(text: str, source: str) -> None:
+    for token, exact in (
+        ("playwright-cli", PLAYWRIGHT_CLI),
+        ("chrome-devtools-mcp", CHROME_WRAPPER),
+    ):
+        pattern = re.compile(rf"(?<![\w-]){re.escape(token)}(?![\w-])")
+        prefix = exact[: -len(token)]
+        for match in pattern.finditer(text):
+            exact_start = match.start() - len(prefix)
+            actual_prefix = text[max(0, exact_start) : match.start()]
+            prior = text[exact_start - 1] if exact_start > 0 else ""
+            require(
+                actual_prefix == prefix and (not prior or prior not in "/~$._-"),
+                f"{source}: {token} must use exact {exact}",
+            )
+
+
+def validate_browser_execution_surface(source: str, text: str) -> None:
+    require(
+        text.count(MANDATORY_BROWSER_BOUNDARY) == 1,
+        f"{source}: mandatory CloakBrowser boundary must appear exactly once",
+    )
+    remainder = text.replace(MANDATORY_BROWSER_BOUNDARY, "", 1)
+    require(
+        "run-code" not in remainder,
+        f"{source}: run-code is forbidden outside the boundary declaration",
+    )
+    require(
+        "--filename" not in remainder,
+        f"{source}: --filename is forbidden outside the boundary declaration",
+    )
+    require_exact_browser_provider_mentions(remainder, source)
+    normalized_remainder = " ".join(remainder.split())
+    require(
+        "webwright-task" in normalized_remainder
+        and "never authorizes Webwright runtime execution" in normalized_remainder,
+        f"{source}: webwright-task must remain compatibility intent only",
+    )
+
+    for block in browser_bash_blocks(remainder):
+        previous_command = ""
+        for raw_line in block:
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            for pattern in FORBIDDEN_BROWSER_SHELL_PATTERNS:
+                require(
+                    pattern.search(line) is None,
+                    f"{source}: unapproved browser shell execution is forbidden: {line}",
+                )
+            if PLAYWRIGHT_CLI in line:
+                require(
+                    previous_command == HEALTH_COMMAND,
+                    f"{source}: every Playwright CLI action must be immediately health-gated",
+                )
+            previous_command = line
+
+
+def validate_browser_policy_object(policy: dict[str, Any]) -> None:
+    require(
+        policy == EXPECTED_BROWSER_POLICY,
+        "browser provider policy must exactly match the fail-closed CloakBrowser contract",
+    )
+
+
 def validate_browser_transport_text(source: str, text: str) -> None:
     for line_number, line in enumerate(text.splitlines(), start=1):
         lowered = line.lower()
@@ -584,6 +833,11 @@ def validate_browser_transport_text(source: str, text: str) -> None:
         DIRECT_CHROME_COMMAND_RE.search(text) is None,
         f"{source}: direct package command transport for chrome-devtools-mcp is forbidden",
     )
+    require(
+        re.search(r"~/.local/bin/(?:playwright-cli|chrome-devtools-mcp|cloakbrowser-cdp-health)", text)
+        is None,
+        f"{source}: browser wrapper paths must use exact $HOME/.local/bin form",
+    )
 
 
 def validate_browser_policy_surfaces() -> None:
@@ -592,6 +846,11 @@ def validate_browser_policy_surfaces() -> None:
         require(path.is_file(), f"missing browser policy surface: {relative}")
         text = read_text(path)
         validate_browser_transport_text(relative, text)
+        if relative in BROWSER_EXECUTION_SURFACES:
+            validate_browser_execution_surface(relative, text)
+
+    for relative in BROWSER_DOC_SURFACES:
+        text = read_text(ROOT / relative)
         normalized_text = " ".join(text.split())
         for marker in BROWSER_POLICY_MARKERS:
             normalized_marker = " ".join(marker.split())
@@ -603,62 +862,35 @@ def validate_browser_policy_surfaces() -> None:
 
 def validate_browser_routing() -> None:
     policy = load_json(ROOT / "config/browser-provider-policy.json")
-    require(policy.get("schema_version") == 2, "browser provider policy schema must be 2")
-    require(policy.get("required_backend") == "cloakbrowser", "CloakBrowser must be the required backend")
-    require(policy.get("transport_owner") == "bootstrap", "bootstrap must own browser transports")
-    require(policy.get("managed_wrapper_root") == "~/.local/bin", "managed browser wrappers must live under ~/.local/bin")
-    require(policy.get("fallback_allowed") is False, "browser fallback must remain disabled")
-    providers = policy["providers"]
-    for name, provider in providers.items():
-        require(provider.get("backend") == "cloakbrowser", f"{name} must target CloakBrowser")
-        require(provider.get("transport_owner") == "bootstrap", f"bootstrap must own {name} transport")
-    require(providers["webwright"]["mcp"] is False, "Webwright must not be MCP")
-    require(providers["playwright-cli"]["mcp"] is False, "Playwright CLI must not be MCP")
-    require(providers["chrome-devtools-mcp"]["mcp"] is True, "Chrome DevTools MCP must remain active")
-    require(providers["playwright-cli"].get("version") == "0.1.17", "Playwright CLI pin must be 0.1.17")
-    require(providers["chrome-devtools-mcp"].get("version") == "1.5.0", "Chrome DevTools MCP pin must be 1.5.0")
-    require(
-        providers["chrome-devtools-mcp"].get("transport")
-        == {"command": CHROME_COMMAND, "args": CHROME_ARGS},
-        "browser policy must carry the exact managed wrapper transport",
-    )
-    require(
-        policy.get("forbidden_direct_chrome_devtools_launchers") == ["bunx", "npx"],
-        "direct bunx/npx Chrome DevTools launchers must remain forbidden",
-    )
-    require(
-        policy.get("forbidden_browser_fallbacks") == ["raw", "stock", "in-app"],
-        "raw, stock, and in-app browser fallbacks must remain forbidden",
-    )
+    validate_browser_policy_object(policy)
+
     source_policy = load_toml(ROOT / "policies/rldyour-browser-routing.toml")
-    transport = source_policy.get("transport") or {}
-    require(transport.get("owner") == "bootstrap", "browser routing policy must keep bootstrap transport ownership")
-    require(transport.get("backend") == "cloakbrowser", "browser routing policy must require CloakBrowser")
-    require(transport.get("managed_wrapper_root") == "~/.local/bin", "browser routing policy must keep ~/.local/bin wrapper root")
-    forbidden = source_policy.get("forbidden") or {}
-    for key in (
-        "direct_bunx_chrome_devtools",
-        "direct_npx_chrome_devtools",
-        "raw_browser_fallback",
-        "stock_browser_fallback",
-        "in_app_browser_fallback",
-    ):
-        require(forbidden.get(key) is True, f"browser routing policy must forbid {key}")
-    browser_agent = policy.get("gemini_builtin_browser_agent") or {}
-    require(browser_agent.get("enabled") is False, "Gemini built-in browser_agent must be disabled for this release")
     require(
-        set(browser_agent.get("must_not_replace") or []) == {"webwright", "playwright-cli", "chrome-devtools-mcp"},
-        "Gemini browser_agent policy must preserve the canonical provider matrix",
+        source_policy == EXPECTED_BROWSER_SOURCE_POLICY,
+        "source browser routing policy drift",
     )
-    docs = "\n".join(read_text(path) for path in [
-        ROOT / "README.md",
-        ROOT / "references/browser-provider-routing.md",
-        ROOT / "references/gemini-surface-adoption.md",
-        ROOT / ".gemini/skills/browser-validation/SKILL.md",
-    ])
-    for phrase in ["Webwright", "Playwright CLI", "Chrome DevTools MCP"]:
-        require(phrase in docs, f"browser docs must mention {phrase}")
-    require("browser_agent" in docs and "disabled" in docs.lower(), "browser docs must record disabled Gemini browser_agent policy")
+
+    contract = load_json(ROOT / "config/rldyour-contract.json")
+    require(
+        contract.get("browser_provider_model") == EXPECTED_BROWSER_CONTRACT,
+        "contract browser provider model drift",
+    )
+
+    for relative in (
+        ".gemini/settings.json",
+        ".gemini/antigravity-cli/mcp_config.json",
+        "gemini-extension.json",
+    ):
+        data = load_json(ROOT / relative)
+        servers = data.get("mcpServers") or {}
+        for alias in ("webwright", "playwright", "browser", "browser-agent"):
+            require(alias not in servers, f"{relative}: unapproved browser MCP alias is active: {alias}")
+        chrome = servers.get("chrome-devtools") or {}
+        require(
+            chrome.get("command") == CHROME_COMMAND and chrome.get("args") == CHROME_ARGS,
+            f"{relative}: Chrome DevTools must use the exact managed transport",
+        )
+
     validate_browser_policy_surfaces()
 
 
