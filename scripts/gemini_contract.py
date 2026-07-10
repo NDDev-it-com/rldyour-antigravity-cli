@@ -12,8 +12,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.29"
-RUNTIME_VERSION = "1.1.0"
+VERSION = "1.7.30"
+RUNTIME_VERSION = "1.1.1"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
 SEQUENTIAL_THINKING_MCP_VERSION = "2026.7.4"
@@ -361,7 +361,7 @@ def validate_runtime_baseline(strict: bool = False) -> None:
     require(baseline["runtime_binary"] == RUNTIME_BINARY, "runtime binary must be agy")
     require(baseline["runtime_package"] == RUNTIME_PACKAGE, "runtime package must be antigravity-cli")
     require("gemini_legacy" not in baseline, "baseline must not model Gemini CLI as a supported runtime")
-    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.1.0")
+    require(baseline["target_runtime_version"] == RUNTIME_VERSION, "runtime baseline must be 1.1.1")
     require(
         baseline["target_channel"] == "rldyour-bootstrap-generation-pinned-artifact",
         "target channel must be the bootstrap-owned generation-pinned artifact",
