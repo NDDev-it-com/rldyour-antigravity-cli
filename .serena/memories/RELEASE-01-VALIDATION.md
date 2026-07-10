@@ -33,10 +33,10 @@ release readiness, versioning, and artifact hygiene
 ## Last verified
 - date: 2026-07-10
 - commit: `c74adf6766b1fb1c88c019d20f78dab65ae5e932`
-- checked by: Antigravity adapter 1.7.30 release validation
+- checked by: Antigravity adapter 1.7.31 release validation
 
 ## Facts
-- Current adapter release version is `1.7.30`; `VERSION`, `pyproject.toml`,
+- Current adapter release version is `1.7.31`; `VERSION`, `pyproject.toml`,
   `uv.lock`, `gemini-extension.json`, policy projections, hook fallbacks,
   contract claims, docs, and security support metadata must agree.
 - Antigravity CLI remains pinned to `1.1.1`; this adapter release changes the
