@@ -44,6 +44,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.7.27] - 2026-07-10
+
+### Fixed
+
+- Replace stale direct `bunx` Chrome DevTools documentation with the exact
+  bootstrap-owned `~/.local/bin/chrome-devtools-mcp` transport and mandatory
+  CloakBrowser backend.
+- Enforce browser-policy documentation, reject direct `bunx`/`npx` Chrome
+  DevTools package transports, and forbid raw, stock, or in-app browser
+  fallback through regression-tested release validation.
+
 ## [1.7.26] - 2026-07-10
 
 ### Changed

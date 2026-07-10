@@ -5,12 +5,13 @@ input="$(cat || true)"
 export RLDYOUR_GEMINI_HOOK_INPUT="$input"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [[ -f "$script_dir/../VERSION" ]]; then
-  export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="$(<"$script_dir/../VERSION")"
+  adapter_version="$(<"$script_dir/../VERSION")"
 elif [[ -f "$script_dir/../../VERSION" ]]; then
-  export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="$(<"$script_dir/../../VERSION")"
+  adapter_version="$(<"$script_dir/../../VERSION")"
 else
-  export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="1.7.26"
+  adapter_version="1.7.27"
 fi
+export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="$adapter_version"
 printf '%s\n' "rldyour-antigravity-cli SessionStart hook received input" >&2
 
 python3 - <<'PY'
@@ -18,11 +19,13 @@ import json
 import os
 
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
-version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.26")
+version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.27")
 message = (
     f"rldyour-antigravity-cli adapter={version} runtime=antigravity-cli@1.1.0; "
     "standard mode is owner-led; cmux orchestration is visible-terminal-only; "
-    "browser routing is Webwright, Playwright CLI, and Chrome DevTools MCP; "
+    "browser routing is Webwright, Playwright CLI, and Chrome DevTools MCP through "
+    "bootstrap-owned CloakBrowser and the managed ~/.local/bin/chrome-devtools-mcp wrapper; "
+    "direct bunx/npx and raw/stock/in-app browser fallback are forbidden; "
     "only approved inventory providers are active; supported auth is enterprise, "
     "API-key, Vertex, Google Cloud, or owner-approved."
 )

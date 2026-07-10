@@ -3,7 +3,7 @@
   "adapter": {
     "id": "gemini",
     "name": "rldyour-antigravity-cli",
-    "version": "1.7.26",
+    "version": "1.7.27",
     "runtime": "antigravity-cli",
     "runtime_binary": "agy",
     "runtime_package": "antigravity-cli",
@@ -46,13 +46,19 @@
     "openai-docs"
   ],
   "browser_provider_model": {
-    "webwright": "high-level long-horizon browser workflows",
-    "playwright-cli": "low-level screenshots, snapshots, traces, and visual evidence",
-    "chrome-devtools-mcp": "console, network, performance, Lighthouse, memory, live debugging",
+    "transport_owner": "bootstrap",
+    "required_backend": "cloakbrowser",
+    "managed_wrapper_root": "~/.local/bin",
+    "webwright": "high-level long-horizon browser workflows attached to bootstrap-owned CloakBrowser",
+    "playwright-cli": "low-level screenshots, snapshots, traces, and visual evidence through bootstrap-owned CloakBrowser",
+    "chrome-devtools-mcp": "console, network, performance, Lighthouse, memory, and live debugging through ~/.local/bin/chrome-devtools-mcp",
     "gemini_builtin_browser_agent": "disabled for this release; NOT_PROVEN as a separate provider until explicitly modeled"
   },
   "hard_invariants": [
     "no_active_playwright_mcp",
+    "browser_backend_is_bootstrap_owned_cloakbrowser",
+    "no_direct_chrome_devtools_package_transport",
+    "no_raw_stock_in_app_browser_fallback",
     "no_active_semgrep",
     "no_gemini_cli_runtime_support",
     "gemini_subagents_are_not_cmux_orchestration",

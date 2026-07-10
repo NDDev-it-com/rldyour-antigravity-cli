@@ -2,7 +2,7 @@
 
 ## Current Fact
 
-Antigravity CLI adapter `1.7.26` targets Antigravity CLI `1.1.0` through the
+Antigravity CLI adapter `1.7.27` targets Antigravity CLI `1.1.0` through the
 `agy` command. Gemini CLI is retired as a supported runtime for this adapter.
 
 ## Migration Status: MIGRATED

@@ -1,7 +1,7 @@
 <!-- Memory Metadata
-Last updated: 2026-05-22
-Last verified: 2026-05-22
-Last commit: 62d3934d280dc2ffb3e57debe9a54b0de9869b98 chore(release): gemini 1.7.25 (other)
+Last updated: 2026-07-10
+Last verified: 2026-07-10
+Last commit: eaed204f9dac5b022f62bb673e36a0b96d915cdc feat(browser): enforce managed Cloak routing
 Scope: release readiness, versioning, and artifact hygiene
 Area: RELEASE
 -->
@@ -19,7 +19,7 @@ Maintain durable Antigravity CLI adapter knowledge for `RELEASE-01-VALIDATION`.
 - Keep this memory fact-only and update it after verified Antigravity adapter changes.
 
 ## Last Verified
-2026-07-04
+2026-07-10
 
 
 ## Scope
@@ -31,18 +31,21 @@ release readiness, versioning, and artifact hygiene
 - `path:.github/workflows/release.yml`
 
 ## Last verified
-- date: 2026-05-22
-- commit: `62d3934d280dc2ffb3e57debe9a54b0de9869b98`
-- checked by: Codex ry-start memory taxonomy sync
+- date: 2026-07-10
+- commit: `eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- checked by: Antigravity adapter 1.7.27 release preparation
 
 ## Facts
-- Release memories record numeric versioning, tags, CI gates, and clean artifact hygiene.
+- Current adapter release version is `1.7.27`; `VERSION`, `pyproject.toml`, `uv.lock`, `gemini-extension.json`, policy projections, contract claims, docs, and security support metadata must agree.
+- Antigravity CLI remains pinned to `1.1.0`; browser transport documentation changes do not move the runtime or bootstrap-owned CloakBrowser version.
+- `scripts/validate_release.sh` includes strict browser policy, projection, instruction-doc, Serena, pytest, Python compile, and diff hygiene gates.
 
 ## Evidence
-- `commit:62d3934d280dc2ffb3e57debe9a54b0de9869b98`
+- `commit:eaed204f9dac5b022f62bb673e36a0b96d915cdc`
 - `path:VERSION`
 - `path:CHANGELOG.md`
 - `path:.github/workflows/release.yml`
+- `path:scripts/validate_release.sh`
 
 ## Known pitfalls
 - Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.

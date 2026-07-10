@@ -6,7 +6,7 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.7.26`.
+- Adapter version: `1.7.27`.
 - Runtime: Antigravity CLI `1.1.0`.
 - Install owner: `rldyour-new-mac-or-ubuntu` generation-pinned artifact channel
 - Config path: `~/.gemini/antigravity-cli/settings.json`
@@ -27,6 +27,11 @@ native surfaces for the rldyour AI CLI control plane.
   historical tools require an explicit inventory and release-policy update.
 - Keep browser routing split: Webwright for long-horizon workflows, Playwright
   CLI for screenshots/flows/visual evidence, Chrome DevTools MCP for debugging.
+- All browser providers must attach to bootstrap-owned CloakBrowser. The only
+  configured browser MCP transport is the managed
+  `~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
+  package transport is forbidden. Raw, stock, and in-app browser fallback is
+  forbidden.
 - Antigravity built-in `browser_agent` is disabled for this release; do not enable it
   unless it is modeled as a separate explicit provider with validators.
 - In standard mode, the owner/user remains the orchestration layer.

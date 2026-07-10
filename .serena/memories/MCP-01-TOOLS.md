@@ -1,7 +1,7 @@
 <!-- Memory Metadata
-Last updated: 2026-05-22
-Last verified: 2026-05-22
-Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
+Last updated: 2026-07-10
+Last verified: 2026-07-10
+Last commit: eaed204f9dac5b022f62bb673e36a0b96d915cdc feat(browser): enforce managed Cloak routing
 Scope: MCP runtime transport and pin policy
 Area: MCP
 -->
@@ -19,26 +19,33 @@ Maintain durable Antigravity CLI adapter knowledge for `MCP-01-TOOLS`.
 - Keep this memory fact-only and update it after verified Antigravity adapter changes.
 
 ## Last Verified
-2026-07-04
+2026-07-10
 
 
 ## Scope
 MCP runtime transport and pin policy
 
 ## Current source of truth
-- `path:README.md`
+- `path:.gemini/antigravity-cli/mcp_config.json`
+- `path:.gemini/settings.json`
+- `path:gemini-extension.json`
+- `path:scripts/gemini_contract.py`
 
 ## Last verified
-- date: 2026-05-22
-- commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: Codex ry-start memory taxonomy sync
+- date: 2026-07-10
+- commit: `eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- checked by: Antigravity MCP projection and transport validation
 
 ## Facts
-- MCP memories record server ownership, transports, versions, and toolset constraints.
+- The active inventory contains exactly 11 MCP servers and all three Antigravity MCP projections must remain byte-equivalent after normalization.
+- `chrome-devtools` uses `/bin/sh -c` to execute the bootstrap-owned `~/.local/bin/chrome-devtools-mcp` wrapper; no direct package launcher is allowed.
+- CloakBrowser identity, endpoint, health, and version remain owned by the bootstrap rather than this adapter.
 
 ## Evidence
-- `commit:56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- `path:README.md`
+- `commit:eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- `path:.gemini/antigravity-cli/mcp_config.json`
+- `path:config/browser-provider-policy.json`
+- `path:scripts/gemini_contract.py`
 
 ## Known pitfalls
 - Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.

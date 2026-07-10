@@ -1,5 +1,5 @@
 name = "rldyour-browser-routing"
-version = "1.7.26"
+version = "1.7.27"
 scope = "antigravity-adapter"
 
 [providers]
@@ -7,6 +7,17 @@ webwright = "high-level long-horizon web workflows and reusable scripts"
 playwright_cli = "low-level screenshots, snapshots, traces, and visual evidence"
 chrome_devtools_mcp = "console, network, performance, Lighthouse, memory, live Chrome debugging"
 
+[transport]
+owner = "bootstrap"
+backend = "cloakbrowser"
+managed_wrapper_root = "~/.local/bin"
+chrome_devtools_mcp = "~/.local/bin/chrome-devtools-mcp"
+
 [forbidden]
 playwright_mcp = true
 webwright_mcp = true
+direct_bunx_chrome_devtools = true
+direct_npx_chrome_devtools = true
+raw_browser_fallback = true
+stock_browser_fallback = true
+in_app_browser_fallback = true

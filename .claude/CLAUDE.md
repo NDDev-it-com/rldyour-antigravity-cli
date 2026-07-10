@@ -45,7 +45,7 @@ Validation:
 python3 scripts/validate_gemini_extension_manifest.py
 python3 scripts/validate_gemini_projection_parity.py
 python3 scripts/validate_gemini_config.py
-python3 scripts/validate_instruction_docs.py --require-agent-docs
+python3 scripts/validate_instruction_docs.py --strict
 ```
 
 ## Browser/Provider Boundary
@@ -53,3 +53,9 @@ python3 scripts/validate_instruction_docs.py --require-agent-docs
 - Webwright: orchestration-level browser routing.
 - Playwright CLI: low-level UI evidence.
 - Chrome DevTools MCP: console/network/performance traces.
+
+All browser providers must attach to bootstrap-owned CloakBrowser. The only
+configured browser MCP transport is the managed
+`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
+package transport is forbidden. Raw, stock, and in-app browser fallback is
+forbidden.

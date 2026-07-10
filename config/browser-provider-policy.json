@@ -1,26 +1,34 @@
 {
   "schema_version": 2,
   "required_backend": "cloakbrowser",
+  "transport_owner": "bootstrap",
+  "managed_wrapper_root": "~/.local/bin",
   "fallback_allowed": false,
   "providers": {
     "webwright": {
       "kind": "high-level-browser-workflow",
-      "mcp": false
+      "mcp": false,
+      "backend": "cloakbrowser",
+      "transport_owner": "bootstrap"
     },
     "playwright-cli": {
       "kind": "low-level-browser-automation",
       "mcp": false,
-      "version": "0.1.17"
+      "version": "0.1.17",
+      "backend": "cloakbrowser",
+      "transport_owner": "bootstrap"
     },
     "chrome-devtools-mcp": {
       "kind": "devtools-debugging",
       "mcp": true,
       "version": "1.5.0",
+      "backend": "cloakbrowser",
+      "transport_owner": "bootstrap",
       "transport": {
         "command": "/bin/sh",
         "args": [
           "-c",
-        "exec \"$HOME/.local/bin/chrome-devtools-mcp\" --headless --isolated --no-usage-statistics --no-performance-crux"
+          "exec \"$HOME/.local/bin/chrome-devtools-mcp\" --headless --isolated --no-usage-statistics --no-performance-crux"
         ]
       }
     }
@@ -35,6 +43,15 @@
     "@playwright/mcp",
     "semgrep",
     "semgrep-mcp"
+  ],
+  "forbidden_direct_chrome_devtools_launchers": [
+    "bunx",
+    "npx"
+  ],
+  "forbidden_browser_fallbacks": [
+    "raw",
+    "stock",
+    "in-app"
   ],
   "gemini_builtin_browser_agent": {
     "enabled": false,

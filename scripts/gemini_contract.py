@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.26"
+VERSION = "1.7.27"
 RUNTIME_VERSION = "1.1.0"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
@@ -85,6 +85,41 @@ RETIRED_ALLOWED = {
     "config/rldyour-contract.json",
     "references/browser-provider-routing.md",
 }
+BROWSER_POLICY_SURFACES = [
+    "README.md",
+    "AGENTS.md",
+    ".claude/CLAUDE.md",
+    "GEMINI.md",
+    "references/browser-provider-routing.md",
+    "references/gemini-surface-adoption.md",
+    "skills/browser-validation/SKILL.md",
+    "skills/design-review/SKILL.md",
+    "commands/browser/validate.toml",
+    "commands/browser/design-review.toml",
+    "agents/browser-reviewer.md",
+    "agents/design-reviewer.md",
+    ".gemini/skills/browser-validation/SKILL.md",
+    ".gemini/skills/design-review/SKILL.md",
+    ".gemini/commands/browser/validate.toml",
+    ".gemini/commands/browser/design-review.toml",
+    ".gemini/agents/browser-reviewer.md",
+    ".gemini/agents/design-reviewer.md",
+]
+BROWSER_POLICY_MARKERS = [
+    "bootstrap-owned",
+    "CloakBrowser",
+    "~/.local/bin/chrome-devtools-mcp",
+    "Direct `bunx`/`npx` Chrome DevTools package transport is forbidden.",
+    "Raw, stock, and in-app browser fallback is forbidden.",
+]
+DIRECT_CHROME_PACKAGE_RE = re.compile(
+    r"\b(?:bunx|npx)\b\s+(?:--yes\s+)?chrome-devtools-mcp(?:@[^\s`\"'|]+)?",
+    re.IGNORECASE,
+)
+DIRECT_CHROME_COMMAND_RE = re.compile(
+    r"(?:[\"']?command[\"']?\s*[:=]\s*[\"']?(?:bunx|npx)[\"']?).{0,200}chrome-devtools-mcp",
+    re.IGNORECASE | re.DOTALL,
+)
 MEMORY_SECTIONS = [
     "## Purpose",
     "## Current Facts",
@@ -476,12 +511,47 @@ def validate_hook_script_json(script: Path, event: str) -> None:
     require(proc.stdout.strip().startswith("{") and proc.stdout.strip().endswith("}"), f"{script.relative_to(ROOT)}: stdout must contain only JSON")
 
 
+def validate_browser_transport_text(source: str, text: str) -> None:
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        lowered = line.lower()
+        if "chrome-devtools" in lowered and re.search(r"stdio\s*\(\s*`?(?:bunx|npx)`?\s*\)", lowered):
+            raise ValidationError(f"{source}:{line_number}: stale direct Chrome DevTools transport wording")
+    require(
+        DIRECT_CHROME_PACKAGE_RE.search(text) is None,
+        f"{source}: direct bunx/npx chrome-devtools-mcp command is forbidden",
+    )
+    require(
+        DIRECT_CHROME_COMMAND_RE.search(text) is None,
+        f"{source}: direct package command transport for chrome-devtools-mcp is forbidden",
+    )
+
+
+def validate_browser_policy_surfaces() -> None:
+    for relative in BROWSER_POLICY_SURFACES:
+        path = ROOT / relative
+        require(path.is_file(), f"missing browser policy surface: {relative}")
+        text = read_text(path)
+        validate_browser_transport_text(relative, text)
+        normalized_text = " ".join(text.split())
+        for marker in BROWSER_POLICY_MARKERS:
+            normalized_marker = " ".join(marker.split())
+            require(
+                normalized_marker in normalized_text,
+                f"{relative}: missing browser transport policy marker: {marker}",
+            )
+
+
 def validate_browser_routing() -> None:
     policy = load_json(ROOT / "config/browser-provider-policy.json")
     require(policy.get("schema_version") == 2, "browser provider policy schema must be 2")
     require(policy.get("required_backend") == "cloakbrowser", "CloakBrowser must be the required backend")
+    require(policy.get("transport_owner") == "bootstrap", "bootstrap must own browser transports")
+    require(policy.get("managed_wrapper_root") == "~/.local/bin", "managed browser wrappers must live under ~/.local/bin")
     require(policy.get("fallback_allowed") is False, "browser fallback must remain disabled")
     providers = policy["providers"]
+    for name, provider in providers.items():
+        require(provider.get("backend") == "cloakbrowser", f"{name} must target CloakBrowser")
+        require(provider.get("transport_owner") == "bootstrap", f"bootstrap must own {name} transport")
     require(providers["webwright"]["mcp"] is False, "Webwright must not be MCP")
     require(providers["playwright-cli"]["mcp"] is False, "Playwright CLI must not be MCP")
     require(providers["chrome-devtools-mcp"]["mcp"] is True, "Chrome DevTools MCP must remain active")
@@ -492,6 +562,28 @@ def validate_browser_routing() -> None:
         == {"command": CHROME_COMMAND, "args": CHROME_ARGS},
         "browser policy must carry the exact managed wrapper transport",
     )
+    require(
+        policy.get("forbidden_direct_chrome_devtools_launchers") == ["bunx", "npx"],
+        "direct bunx/npx Chrome DevTools launchers must remain forbidden",
+    )
+    require(
+        policy.get("forbidden_browser_fallbacks") == ["raw", "stock", "in-app"],
+        "raw, stock, and in-app browser fallbacks must remain forbidden",
+    )
+    source_policy = load_toml(ROOT / "policies/rldyour-browser-routing.toml")
+    transport = source_policy.get("transport") or {}
+    require(transport.get("owner") == "bootstrap", "browser routing policy must keep bootstrap transport ownership")
+    require(transport.get("backend") == "cloakbrowser", "browser routing policy must require CloakBrowser")
+    require(transport.get("managed_wrapper_root") == "~/.local/bin", "browser routing policy must keep ~/.local/bin wrapper root")
+    forbidden = source_policy.get("forbidden") or {}
+    for key in (
+        "direct_bunx_chrome_devtools",
+        "direct_npx_chrome_devtools",
+        "raw_browser_fallback",
+        "stock_browser_fallback",
+        "in_app_browser_fallback",
+    ):
+        require(forbidden.get(key) is True, f"browser routing policy must forbid {key}")
     browser_agent = policy.get("gemini_builtin_browser_agent") or {}
     require(browser_agent.get("enabled") is False, "Gemini built-in browser_agent must be disabled for this release")
     require(
@@ -507,6 +599,7 @@ def validate_browser_routing() -> None:
     for phrase in ["Webwright", "Playwright CLI", "Chrome DevTools MCP"]:
         require(phrase in docs, f"browser docs must mention {phrase}")
     require("browser_agent" in docs and "disabled" in docs.lower(), "browser docs must record disabled Gemini browser_agent policy")
+    validate_browser_policy_surfaces()
 
 
 def validate_native_boundaries() -> None:

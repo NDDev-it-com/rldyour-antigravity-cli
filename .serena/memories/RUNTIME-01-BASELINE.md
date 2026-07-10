@@ -1,7 +1,7 @@
 <!-- Memory Metadata
-Last updated: 2026-05-22
-Last verified: 2026-05-22
-Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
+Last updated: 2026-07-10
+Last verified: 2026-07-10
+Last commit: eaed204f9dac5b022f62bb673e36a0b96d915cdc feat(browser): enforce managed Cloak routing
 Scope: CLI runtime and package baselines
 Area: RUNTIME
 -->
@@ -19,7 +19,7 @@ Maintain durable Antigravity CLI adapter knowledge for `RUNTIME-01-BASELINE`.
 - Keep this memory fact-only and update it after verified Antigravity adapter changes.
 
 ## Last Verified
-2026-07-04
+2026-07-10
 
 
 ## Scope
@@ -27,18 +27,24 @@ CLI runtime and package baselines
 
 ## Current source of truth
 - `path:README.md`
+- `path:config/gemini-baseline.json`
+- `path:references/gemini-antigravity-transition.md`
 
 ## Last verified
-- date: 2026-05-22
-- commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: Codex ry-start memory taxonomy sync
+- date: 2026-07-10
+- commit: `eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- checked by: Antigravity runtime baseline parity validation
 
 ## Facts
-- Runtime memories record pinned CLI/package baselines and freshness checks.
+- The supported runtime binary is `agy` from Antigravity CLI `1.1.0`.
+- Runtime installation remains a bootstrap-owned generation-pinned artifact with digest verification; this adapter does not execute remote installer scripts.
+- Adapter patch `1.7.27` changes browser transport policy documentation and validation without changing the runtime baseline.
 
 ## Evidence
-- `commit:56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
+- `commit:eaed204f9dac5b022f62bb673e36a0b96d915cdc`
 - `path:README.md`
+- `path:config/gemini-baseline.json`
+- `path:references/gemini-antigravity-transition.md`
 
 ## Known pitfalls
 - Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.

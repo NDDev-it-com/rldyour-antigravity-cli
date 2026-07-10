@@ -6,10 +6,10 @@
 
 | Surface | Value |
 | --- | ---: |
-| Adapter version | `1.7.26` |
+| Adapter version | `1.7.27` |
 | Runtime baseline | Antigravity CLI `1.1.0` |
 | Runtime channel | bootstrap-owned generation-pinned artifact |
-| GitHub release tag | `1.7.26` |
+| GitHub release tag | `1.7.27` |
 
 Antigravity CLI freshness uses `agy --version` as the primary
 source of truth, with the GitHub release tag as release provenance.
@@ -117,6 +117,13 @@ Commands are grouped into: `browser`, `flow`, `release`, `ry`, `security`, and
 
 Browser work follows the shared rldyour provider model with three distinct roles:
 
+All browser providers attach to bootstrap-owned CloakBrowser. Browser
+installation, endpoint identity, and health gates stay outside this adapter.
+The only configured browser MCP transport is the managed
+`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
+package transport is forbidden. Raw, stock, and in-app browser fallback is
+forbidden.
+
 - **Webwright** - high-level, long-horizon browser workflows, reusable evidence
   scripts, screenshots, logs, and final-script reproduction. Webwright is a
   provider/harness, not an MCP server.
@@ -142,7 +149,7 @@ declared in `.gemini/settings.json` under `mcpServers`:
 | Server | Transport | Role |
 | --- | --- | --- |
 | `serena` | stdio (`uvx`) | LSP-based code intelligence and Serena memory |
-| `chrome-devtools` | stdio (`bunx`) | Live Chrome debugging and DevTools |
+| `chrome-devtools` | stdio (managed `~/.local/bin/chrome-devtools-mcp` wrapper) | CloakBrowser live debugging and DevTools |
 | `sequential-thinking` | stdio (`bunx`) | Structured reasoning chains |
 | `shadcn` | stdio (`bunx`) | shadcn/ui component registry |
 | `dart-flutter` | stdio (`dart`) | Dart/Flutter LSP and pub tools |
@@ -221,7 +228,7 @@ release-policy update.
 
 ### Access and Antigravity Notice
 
-Antigravity CLI adapter `1.7.26` targets enterprise, paid API-key, Vertex AI, Google
+Antigravity CLI adapter `1.7.27` targets enterprise, paid API-key, Vertex AI, Google
 Cloud, and explicitly owner-approved authenticated environments. Consumer OAuth
 availability after June 18, 2026 is `NOT_PROVEN` for this adapter because
 legacy runtime support is retired for active use in this adapter. See

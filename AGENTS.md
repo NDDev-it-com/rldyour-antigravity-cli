@@ -44,6 +44,12 @@ Route browser tasks through Webwright, Playwright CLI + Skills, and Chrome
 DevTools MCP according to `references/browser-provider-routing.md`. Keep
 Webwright as a non-MCP harness and keep Playwright CLI-only.
 
+All browser providers must attach to bootstrap-owned CloakBrowser. The only
+configured browser MCP transport is the managed
+`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
+package transport is forbidden. Raw, stock, and in-app browser fallback is
+forbidden.
+
 ## cmux Boundary
 
 Antigravity may run as a visible cmux worker terminal or, when explicitly selected by

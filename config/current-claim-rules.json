@@ -1,9 +1,12 @@
 {
   "schema_version": 1,
   "current_claims": {
-    "adapter_version": "1.7.26",
+    "adapter_version": "1.7.27",
     "runtime_version": "1.1.0",
     "mcp_server_count": 11,
+    "browser_backend": "cloakbrowser",
+    "browser_transport_owner": "bootstrap",
+    "browser_fallback_allowed": false,
     "playwright_mcp_active": false,
     "semgrep_active": false,
     "antigravity_adapter_in_scope": true

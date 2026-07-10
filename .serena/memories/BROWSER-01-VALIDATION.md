@@ -1,7 +1,7 @@
 <!-- Memory Metadata
-Last updated: 2026-05-22
-Last verified: 2026-05-22
-Last commit: 56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c chore(release): prepare antigravity 1.7.5 tracked context
+Last updated: 2026-07-10
+Last verified: 2026-07-10
+Last commit: eaed204f9dac5b022f62bb673e36a0b96d915cdc feat(browser): enforce managed Cloak routing
 Scope: browser-visible validation and debugging workflows
 Area: BROWSER
 -->
@@ -19,7 +19,7 @@ Maintain durable Antigravity CLI adapter knowledge for `BROWSER-01-VALIDATION`.
 - Keep this memory fact-only and update it after verified Antigravity adapter changes.
 
 ## Last Verified
-2026-07-04
+2026-07-10
 
 
 ## Scope
@@ -27,18 +27,26 @@ browser-visible validation and debugging workflows
 
 ## Current source of truth
 - `path:README.md`
+- `path:config/browser-provider-policy.json`
+- `path:references/browser-provider-routing.md`
+- `path:scripts/gemini_contract.py`
 
 ## Last verified
-- date: 2026-05-22
-- commit: `56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
-- checked by: Codex ry-start memory taxonomy sync
+- date: 2026-07-10
+- commit: `eaed204f9dac5b022f62bb673e36a0b96d915cdc`
+- checked by: Antigravity browser transport release validation
 
 ## Facts
-- Browser memories route UI and runtime validation through Playwright and Chrome DevTools when relevant.
+- Webwright, Playwright CLI, and Chrome DevTools MCP must attach to the bootstrap-owned CloakBrowser backend.
+- The only configured browser MCP transport is `/bin/sh -c` executing `~/.local/bin/chrome-devtools-mcp` with the managed privacy flags.
+- Direct `bunx`/`npx` Chrome DevTools package transport and raw, stock, or in-app browser fallback are forbidden.
 
 ## Evidence
-- `commit:56af1bd1d5c2f14c3417a8bd8c7737d6beba3f1c`
+- `commit:eaed204f9dac5b022f62bb673e36a0b96d915cdc`
 - `path:README.md`
+- `path:config/browser-provider-policy.json`
+- `path:references/browser-provider-routing.md`
+- `path:tests/test_gemini_browser_routing.py`
 
 ## Known pitfalls
 - Treat this memory as derived context. Current code, configuration, runtime output, and GitHub state override stale memory text.

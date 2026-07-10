@@ -12,6 +12,12 @@ Evaluate visual implementation against a Figma export, screenshot, image, or spe
 Use Figma and Chrome DevTools MCP where available; use Playwright CLI for
 deterministic visual evidence.
 
+All browser providers must attach to bootstrap-owned CloakBrowser. The only
+configured browser MCP transport is the managed
+`~/.local/bin/chrome-devtools-mcp` wrapper. Direct `bunx`/`npx` Chrome DevTools
+package transport is forbidden. Raw, stock, and in-app browser fallback is
+forbidden.
+
 # When To Use
 
 Use for Figma-to-code, responsive visual review, typography/color checks, and

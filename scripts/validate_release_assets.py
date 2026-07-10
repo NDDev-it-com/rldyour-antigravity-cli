@@ -51,9 +51,11 @@ def validate_spdx(path: Path) -> None:
     creation = payload.get("creationInfo")
     require(isinstance(creation, dict) and isinstance(creation.get("created"), str), "SBOM must define creationInfo.created")
     packages = payload.get("packages")
-    require(isinstance(packages, list) and packages, "SBOM must define non-empty packages")
+    if not isinstance(packages, list) or not packages:
+        raise Failure("SBOM must define non-empty packages")
     relationships = payload.get("relationships")
-    require(isinstance(relationships, list) and relationships, "SBOM must define non-empty relationships")
+    if not isinstance(relationships, list) or not relationships:
+        raise Failure("SBOM must define non-empty relationships")
     package_names = {str(item.get("name")) for item in packages if isinstance(item, dict)}
     require(PACKAGE_NAME in package_names, f"SBOM packages must include {PACKAGE_NAME}")
     for package in packages:

@@ -4,5 +4,5 @@ requires-python = "==3.13.*"
 
 [[package]]
 name = "rldyour-antigravity-cli"
-version = "1.7.26"
+version = "1.7.27"
 source = { virtual = "." }
