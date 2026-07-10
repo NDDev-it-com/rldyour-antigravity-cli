@@ -36,7 +36,7 @@ CLI runtime and package baselines
 - checked by: Antigravity runtime and browser boundary validation
 
 ## Facts
-- The supported runtime binary is `agy` from Antigravity CLI `1.1.0`.
+- The supported runtime binary is `agy` from Antigravity CLI `1.1.1`.
 - Runtime installation remains a bootstrap-owned generation-pinned artifact with digest verification; this adapter does not execute remote installer scripts.
 - Adapter patch `1.7.29` hardens browser execution without changing the
   Antigravity runtime baseline.
