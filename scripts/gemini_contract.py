@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.7.30"
+VERSION = "1.7.31"
 RUNTIME_VERSION = "1.1.1"
 RUNTIME_PACKAGE = "antigravity-cli"
 RUNTIME_BINARY = "agy"
@@ -41,6 +41,7 @@ CHROME_COMMAND = "/bin/sh"
 CHROME_ARGS = [
     "-c",
     'exec "$HOME/.local/bin/chrome-devtools-mcp" --headless --isolated '
+    +
     "--no-usage-statistics --no-performance-crux",
 ]
 HEALTH_COMMAND = "$HOME/.local/bin/cloakbrowser-cdp-health"
