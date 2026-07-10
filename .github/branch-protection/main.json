@@ -9,9 +9,9 @@
     "Secret scan / Gitleaks secret scan",
     "Dependency check",
     "Scorecard / OSSF Scorecard analysis",
-    "Cross-platform smoke / smoke (ubuntu-latest)",
-    "Cross-platform smoke / smoke (windows-latest)",
-    "Cross-platform smoke / smoke (macos-latest)"
+    "Cross-platform smoke (ubuntu-latest) / smoke (ubuntu-latest)",
+    "Cross-platform smoke (windows-latest) / smoke (windows-latest)",
+    "Cross-platform smoke (macos-latest) / smoke (macos-latest)"
   ],
   "strict_required_status_checks": true,
   "allow_force_pushes": false,
