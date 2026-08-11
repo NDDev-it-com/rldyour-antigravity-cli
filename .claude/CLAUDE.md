@@ -62,3 +62,15 @@ Before every browser action, run exact
 `browser_agent`, `node_repl`, computer-use, MCP-based Playwright browser
 control, raw/stock/in-app Browser, direct packages, alternate
 CDP/executables/configs, `run-code`, and `--filename` are forbidden.
+
+## CI runner selection
+
+This repository is public, so `pull_request` executes untrusted fork code.
+Every caller of a `NDDev-it-com/ci-workflows` reusable that exposes a `runner`
+input passes `runner: ubuntu-latest` explicitly, and must keep it. Several of
+those reusables default `runner` to the estate's self-hosted `amsterdam`
+label, and a default is a property of the **pinned commit**, not of this
+repository — so dropping the explicit value would let a routine pin bump route
+fork PRs onto trusted private infrastructure with no diff here to review. On
+any ci-workflows pin bump, diff `inputs.runner.default` between the old and
+new commit before merging.
