@@ -20,6 +20,6 @@ jobs:
       id-token: write
       contents: read
       actions: read
-    uses: NDDev-it-com/ci-workflows/.github/workflows/public-scorecard-json.yml@2ccb80e96f5771b6a6b4eae63a4f47e232906dc7 # 0.12.0
+    uses: NDDev-it-com/ci-workflows/.github/workflows/public-scorecard-json.yml@7f69c724923d06b2c2057c5a6ad341c37f1a8995 # 0.13.3
     with:
       publish_results: false
