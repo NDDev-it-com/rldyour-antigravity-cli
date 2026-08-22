@@ -18,7 +18,7 @@
   "upstream_release": "1.1.1",
   "upstream_release_published_at": "2026-07-10T03:40:13Z",
   "upstream_release_url": "https://github.com/google-antigravity/antigravity-cli/releases/tag/1.1.1",
-  "installer_owner": "rldyour-new-mac-or-ubuntu",
+  "installer_owner": "github-device-sync/modules/macos-ubuntu-bootstrap",
   "remote_script_execution": false,
   "source_of_truth_priority": [
     "agy --version",

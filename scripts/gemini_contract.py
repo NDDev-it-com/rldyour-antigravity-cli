@@ -368,7 +368,10 @@ def validate_runtime_baseline(strict: bool = False) -> None:
         "target channel must be the bootstrap-owned generation-pinned artifact",
     )
     require(baseline["upstream_release"] == RUNTIME_VERSION, "upstream release must match the runtime")
-    require(baseline["installer_owner"] == "rldyour-new-mac-or-ubuntu", "bootstrap must own runtime installation")
+    require(
+        baseline["installer_owner"] == "github-device-sync/modules/macos-ubuntu-bootstrap",
+        "GDS macos-ubuntu-bootstrap must own runtime installation",
+    )
     require(baseline["remote_script_execution"] is False, "remote installer scripts must remain disabled")
     priority = baseline["source_of_truth_priority"]
     require(priority[0] == "agy --version", "agy version must be primary source of truth")

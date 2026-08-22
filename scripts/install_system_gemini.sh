@@ -28,7 +28,7 @@ done
 if [[ "$apply" -eq 1 ]]; then
   if ! command -v agy >/dev/null 2>&1; then
     printf "error: Antigravity CLI requires the managed 'agy' CLI on PATH.\n" >&2
-    printf 'Run the rldyour-new-mac-or-ubuntu bootstrap; remote installer streams are unsupported.\n' >&2
+    printf 'Run github-device-sync/modules/macos-ubuntu-bootstrap; remote installer streams are unsupported.\n' >&2
     exit 1
   fi
   # Clean up legacy rldyour-gemini extension (renamed in 1.4.0 to rldyour-antigravity-cli)
