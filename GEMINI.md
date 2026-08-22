@@ -6,7 +6,7 @@ native surfaces for the rldyour AI CLI control plane.
 
 ## Current Facts
 
-- Adapter version: `1.7.31`.
+- Adapter version: `1.7.32`.
 - Runtime: Antigravity CLI `1.1.1`.
 - MCP refresh: Sequential Thinking `2026.7.4`; Context7 `3.2.3`.
 - Install owner: `rldyour-new-mac-or-ubuntu` generation-pinned artifact channel

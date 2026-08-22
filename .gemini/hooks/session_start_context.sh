@@ -9,7 +9,7 @@ if [[ -f "$script_dir/../VERSION" ]]; then
 elif [[ -f "$script_dir/../../VERSION" ]]; then
   adapter_version="$(<"$script_dir/../../VERSION")"
 else
-  adapter_version="1.7.31"
+  adapter_version="1.7.32"
 fi
 export RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION="$adapter_version"
 printf '%s\n' "rldyour-antigravity-cli SessionStart hook received input" >&2
@@ -19,7 +19,7 @@ import json
 import os
 
 _ = os.environ.get("RLDYOUR_GEMINI_HOOK_INPUT", "")
-version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.31")
+version = os.environ.get("RLDYOUR_ANTIGRAVITY_ADAPTER_VERSION", "1.7.32")
 message = (
     f"rldyour-antigravity-cli adapter={version} runtime=antigravity-cli@1.1.1; "
     "standard mode is owner-led; cmux orchestration is visible-terminal-only; "
