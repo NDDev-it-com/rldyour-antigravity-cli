@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: release-dry-run-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.run_id }}
+  cancel-in-progress: false
 
 jobs:
   release-dry-run:
