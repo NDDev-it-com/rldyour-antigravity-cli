@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 
+## [1.7.32] - 2026-08-23
+
+### Fixed
+
+- Align Antigravity runtime ownership with the canonical GDS bootstrap.
+
 ## [1.7.31] - 2026-07-10
 
 ### Fixed
