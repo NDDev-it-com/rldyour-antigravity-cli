@@ -75,7 +75,7 @@ Clone or update this adapter:
 
 ```bash
 # First time
-git clone https://github.com/NDDev-it-com/rldyour-antigravity-cli.git
+git clone https://github.com/rldyourmnd/rldyour-antigravity-cli.git
 cd rldyour-antigravity-cli
 
 # Update to latest
