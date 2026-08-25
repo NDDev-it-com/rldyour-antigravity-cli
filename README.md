@@ -287,8 +287,8 @@ License: `AGPL-3.0-or-later`.
 
 Author: Danil Silantyev (github:rldyourmnd), CEO NDDev.
 
-Repository: <https://github.com/NDDev-it-com/rldyour-antigravity-cli>
+Repository: <https://github.com/rldyourmnd/rldyour-antigravity-cli>
 
 Report security issues privately through GitHub Security Advisories for
-`NDDev-it-com/rldyour-antigravity-cli`. Do not open public issues for security
+`rldyourmnd/rldyour-antigravity-cli`. Do not open public issues for security
 vulnerabilities.

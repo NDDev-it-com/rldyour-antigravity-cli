@@ -26,10 +26,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/NDDev-it-com/rldyour-antigravity-cli"
-Repository = "https://github.com/NDDev-it-com/rldyour-antigravity-cli"
-Issues = "https://github.com/NDDev-it-com/rldyour-antigravity-cli/issues"
-Changelog = "https://github.com/NDDev-it-com/rldyour-antigravity-cli/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/rldyourmnd/rldyour-antigravity-cli"
+Repository = "https://github.com/rldyourmnd/rldyour-antigravity-cli"
+Issues = "https://github.com/rldyourmnd/rldyour-antigravity-cli/issues"
+Changelog = "https://github.com/rldyourmnd/rldyour-antigravity-cli/blob/main/CHANGELOG.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

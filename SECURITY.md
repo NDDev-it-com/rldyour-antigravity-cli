@@ -31,4 +31,4 @@ Unverified `yolo` values must never be written into committed settings.
 ## Reporting
 
 Report security issues privately through GitHub security advisories for
-`NDDev-it-com/rldyour-antigravity-cli`.
+`rldyourmnd/rldyour-antigravity-cli`.
